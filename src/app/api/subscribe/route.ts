@@ -35,28 +35,26 @@ export async function POST(req: NextRequest) {
       .eq('email', cleanEmail)
       .single();
 
-    if (existing) {
-      return NextResponse.json({ success: true, existing: true });
+    if (!existing) {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert({ email: cleanEmail });
+
+      if (error) {
+        console.error('Supabase insert error:', error);
+        return NextResponse.json({ error: 'Failed to save email' }, { status: 500 });
+      }
     }
 
-    const { error } = await supabase
-      .from('waitlist')
-      .insert({ email: cleanEmail });
-
-    if (error) {
-      console.error('Supabase insert error:', error);
-      return NextResponse.json({ error: 'Failed to save email' }, { status: 500 });
-    }
-
-    // Send welcome email before returning (Vercel kills the function after response)
+    // Always send welcome email (even for existing — they may not have received it)
     try {
       await sendWelcomeEmail(cleanEmail);
+      console.log('Welcome email sent to:', cleanEmail);
     } catch (err) {
       console.error('Failed to send welcome email:', err);
-      // Don't fail the request if email fails — waitlist entry is saved
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, existing: !!existing });
   } catch {
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
