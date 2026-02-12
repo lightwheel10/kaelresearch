@@ -1,8 +1,66 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SampleReportPage() {
+  const [authorized, setAuthorized] = useState(false);
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && localStorage.getItem('kael_email')) {
+      setAuthorized(true);
+    }
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes('@')) { setError('Enter a valid email.'); return; }
+    setLoading(true);
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        localStorage.setItem('kael_email', email);
+        setAuthorized(true);
+      } else { setError('Something went wrong.'); }
+    } catch { setError('Network error.'); }
+    setLoading(false);
+  };
+
+  if (!authorized) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] text-gray-200 flex items-center justify-center px-4">
+        <div className="max-w-md w-full bg-slate-900 border border-slate-700 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-white mb-2">Read the Full Sample Report</h2>
+          <p className="text-slate-400 text-sm mb-6">Drop your email to unlock instant access. No spam.</p>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="you@company.com"
+              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+              autoFocus
+            />
+            {error && <p className="text-red-400 text-sm">{error}</p>}
+            <button type="submit" disabled={loading} className="w-full py-3 bg-amber-600 hover:bg-amber-500 disabled:opacity-50 text-white font-medium rounded-lg transition-colors">
+              {loading ? 'Unlocking...' : 'Unlock Report'}
+            </button>
+          </form>
+          <p className="text-slate-500 text-xs mt-4 text-center">Or <Link href="/" className="text-amber-400 hover:underline">go back home</Link></p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-200">
       {/* Header */}
