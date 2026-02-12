@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { sendWelcomeEmail } from '@/lib/email';
+import { isRateLimited } from '@/lib/rate-limit';
+import { isValidEmail } from '@/lib/validation';
+import { checkCors } from '@/lib/cors';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -9,9 +12,17 @@ const supabase = createClient(
 
 export async function POST(req: NextRequest) {
   try {
+    const corsErr = checkCors(req);
+    if (corsErr) return corsErr;
+
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    if (isRateLimited(ip)) {
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+    }
+
     const { email } = await req.json();
 
-    if (!email || !email.includes('@')) {
+    if (!isValidEmail(email)) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 });
     }
 
