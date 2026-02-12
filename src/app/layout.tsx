@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Kael Research — Market Intelligence That Moves Markets",
   description: "Sourced, verified market research reports delivered in 3 days. Stop Googling. Start knowing.",
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

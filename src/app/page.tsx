@@ -277,10 +277,10 @@ export default function Home() {
               Get a Free Sample Report
             </button>
             <button 
-              onClick={() => scrollToSection('comparison')}
+              onClick={() => scrollToSection('pricing')}
               className="w-full sm:w-auto bg-transparent hover:bg-gray-50 text-gray-600 hover:text-[#1B2A4A] text-lg font-medium px-8 py-4 rounded-full border border-gray-300 hover:border-gray-400 transition-colors"
             >
-              See Example Output
+              View Pricing
             </button>
           </div>
         </div>
