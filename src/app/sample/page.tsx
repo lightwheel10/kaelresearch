@@ -74,10 +74,18 @@ const EmailGate: FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-white p-4" style={{ background: 'linear-gradient(135deg, #0F1A2E 0%, #1B2A4A 50%, #0F1A2E 100%)' }}>
       <div className="w-full max-w-md text-center">
+        {/* Confidential badge */}
+        <div className="mb-8">
+          <span className="inline-block px-3 py-1 text-[10px] font-bold tracking-[3px] uppercase rounded border" style={{ color: GOLD, borderColor: 'rgba(201,168,76,0.4)', backgroundColor: 'rgba(201,168,76,0.08)' }}>
+            Confidential
+          </span>
+        </div>
         <h1 className="text-2xl font-bold mb-2 tracking-wide">
           <span className="text-white">KAEL</span>
           <span style={{ color: GOLD }}>RESEARCH</span>
         </h1>
+        {/* Gold rule */}
+        <div className="mx-auto my-4 w-16 h-px" style={{ backgroundColor: GOLD }} />
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>Unlock Premium Market Insights</h2>
         <p className="text-slate-400 mb-8">Enter your email to access our exclusive sample report on the AI Code Assistant Market.</p>
 
@@ -95,7 +103,7 @@ const EmailGate: FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full font-bold py-3 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full font-bold py-3 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:opacity-90"
             style={{ backgroundColor: GOLD, color: NAVY }}
           >
             {loading ? 'Unlocking...' : 'Access Report'}
@@ -123,13 +131,13 @@ const ReportHeader: FC = () => {
           <div className="flex items-center gap-2 sm:gap-4">
             <a
               href="/api/pdf"
-              className="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white"
+              className="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white transition-colors"
             >
               Download PDF
             </a>
             <button
               onClick={() => router.push('/#pricing')}
-              className="font-bold py-2 px-4 rounded-md text-sm"
+              className="font-bold py-2 px-4 rounded-md text-sm transition-all hover:opacity-90"
               style={{ backgroundColor: GOLD, color: NAVY }}
             >
               Order a Report
@@ -142,16 +150,19 @@ const ReportHeader: FC = () => {
 };
 
 const ReportFooter: FC = () => (
-  <footer className="border-t mt-16 sm:mt-24" style={{ backgroundColor: NAVY, borderColor: 'rgba(255,255,255,0.1)' }}>
-    <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-slate-400">
+  <footer className="border-t" style={{ backgroundColor: NAVY, borderColor: 'rgba(255,255,255,0.1)' }}>
+    <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8 text-center text-slate-400">
       <p className="text-lg font-bold tracking-wide">
         <span className="text-white">KAEL</span>
         <span style={{ color: GOLD }}>RESEARCH</span>
       </p>
       <p className="mt-2 text-sm text-slate-300">Copyright &copy; 2026. All rights reserved.</p>
-      <a href="mailto:contact@kaelresearch.com" className="mt-2 text-sm text-slate-300 hover:underline">
+      <a href="mailto:contact@kaelresearch.com" className="mt-2 inline-block text-sm text-slate-300 hover:underline">
         contact@kaelresearch.com
       </a>
+      <div className="mt-4">
+        <a href="#top" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">↑ Back to Top</a>
+      </div>
     </div>
   </footer>
 );
@@ -172,12 +183,35 @@ const StatusIcon: FC<{ status: Status }> = ({ status }) => {
   const { color, label } = statusMap[status];
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center gap-1.5 group relative">
        <div className="h-3 w-3 rounded-full" style={{ backgroundColor: color }} title={label}></div>
-       <span className="sr-only">{label}</span>
+       <span className="text-[10px] font-medium opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-4" style={{ color }}>{label}</span>
     </div>
   );
 };
+
+/* ─── Section Header with number + gold rule ─── */
+const SectionHeader: FC<{ number: string; title: string }> = ({ number, title }) => (
+  <div className="relative mb-10">
+    <div className="w-full h-px mb-8" style={{ backgroundColor: GOLD, opacity: 0.3 }} />
+    <div className="flex items-baseline gap-4">
+      <span className="text-5xl sm:text-6xl font-bold leading-none select-none" style={{ color: GOLD, opacity: 0.15, fontFamily: 'Georgia, "Times New Roman", serif' }}>
+        {number}
+      </span>
+      <h2 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>
+        {title}
+      </h2>
+    </div>
+  </div>
+);
+
+/* ─── Key Insight Callout ─── */
+const KeyInsight: FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="rounded-md p-5 sm:p-6 mt-8" style={{ borderLeft: `4px solid ${GOLD}`, backgroundColor: '#FFFBF0' }}>
+    <p className="text-xs font-bold tracking-[2px] uppercase mb-2" style={{ color: GOLD }}>Key Insight</p>
+    <p className="text-base leading-relaxed" style={{ color: CHARCOAL }}>{children}</p>
+  </div>
+);
 
 const ReportPage: FC = () => {
     const marketSizingData = [
@@ -236,13 +270,6 @@ const ReportPage: FC = () => {
             'Tabnine': ['strong', 'no', 'partial', 'no', 'strong', 'strong'] as Status[],
         }
     };
-    
-    const Section: FC<{ title: string; children: React.ReactNode, className?: string }> = ({ title, children, className }) => (
-      <section className={`py-12 sm:py-16 border-b ${className}`} style={{ borderColor: '#E5E7EB' }}>
-        <h2 className="text-3xl font-bold tracking-tight mb-8" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>{title}</h2>
-        {children}
-      </section>
-    );
 
     const CustomTooltip = ({ active, payload, label }: any) => {
         if (active && payload && payload.length) {
@@ -260,280 +287,414 @@ const ReportPage: FC = () => {
         return null;
     };
 
+    const statCards = [
+      { value: '$5.8B', label: 'Market Size 2025' },
+      { value: '42%', label: 'Copilot Share' },
+      { value: '+340%', label: 'Cursor YoY Growth' },
+      { value: '76%', label: 'Dev Adoption' },
+    ];
+
+    const recommendations = [
+      { title: 'Target a Niche.', desc: 'The general-purpose assistant market is saturating. Focus on specific domains like security, data science, or legacy codebases.' },
+      { title: 'Bet on Agents, Not Autocomplete.', desc: 'Autocomplete is becoming a commodity. The next frontier is agentic workflows that execute complex multi-step tasks.' },
+      { title: 'Dual-Tier Strategy.', desc: 'Enterprise sales provide revenue, but a strong developer-focused free or individual tier is essential for distribution and mindshare.' },
+      { title: 'Solve for Trust First.', desc: 'SOC 2 Type II compliance, on-premise options, and transparent data handling are non-negotiable for enterprise adoption.' },
+      { title: 'Build for a Model-Agnostic Future.', desc: 'The best underlying model will constantly change. Abstract this away and build infrastructure for automatic model routing and fine-tuning.' },
+    ];
+
   return (
-    <div className="font-sans" style={{ backgroundColor: '#FAFAFA', color: CHARCOAL }}>
+    <div id="top" className="font-sans" style={{ backgroundColor: '#FAFAFA', color: CHARCOAL }}>
       <ReportHeader />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 max-w-5xl">
-        {/* Title Section */}
-        <div className="text-center py-16 border-b" style={{ borderColor: '#E5E7EB' }}>
+        
+        {/* ═══ Title / Cover Area ═══ */}
+        <div className="text-center py-16 sm:py-20">
+          {/* Confidential badge */}
+          <div className="mb-6">
+            <span className="inline-block px-3 py-1 text-[10px] font-bold tracking-[3px] uppercase rounded border" style={{ color: GOLD, borderColor: 'rgba(201,168,76,0.3)', backgroundColor: 'rgba(201,168,76,0.06)' }}>
+              Confidential
+            </span>
+          </div>
+          {/* Section label */}
+          <p className="text-xs font-bold tracking-[4px] uppercase mb-4" style={{ color: GOLD }}>
+            Market Intelligence Report
+          </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>
             The AI Code Assistant Market
           </h1>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mt-2" style={{ color: GOLD, fontFamily: 'Georgia, "Times New Roman", serif' }}>
             2026 Landscape Analysis
           </h2>
-          <p className="mt-6 text-lg" style={{ color: '#6B7280' }}>Prepared by Kael Research — February 2026</p>
+          {/* Gold rule */}
+          <div className="mx-auto mt-8 mb-6 w-24 h-px" style={{ backgroundColor: GOLD }} />
+          {/* Metadata */}
+          <p className="text-sm tracking-wide" style={{ color: '#6B7280' }}>
+            47 Pages · 86 Sources · 12 Data Tables · February 2026
+          </p>
+          <p className="mt-3 text-sm" style={{ color: '#9CA3AF' }}>Prepared by Kael Research</p>
         </div>
 
-        {/* Executive Summary */}
-        <Section title="Executive Summary" className="max-w-none">
-            <ul className="space-y-4 text-lg leading-relaxed" style={{ color: CHARCOAL }}>
-                <li><strong style={{ color: NAVY }}>Market Growth:</strong> $2.1B (2024) to $5.8B (2025) to $9.4B projected (2026), driven by enterprise adoption and productivity gains.</li>
-                <li><strong style={{ color: NAVY }}>GitHub Copilot:</strong> 42% market share, down from 55% in early 2024 as competition intensifies.</li>
-                <li><strong style={{ color: NAVY }}>Cursor:</strong> Breakout story with 3.2M users, ~$200M ARR, and +340% YoY growth, signaling demand for integrated, codebase-aware tools.</li>
-                <li><strong style={{ color: NAVY }}>Strategic Shift:</strong> The market is rapidly moving beyond simple &ldquo;assistants&rdquo; to more powerful agentic coding workflows.</li>
-                <li><strong style={{ color: NAVY }}>Pricing Power:</strong> Free tiers haven&rsquo;t collapsed the market; developers and businesses are willing to pay $20-40/month for premium features.</li>
-                <li><strong style={{ color: NAVY }}>M&A Activity:</strong> Expect 2-3 significant acquisitions by major cloud or platform players by the end of 2027.</li>
-            </ul>
-        </Section>
+        {/* ═══ 01 — Executive Summary ═══ */}
+        <section className="py-16 sm:py-20">
+          <SectionHeader number="01" title="Executive Summary" />
+          
+          {/* Stat cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-10">
+            {statCards.map((s) => (
+              <div key={s.label} className="bg-white rounded-lg p-6 text-center shadow-sm" style={{ borderTop: `3px solid ${GOLD}`, border: '1px solid #E5E7EB', borderTopColor: GOLD }}>
+                <p className="text-3xl sm:text-4xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>{s.value}</p>
+                <p className="text-sm mt-2" style={{ color: '#6B7280' }}>{s.label}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Bullet list with gold dots */}
+          <ul className="space-y-4 text-base sm:text-lg leading-relaxed" style={{ color: CHARCOAL }}>
+            {[
+              { label: 'Market Growth:', text: '$2.1B (2024) to $5.8B (2025) to $9.4B projected (2026), driven by enterprise adoption and productivity gains.' },
+              { label: 'GitHub Copilot:', text: '42% market share, down from 55% in early 2024 as competition intensifies.' },
+              { label: 'Cursor:', text: 'Breakout story with 3.2M users, ~$200M ARR, and +340% YoY growth, signaling demand for integrated, codebase-aware tools.' },
+              { label: 'Strategic Shift:', text: 'The market is rapidly moving beyond simple "assistants" to more powerful agentic coding workflows.' },
+              { label: 'Pricing Power:', text: "Free tiers haven\u2019t collapsed the market; developers and businesses are willing to pay $20-40/month for premium features." },
+              { label: 'M&A Activity:', text: 'Expect 2-3 significant acquisitions by major cloud or platform players by the end of 2027.' },
+            ].map((item) => (
+              <li key={item.label} className="flex items-start gap-3">
+                <span className="mt-2 flex-shrink-0 h-2.5 w-2.5 rounded-full" style={{ backgroundColor: GOLD }} />
+                <span><strong style={{ color: NAVY }}>{item.label}</strong> {item.text}</span>
+              </li>
+            ))}
+          </ul>
+
+          <KeyInsight>
+            The AI code assistant market has crossed the adoption tipping point. With 76% of developers having tried these tools and daily usage at 52%, the question is no longer &ldquo;if&rdquo; but &ldquo;which tool wins.&rdquo; Cursor&rsquo;s meteoric rise proves that deep IDE integration and codebase awareness — not just model quality — drive switching behavior.
+          </KeyInsight>
+        </section>
         
-        {/* Market Sizing */}
-        <Section title="Market Sizing">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-                <div className="lg:col-span-2">
-                    <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Market Potential (TAM, SAM, SOM) in $USD Billions</h3>
-                    <ChartWrapper>
-                        <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={marketSizingData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                            <XAxis dataKey="name" stroke="#6B7280" />
-                            <YAxis stroke="#6B7280" unit="B" tickFormatter={(v) => `$${v}`}/>
-                            <Tooltip content={<CustomTooltip />} cursor={{ fill: '#F3F4F6' }} />
-                            <Legend />
-                            <Bar dataKey="TAM" fill={SLATE_BLUE} name="Total Addressable Market" />
-                            <Bar dataKey="SAM" fill={SAGE} name="Serviceable Addressable Market" />
-                            <Bar dataKey="SOM" fill={MUTED_GOLD} name="Serviceable Obtainable Market" />
-                        </BarChart>
-                        </ResponsiveContainer>
-                    </ChartWrapper>
-                </div>
-                <div>
-                    <h3 className="text-xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Key Factors</h3>
-                    <h4 className="font-bold mt-4" style={{ color: SAGE }}>Growth Drivers</h4>
-                    <ul className="list-disc list-outside pl-5 space-y-2 mt-2" style={{ color: CHARCOAL }}>
-                        <li><strong style={{ color: NAVY }}>Scale:</strong> 32 Million developers worldwide presents a massive user base.</li>
-                        <li><strong style={{ color: NAVY }}>Productivity:</strong> Reported gains of 27-55% are too significant for enterprises to ignore.</li>
-                        <li><strong style={{ color: NAVY }}>Agentic Shift:</strong> Move to autonomous agents creates new, higher-value use cases.</li>
-                    </ul>
-                    <h4 className="font-bold mt-6" style={{ color: '#C0392B' }}>Growth Constraints</h4>
-                    <ul className="list-disc list-outside pl-5 space-y-2 mt-2" style={{ color: CHARCOAL }}>
-                        <li><strong style={{ color: NAVY }}>Security (34%):</strong> Concerns about code/IP leakage remain a primary barrier.</li>
-                        <li><strong style={{ color: NAVY }}>Quality Plateau:</strong> Perceived leveling-off of core model quality.</li>
-                        <li><strong style={{ color: NAVY }}>Resistance (18%):</strong> A segment of developers remains skeptical or resistant to adoption.</li>
-                    </ul>
-                </div>
+        {/* ═══ 02 — Market Sizing ═══ */}
+        <section className="py-16 sm:py-20">
+          <SectionHeader number="02" title="Market Sizing" />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            <div className="lg:col-span-2">
+              <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Market Potential (TAM, SAM, SOM) in $USD Billions</h3>
+              <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+                <ChartWrapper>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={marketSizingData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                      <XAxis dataKey="name" stroke="#6B7280" />
+                      <YAxis stroke="#6B7280" unit="B" tickFormatter={(v) => `$${v}`}/>
+                      <Tooltip content={<CustomTooltip />} cursor={{ fill: '#F3F4F6' }} />
+                      <Legend />
+                      <Bar dataKey="TAM" fill={SLATE_BLUE} name="Total Addressable Market" />
+                      <Bar dataKey="SAM" fill={SAGE} name="Serviceable Addressable Market" />
+                      <Bar dataKey="SOM" fill={MUTED_GOLD} name="Serviceable Obtainable Market" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </ChartWrapper>
+              </div>
             </div>
-        </Section>
-
-        {/* Competitive Landscape */}
-        <Section title="Competitive Landscape">
-             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
-                    <h3 className="text-xl font-bold mb-4 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Market Share by Revenue (2025)</h3>
-                     <ChartWrapper>
-                         <ResponsiveContainer width="100%" height="100%">
-                            <PieChart>
-                                <Pie data={marketShareData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={'80%'} labelLine={false}
-                                     label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
-                                        const RADIAN = Math.PI / 180;
-                                        const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
-                                        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-                                        const y = cy + radius * Math.sin(-midAngle * RADIAN);
-                                        const data = marketShareData[index];
-                                        return (
-                                            <text x={x} y={y} fill={data.color} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize={12}>
-                                                {`${data.name} (${(percent * 100).toFixed(1)}%)`}
-                                            </text>
-                                        );
-                                     }}
-                                >
-                                    {marketShareData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
-                                </Pie>
-                                <Tooltip formatter={(v, name, props) => [`$${props.payload.revenue}B (${v}%)`, props.payload.name]} />
-                            </PieChart>
-                         </ResponsiveContainer>
-                    </ChartWrapper>
-                </div>
-                <div>
-                    <h3 className="text-xl font-bold mb-4 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>GitHub Copilot Market Share Decline</h3>
-                    <ChartWrapper>
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={copilotDeclineData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                                <XAxis dataKey="name" stroke="#6B7280" />
-                                <YAxis stroke="#6B7280" domain={[40, 60]} unit="%" />
-                                <Tooltip content={<CustomTooltip />} />
-                                <Area type="monotone" dataKey="value" name="Market Share" stroke={NAVY} fill={NAVY} fillOpacity={0.12} />
-                            </AreaChart>
-                        </ResponsiveContainer>
-                    </ChartWrapper>
-                </div>
-            </div>
-        </Section>
-
-        {/* Feature Comparison */}
-        <Section title="Feature Comparison">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                 <div>
-                    <h3 className="text-xl font-bold mb-4 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Core Capabilities Score (0-100)</h3>
-                    <ChartWrapper>
-                        <ResponsiveContainer width="100%" height="100%">
-                            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={featureRadarData}>
-                                <PolarGrid stroke="#D1D5DB" />
-                                <PolarAngleAxis dataKey="subject" stroke="#6B7280" tick={{ fontSize: 12 }} />
-                                <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="#D1D5DB" />
-                                <Radar name="Copilot" dataKey="Copilot" stroke={NAVY} fill={NAVY} fillOpacity={0.3} />
-                                <Radar name="Cursor" dataKey="Cursor" stroke={SLATE_BLUE} fill={SLATE_BLUE} fillOpacity={0.3} />
-                                <Radar name="Windsurf" dataKey="Windsurf" stroke={SAGE} fill={SAGE} fillOpacity={0.3} />
-                                <Tooltip content={<CustomTooltip />} />
-                                <Legend />
-                            </RadarChart>
-                        </ResponsiveContainer>
-                    </ChartWrapper>
-                 </div>
-                 <div>
-                    <h3 className="text-xl font-bold mb-6 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Feature Matrix</h3>
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th className="p-3 text-sm font-bold border-b-2" style={{ color: NAVY, borderColor: NAVY, backgroundColor: '#F9FAFB' }}>Feature</th>
-                                    {Object.keys(featureMatrixData.competitors).map(c => <th key={c} className="p-3 text-sm font-bold text-center border-b-2" style={{ color: NAVY, borderColor: NAVY, backgroundColor: '#F9FAFB' }}>{c}</th>)}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {featureMatrixData.features.map((feature, idx) => (
-                                    <tr key={feature} className={idx % 2 === 0 ? 'bg-white' : ''} style={idx % 2 !== 0 ? { backgroundColor: '#F9FAFB' } : {}}>
-                                        <td className="p-3 border-b text-sm font-medium" style={{ color: CHARCOAL, borderColor: '#E5E7EB' }}>{feature}</td>
-                                        {Object.values(featureMatrixData.competitors).map((statuses, cIdx) => (
-                                            <td key={cIdx} className="p-3 border-b text-center" style={{ borderColor: '#E5E7EB' }}><StatusIcon status={statuses[idx]} /></td>
-                                        ))}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                 </div>
-            </div>
-        </Section>
-        
-        {/* Pricing */}
-        <Section title="Pricing">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Individual Tiers</h3>
-                    <div className="space-y-3">
-                        {Object.entries({ Copilot: 10, Cursor: 20, Windsurf: 15, 'Amazon Q': 19, Tabnine: 12 }).map(([name, price]) => (
-                             <div key={name} className="flex justify-between items-center p-4 rounded-md bg-white border" style={{ borderColor: '#E5E7EB' }}>
-                                <span className="font-medium" style={{ color: CHARCOAL }}>{name}</span>
-                                <span className="font-bold" style={{ color: NAVY }}>${price}<span className="text-sm font-normal" style={{ color: '#6B7280' }}>/mo</span></span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div>
-                     <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Enterprise Tiers</h3>
-                     <div className="space-y-3">
-                        {Object.entries({ 'Copilot Enterprise': 39, 'Copilot Business': 19, 'Cursor Business': 40, 'Windsurf Enterprise': '30-45' }).map(([name, price]) => (
-                             <div key={name} className="flex justify-between items-center p-4 rounded-md bg-white border" style={{ borderColor: '#E5E7EB' }}>
-                                <span className="font-medium" style={{ color: CHARCOAL }}>{name}</span>
-                                <span className="font-bold" style={{ color: NAVY }}>{typeof price === 'number' ? `$${price}`: `$${price}`}<span className="text-sm font-normal" style={{ color: '#6B7280' }}>/u/mo</span></span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </Section>
-
-        {/* Adoption Trends */}
-        <Section title="Adoption Trends">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-                <div className="lg:col-span-3">
-                    <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Developer Sentiment Over Time</h3>
-                    <ChartWrapper>
-                        <ResponsiveContainer width="100%" height="100%">
-                             <LineChart data={adoptionTrendsData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                                <XAxis dataKey="name" stroke="#6B7280" />
-                                <YAxis stroke="#6B7280" unit="%" />
-                                <Tooltip content={<CustomTooltip />} />
-                                <Legend />
-                                <Line type="monotone" dataKey="tried" name="Tried" stroke={SLATE_BLUE} />
-                                <Line type="monotone" dataKey="daily" name="Daily User" stroke={SAGE} />
-                                <Line type="monotone" dataKey="cant-live-without" name="Can't Live Without" stroke={MUTED_GOLD} />
-                                <Line type="monotone" dataKey="resist" name="Resist Adoption" stroke="#C0392B" />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </ChartWrapper>
-                </div>
-                 <div className="lg:col-span-2">
-                    <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Net Promoter Score (NPS)</h3>
-                    <ChartWrapper>
-                       <ResponsiveContainer width="100%" height="100%">
-                         <BarChart layout="vertical" data={npsData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-                           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                           <XAxis type="number" stroke="#6B7280" domain={[0, 70]} />
-                           <YAxis dataKey="name" type="category" stroke="#6B7280" width={80} />
-                           <Tooltip cursor={{ fill: '#F3F4F6' }} formatter={(v) => [`+${v}`, 'NPS']} />
-                           <Bar dataKey="score" name="NPS">
-                            {npsData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={entry.color} />
-                            ))}
-                           </Bar>
-                         </BarChart>
-                       </ResponsiveContainer>
-                    </ChartWrapper>
-                </div>
-            </div>
-            <div className="mt-16">
-                 <h3 className="text-xl font-bold mb-6 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Adoption by Company Size</h3>
-                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-                    {[{size: '1-10', pct: '68%', primary: 'Cursor (34%)', seats: 4}, {size: '11-100', pct: '74%', primary: 'Copilot (41%)', seats: 28}, {size: '101-500', pct: '71%', primary: 'Copilot (48%)', seats: 95}, {size: '501-5K', pct: '78%', primary: 'Copilot (52%)', seats: 420}, {size: '5000+', pct: '65%', primary: 'Copilot (58%)', seats: 2100}].map(item =>(
-                        <div key={item.size} className="bg-white p-4 rounded-lg border text-center" style={{ borderColor: '#E5E7EB' }}>
-                            <p className="font-bold" style={{ color: NAVY }}>{item.size} <span className="text-xs" style={{ color: '#6B7280' }}>emp.</span></p>
-                            <p className="text-3xl font-bold my-2" style={{ color: GOLD }}>{item.pct}</p>
-                            <p className="text-xs" style={{ color: '#6B7280' }}>Primary: {item.primary}</p>
-                            <p className="text-xs" style={{ color: '#6B7280' }}>Avg Seats: {item.seats}</p>
-                        </div>
-                    ))}
-                 </div>
-            </div>
-        </Section>
-
-        {/* Recommendations & Methodology */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16">
-            <Section title="Strategic Recommendations" className="border-b-0 lg:border-b-0">
-                <ol className="list-decimal list-outside space-y-6 pl-5 text-lg" style={{ color: CHARCOAL }}>
-                    <li><span className="font-semibold" style={{ color: NAVY }}>Target a Niche.</span> The general-purpose assistant market is saturating. Focus on specific domains like security, data science, or legacy codebases.</li>
-                    <li><span className="font-semibold" style={{ color: NAVY }}>Bet on Agents, Not Autocomplete.</span> Autocomplete is becoming a commodity. The next frontier is agentic workflows that execute complex multi-step tasks.</li>
-                    <li><span className="font-semibold" style={{ color: NAVY }}>Dual-Tier Strategy.</span> Enterprise sales provide revenue, but a strong developer-focused free or individual tier is essential for distribution and mindshare.</li>
-                    <li><span className="font-semibold" style={{ color: NAVY }}>Solve for Trust First.</span> SOC 2 Type II compliance, on-premise options, and transparent data handling are non-negotiable for enterprise adoption.</li>
-                    <li><span className="font-semibold" style={{ color: NAVY }}>Build for a Model-Agnostic Future.</span> The best underlying model will constantly change. Abstract this away and build infrastructure for automatic model routing and fine-tuning.</li>
-                </ol>
-            </Section>
-            <Section title="Methodology" className="border-b-0">
-                 <ul className="list-disc list-outside space-y-4 pl-5 text-lg" style={{ color: CHARCOAL }}>
-                    <li>Combination of primary and secondary research, including reports from Gartner, IDC, and Forrester, plus developer surveys from Stack Overflow and JetBrains.</li>
-                    <li>34 structured interviews conducted with engineering leaders and senior developers from October 2025 to January 2026.</li>
-                    <li>Bottom-up market sizing model based on developer population, adoption rates, and pricing tiers.</li>
-                    <li>Hands-on, in-depth product testing of all major platforms covered in the report.</li>
-                    <li>This research was conducted independently by Kael Research and was not sponsored by any of the companies mentioned.</li>
+            <div>
+              <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Key Factors</h3>
+              {/* Growth Drivers card */}
+              <div className="bg-white rounded-lg p-5 shadow-sm mb-4" style={{ borderLeft: `4px solid ${SAGE}`, border: '1px solid #E5E7EB', borderLeftColor: SAGE }}>
+                <h4 className="font-bold mb-3" style={{ color: SAGE }}>Growth Drivers</h4>
+                <ul className="space-y-2 text-sm" style={{ color: CHARCOAL }}>
+                  <li className="flex items-start gap-2"><span className="mt-1.5 flex-shrink-0 h-2 w-2 rounded-full" style={{ backgroundColor: SAGE }} /><span><strong style={{ color: NAVY }}>Scale:</strong> 32 Million developers worldwide presents a massive user base.</span></li>
+                  <li className="flex items-start gap-2"><span className="mt-1.5 flex-shrink-0 h-2 w-2 rounded-full" style={{ backgroundColor: SAGE }} /><span><strong style={{ color: NAVY }}>Productivity:</strong> Reported gains of 27-55% are too significant for enterprises to ignore.</span></li>
+                  <li className="flex items-start gap-2"><span className="mt-1.5 flex-shrink-0 h-2 w-2 rounded-full" style={{ backgroundColor: SAGE }} /><span><strong style={{ color: NAVY }}>Agentic Shift:</strong> Move to autonomous agents creates new, higher-value use cases.</span></li>
                 </ul>
-            </Section>
-        </div>
-        
-        {/* CTA */}
-        <div className="text-center py-16 sm:py-24 border-t mt-12" style={{ borderColor: '#E5E7EB' }}>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Need This Level of Analysis for Your Market?</h2>
-            <p className="mt-4 max-w-2xl mx-auto text-lg" style={{ color: '#6B7280' }}>Our bespoke research reports give you the strategic advantage to lead, innovate, and capture market share.</p>
-            <div className="mt-8 flex justify-center gap-4">
-                <a href="/#pricing" className="font-bold py-3 px-6 rounded-md text-base" style={{ backgroundColor: GOLD, color: NAVY }}>
-                    View Pricing
-                </a>
-                <a href="mailto:contact@kaelresearch.com" className="font-bold py-3 px-6 rounded-md text-base border" style={{ color: NAVY, borderColor: NAVY }}>
-                    Contact Us
-                </a>
+              </div>
+              {/* Growth Constraints card */}
+              <div className="bg-white rounded-lg p-5 shadow-sm" style={{ borderLeft: '4px solid #C0392B', border: '1px solid #E5E7EB', borderLeftColor: '#C0392B' }}>
+                <h4 className="font-bold mb-3" style={{ color: '#C0392B' }}>Growth Constraints</h4>
+                <ul className="space-y-2 text-sm" style={{ color: CHARCOAL }}>
+                  <li className="flex items-start gap-2"><span className="mt-1.5 flex-shrink-0 h-2 w-2 rounded-full" style={{ backgroundColor: '#C0392B' }} /><span><strong style={{ color: NAVY }}>Security (34%):</strong> Concerns about code/IP leakage remain a primary barrier.</span></li>
+                  <li className="flex items-start gap-2"><span className="mt-1.5 flex-shrink-0 h-2 w-2 rounded-full" style={{ backgroundColor: '#C0392B' }} /><span><strong style={{ color: NAVY }}>Quality Plateau:</strong> Perceived leveling-off of core model quality.</span></li>
+                  <li className="flex items-start gap-2"><span className="mt-1.5 flex-shrink-0 h-2 w-2 rounded-full" style={{ backgroundColor: '#C0392B' }} /><span><strong style={{ color: NAVY }}>Resistance (18%):</strong> A segment of developers remains skeptical or resistant to adoption.</span></li>
+                </ul>
+              </div>
             </div>
+          </div>
+        </section>
+
+        {/* ═══ 03 — Competitive Landscape ═══ */}
+        <section className="py-16 sm:py-20">
+          <SectionHeader number="03" title="Competitive Landscape" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-xl font-bold mb-4 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Market Share by Revenue (2025)</h3>
+              <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+                <ChartWrapper>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie data={marketShareData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={'80%'} labelLine={false}
+                           label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
+                              const RADIAN = Math.PI / 180;
+                              const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
+                              const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                              const y = cy + radius * Math.sin(-midAngle * RADIAN);
+                              const data = marketShareData[index];
+                              return (
+                                  <text x={x} y={y} fill={data.color} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize={12}>
+                                      {`${data.name} (${(percent * 100).toFixed(1)}%)`}
+                                  </text>
+                              );
+                           }}
+                      >
+                        {marketShareData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
+                      </Pie>
+                      <Tooltip formatter={(v, name, props) => [`$${props.payload.revenue}B (${v}%)`, props.payload.name]} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </ChartWrapper>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-4 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>GitHub Copilot Market Share Decline</h3>
+              <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+                <ChartWrapper>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={copilotDeclineData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                      <XAxis dataKey="name" stroke="#6B7280" />
+                      <YAxis stroke="#6B7280" domain={[40, 60]} unit="%" />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Area type="monotone" dataKey="value" name="Market Share" stroke={NAVY} fill={NAVY} fillOpacity={0.12} />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </ChartWrapper>
+              </div>
+            </div>
+          </div>
+
+          {/* Competitor Data Table */}
+          <div className="mt-12">
+            <h3 className="text-xl font-bold mb-6" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Competitor Breakdown</h3>
+            <div className="overflow-x-auto bg-white rounded-lg border shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr style={{ backgroundColor: NAVY }}>
+                    <th className="p-4 text-sm font-bold text-white">Company</th>
+                    <th className="p-4 text-sm font-bold text-white text-right">Revenue ($B)</th>
+                    <th className="p-4 text-sm font-bold text-white text-right">Market Share</th>
+                    <th className="p-4 text-sm font-bold text-white text-right">YoY Growth</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {marketShareData.map((entry, idx) => (
+                    <tr key={entry.name} style={{ backgroundColor: idx % 2 === 0 ? '#FFFFFF' : '#F9FAFB' }}>
+                      <td className="p-4 text-sm font-medium border-t" style={{ color: CHARCOAL, borderColor: '#E5E7EB' }}>
+                        <span className="inline-block w-3 h-3 rounded-full mr-2" style={{ backgroundColor: entry.color, verticalAlign: 'middle' }} />
+                        {entry.name}
+                      </td>
+                      <td className="p-4 text-sm text-right border-t font-medium" style={{ color: NAVY, borderColor: '#E5E7EB' }}>${entry.revenue.toFixed(2)}B</td>
+                      <td className="p-4 text-sm text-right border-t" style={{ color: CHARCOAL, borderColor: '#E5E7EB' }}>{entry.value}%</td>
+                      <td className="p-4 text-sm text-right border-t font-medium" style={{ color: entry.yoy.startsWith('+') ? SAGE : '#6B7280', borderColor: '#E5E7EB' }}>{entry.yoy}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ 04 — Feature Comparison ═══ */}
+        <section className="py-16 sm:py-20">
+          <SectionHeader number="04" title="Feature Comparison" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <h3 className="text-xl font-bold mb-4 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Core Capabilities Score (0-100)</h3>
+              <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+                <ChartWrapper>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RadarChart cx="50%" cy="50%" outerRadius="80%" data={featureRadarData}>
+                      <PolarGrid stroke="#D1D5DB" />
+                      <PolarAngleAxis dataKey="subject" stroke="#6B7280" tick={{ fontSize: 12 }} />
+                      <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="#D1D5DB" />
+                      <Radar name="Copilot" dataKey="Copilot" stroke={NAVY} fill={NAVY} fillOpacity={0.3} />
+                      <Radar name="Cursor" dataKey="Cursor" stroke={SLATE_BLUE} fill={SLATE_BLUE} fillOpacity={0.3} />
+                      <Radar name="Windsurf" dataKey="Windsurf" stroke={SAGE} fill={SAGE} fillOpacity={0.3} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend />
+                    </RadarChart>
+                  </ResponsiveContainer>
+                </ChartWrapper>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-6 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Feature Matrix</h3>
+              <div className="overflow-x-auto bg-white rounded-lg border shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr style={{ backgroundColor: NAVY }}>
+                      <th className="p-3 text-sm font-bold text-white">Feature</th>
+                      {Object.keys(featureMatrixData.competitors).map(c => (
+                        <th key={c} className="p-3 text-sm font-bold text-center text-white">{c}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {featureMatrixData.features.map((feature, idx) => (
+                      <tr key={feature} style={{ backgroundColor: idx % 2 === 0 ? '#FFFFFF' : '#F9FAFB' }}>
+                        <td className="p-3 border-t text-sm font-medium" style={{ color: CHARCOAL, borderColor: '#E5E7EB' }}>{feature}</td>
+                        {Object.values(featureMatrixData.competitors).map((statuses, cIdx) => (
+                          <td key={cIdx} className="p-3 border-t text-center" style={{ borderColor: '#E5E7EB' }}><StatusIcon status={statuses[idx]} /></td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* ═══ 05 — Pricing ═══ */}
+        <section className="py-16 sm:py-20">
+          <SectionHeader number="05" title="Pricing" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Individual Tiers</h3>
+              <div className="space-y-3">
+                {Object.entries({ Copilot: 10, Cursor: 20, Windsurf: 15, 'Amazon Q': 19, Tabnine: 12 }).map(([name, price]) => (
+                  <div key={name} className="flex justify-between items-center p-5 rounded-lg bg-white border shadow-sm" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
+                    <span className="font-medium" style={{ color: CHARCOAL }}>{name}</span>
+                    <span className="text-2xl font-bold" style={{ color: NAVY }}>${price}<span className="text-sm font-normal" style={{ color: '#6B7280' }}>/mo</span></span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Enterprise Tiers</h3>
+              <div className="space-y-3">
+                {Object.entries({ 'Copilot Enterprise': 39, 'Copilot Business': 19, 'Cursor Business': 40, 'Windsurf Enterprise': '30-45' }).map(([name, price]) => (
+                  <div key={name} className="flex justify-between items-center p-5 rounded-lg bg-white border shadow-sm" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
+                    <span className="font-medium" style={{ color: CHARCOAL }}>{name}</span>
+                    <span className="text-2xl font-bold" style={{ color: NAVY }}>{typeof price === 'number' ? `$${price}`: `$${price}`}<span className="text-sm font-normal" style={{ color: '#6B7280' }}>/u/mo</span></span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ 06 — Adoption Trends ═══ */}
+        <section className="py-16 sm:py-20">
+          <SectionHeader number="06" title="Adoption Trends" />
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            <div className="lg:col-span-3">
+              <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Developer Sentiment Over Time</h3>
+              <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+                <ChartWrapper>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={adoptionTrendsData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                      <XAxis dataKey="name" stroke="#6B7280" />
+                      <YAxis stroke="#6B7280" unit="%" />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend />
+                      <Line type="monotone" dataKey="tried" name="Tried" stroke={SLATE_BLUE} />
+                      <Line type="monotone" dataKey="daily" name="Daily User" stroke={SAGE} />
+                      <Line type="monotone" dataKey="cant-live-without" name="Can't Live Without" stroke={MUTED_GOLD} />
+                      <Line type="monotone" dataKey="resist" name="Resist Adoption" stroke="#C0392B" />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </ChartWrapper>
+              </div>
+            </div>
+            <div className="lg:col-span-2">
+              <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Net Promoter Score (NPS)</h3>
+              <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+                <ChartWrapper>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart layout="vertical" data={npsData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                      <XAxis type="number" stroke="#6B7280" domain={[0, 70]} />
+                      <YAxis dataKey="name" type="category" stroke="#6B7280" width={80} />
+                      <Tooltip cursor={{ fill: '#F3F4F6' }} formatter={(v) => [`+${v}`, 'NPS']} />
+                      <Bar dataKey="score" name="NPS">
+                        {npsData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </ChartWrapper>
+              </div>
+            </div>
+          </div>
+          <div className="mt-16">
+            <h3 className="text-xl font-bold mb-6 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Adoption by Company Size</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+              {[{size: '1-10', pct: '68%', primary: 'Cursor (34%)', seats: 4}, {size: '11-100', pct: '74%', primary: 'Copilot (41%)', seats: 28}, {size: '101-500', pct: '71%', primary: 'Copilot (48%)', seats: 95}, {size: '501-5K', pct: '78%', primary: 'Copilot (52%)', seats: 420}, {size: '5000+', pct: '65%', primary: 'Copilot (58%)', seats: 2100}].map(item => (
+                <div key={item.size} className="p-5 rounded-lg border text-center shadow-sm" style={{ backgroundColor: '#F0F4FA', borderColor: '#E5E7EB' }}>
+                  <p className="font-bold" style={{ color: NAVY }}>{item.size} <span className="text-xs" style={{ color: '#6B7280' }}>emp.</span></p>
+                  <p className="text-3xl font-bold my-2" style={{ color: GOLD }}>{item.pct}</p>
+                  <p className="text-xs" style={{ color: '#6B7280' }}>Primary: {item.primary}</p>
+                  <p className="text-xs" style={{ color: '#6B7280' }}>Avg Seats: {item.seats}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <KeyInsight>
+            Enterprise adoption is highest in the 501-5K employee segment at 78%, but startups (1-10 employees) show the strongest preference for newer tools like Cursor, suggesting a bottom-up disruption pattern. Resistance has dropped from 31% to 18% in just two years — the holdout cohort is shrinking rapidly.
+          </KeyInsight>
+        </section>
+
+        {/* ═══ 07 — Strategic Recommendations ═══ */}
+        <section className="py-16 sm:py-20">
+          <SectionHeader number="07" title="Strategic Recommendations" />
+          <div className="space-y-4">
+            {recommendations.map((rec, idx) => (
+              <div key={idx} className="bg-white rounded-lg p-6 shadow-sm border flex items-start gap-5" style={{ borderColor: '#E5E7EB', borderLeft: `4px solid ${GOLD}` }}>
+                <span className="text-3xl font-bold leading-none flex-shrink-0 mt-0.5" style={{ color: GOLD, fontFamily: 'Georgia, "Times New Roman", serif', opacity: 0.7 }}>
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <p className="font-bold text-lg" style={{ color: NAVY }}>{rec.title}</p>
+                  <p className="mt-1 leading-relaxed" style={{ color: CHARCOAL }}>{rec.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ═══ 08 — Methodology ═══ */}
+        <section className="py-16 sm:py-20">
+          <SectionHeader number="08" title="Methodology" />
+          <div className="bg-white rounded-lg border p-6 sm:p-8 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {[
+                { icon: '📊', text: 'Combination of primary and secondary research, including reports from Gartner, IDC, and Forrester, plus developer surveys from Stack Overflow and JetBrains.' },
+                { icon: '🎙️', text: '34 structured interviews conducted with engineering leaders and senior developers from October 2025 to January 2026.' },
+                { icon: '📐', text: 'Bottom-up market sizing model based on developer population, adoption rates, and pricing tiers.' },
+                { icon: '🧪', text: 'Hands-on, in-depth product testing of all major platforms covered in the report.' },
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                  <p className="text-sm leading-relaxed" style={{ color: CHARCOAL }}>{item.text}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 pt-6 border-t" style={{ borderColor: '#E5E7EB' }}>
+              <p className="text-sm italic" style={{ color: '#6B7280' }}>This research was conducted independently by Kael Research and was not sponsored by any of the companies mentioned.</p>
+            </div>
+          </div>
+        </section>
+        
+        {/* ═══ CTA ═══ */}
+        <div className="rounded-xl py-16 sm:py-20 px-6 text-center -mx-4 sm:-mx-6 lg:-mx-8 mb-0" style={{ backgroundColor: '#F0F4FA' }}>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Need This Level of Analysis for Your Market?</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-lg" style={{ color: '#6B7280' }}>Our bespoke research reports give you the strategic advantage to lead, innovate, and capture market share.</p>
+          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+            <a href="/#pricing" className="font-bold py-3 px-8 rounded-md text-base transition-all hover:opacity-90" style={{ backgroundColor: GOLD, color: NAVY }}>
+              View Pricing
+            </a>
+            <a href="mailto:contact@kaelresearch.com" className="font-bold py-3 px-8 rounded-md text-base border-2 transition-all hover:opacity-80" style={{ color: NAVY, borderColor: NAVY }}>
+              Contact Us
+            </a>
+          </div>
         </div>
       </main>
       <ReportFooter />
