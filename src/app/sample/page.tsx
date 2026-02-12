@@ -37,7 +37,7 @@ export default function SampleReportPage() {
 
   if (!authorized) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] text-gray-200 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-slate-950 text-slate-50 flex items-center justify-center px-4">
         <div className="max-w-md w-full bg-slate-900 border border-slate-700 rounded-2xl p-8">
           <h2 className="text-2xl font-bold text-white mb-2">Read the Full Sample Report</h2>
           <p className="text-slate-400 text-sm mb-6">Drop your email to unlock instant access. No spam.</p>
@@ -62,33 +62,40 @@ export default function SampleReportPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-gray-200">
-      {/* Header */}
-      <header className="border-b border-white/10 px-6 py-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Link href="/" className="text-white font-semibold text-lg tracking-tight">
-            Kael Research
+    <div className="min-h-screen bg-slate-950 text-slate-50">
+      {/* Background Gradients - matching main site */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-900/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-amber-900/5 rounded-full blur-[120px]" />
+      </div>
+
+      {/* Navigation - matching main site */}
+      <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/50">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight">
+            <span className="text-white">KAEL</span>
+            <span className="text-amber-400">RESEARCH</span>
           </Link>
           <span className="text-xs uppercase tracking-widest text-amber-400 border border-amber-400/30 px-3 py-1 rounded-full">
             Sample Report
           </span>
         </div>
-      </header>
+      </nav>
 
       {/* Report Content */}
-      <main className="max-w-4xl mx-auto px-6 py-16">
+      <main className="relative z-10 max-w-4xl mx-auto px-6 pt-28 pb-16">
         <article className="prose prose-invert prose-lg max-w-none
           prose-headings:text-white prose-headings:font-semibold
           prose-h1:text-4xl prose-h1:mb-4 prose-h1:leading-tight
           prose-h2:text-2xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pt-8 prose-h2:border-t prose-h2:border-white/10
-          prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-gray-300
-          prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+          prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-slate-300
+          prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-4
           prose-strong:text-white
-          prose-li:text-gray-300
+          prose-li:text-slate-300
           prose-table:text-sm
-          prose-th:text-left prose-th:text-gray-400 prose-th:font-medium prose-th:pb-3 prose-th:border-b prose-th:border-white/20
-          prose-td:py-2.5 prose-td:border-b prose-td:border-white/5 prose-td:text-gray-300
-          prose-em:text-gray-400
+          prose-th:text-left prose-th:text-slate-400 prose-th:font-medium prose-th:pb-3 prose-th:border-b prose-th:border-slate-700
+          prose-td:py-2.5 prose-td:border-b prose-td:border-slate-800 prose-td:text-slate-300
+          prose-em:text-slate-400
           prose-a:text-amber-400 prose-a:no-underline hover:prose-a:underline
         ">
           {/* Cover */}
@@ -96,12 +103,12 @@ export default function SampleReportPage() {
             <h1 className="text-5xl font-bold tracking-tight mb-6">
               The AI Code Assistant Market:<br />2026 Landscape Analysis
             </h1>
-            <p className="text-gray-400 text-lg mb-2">Prepared by Kael Research</p>
-            <p className="text-gray-500 mb-6">February 2026</p>
+            <p className="text-slate-400 text-lg mb-2">Prepared by Kael Research</p>
+            <p className="text-slate-500 mb-6">February 2026</p>
             <span className="inline-block text-xs uppercase tracking-widest text-amber-400 border border-amber-400/30 px-4 py-2 rounded">
               Sample Report
             </span>
-            <p className="text-gray-500 text-sm mt-8 max-w-lg mx-auto italic">
+            <p className="text-slate-500 text-sm mt-8 max-w-lg mx-auto italic">
               This document is a sample excerpt from Kael Research&apos;s full market intelligence library.
               For complete reports, custom analysis, and ongoing coverage, visit{' '}
               <Link href="/" className="text-amber-400 hover:underline">kaelresearch.com</Link>.
@@ -182,7 +189,7 @@ export default function SampleReportPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-sm text-gray-500 -mt-4 mb-8">
+          <p className="text-sm text-slate-500 -mt-4 mb-8">
             Sources: Gartner (2025), IDC Software Development Intelligence Report (2025), Kael Research estimates
           </p>
 
@@ -256,7 +263,7 @@ export default function SampleReportPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-sm text-gray-500 -mt-4 mb-8">
+          <p className="text-sm text-slate-500 -mt-4 mb-8">
             Sources: Company disclosures where available, Kael Research estimates
           </p>
 
@@ -373,7 +380,7 @@ export default function SampleReportPage() {
             <li><strong>34% say they &ldquo;can&apos;t imagine coding without it&rdquo;</strong></li>
             <li><strong>18% actively avoid AI coding tools</strong> (down from 31% in 2023)</li>
           </ul>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             Sources: Stack Overflow (2025), JetBrains (2025), SlashData (2025)
           </p>
 
@@ -392,7 +399,7 @@ export default function SampleReportPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-sm text-gray-500 -mt-4 mb-8">
+          <p className="text-sm text-slate-500 -mt-4 mb-8">
             Source: Kael Research Enterprise Software Survey, Q4 2025 (n=840)
           </p>
 
@@ -517,8 +524,8 @@ export default function SampleReportPage() {
             We do not accept sponsorship or payment from companies covered in our reports.
           </p>
 
-          {/* Footer */}
-          <div className="mt-20 pt-8 border-t border-white/10 text-center text-gray-500 text-sm">
+          {/* Report Footer */}
+          <div className="mt-20 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm">
             <p className="italic mb-4">
               This is a sample report. Full Kael Research reports include regulatory analysis,
               regional breakdowns, investment activity tracking, and 5-year forecasting models.
@@ -527,10 +534,25 @@ export default function SampleReportPage() {
               For access to our complete research library, visit{' '}
               <Link href="/" className="text-amber-400 hover:underline">kaelresearch.com</Link>.
             </p>
-            <p className="mt-4">© 2026 Kael Research. All rights reserved.</p>
           </div>
         </article>
       </main>
+
+      {/* Site Footer - matching main site */}
+      <footer className="relative z-10 bg-slate-950 border-t border-slate-900 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="text-center md:text-left">
+              <span className="text-xl font-bold text-white tracking-tight">KAEL <span className="text-amber-500">RESEARCH</span></span>
+              <p className="text-slate-500 text-sm mt-2">&copy; 2026 Kael Research. All rights reserved.</p>
+            </div>
+            <div className="flex items-center gap-6">
+              <Link href="/" className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Home</Link>
+              <a href="mailto:contact@kaelresearch.com" className="text-slate-400 hover:text-amber-400 text-sm transition-colors">contact@kaelresearch.com</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
