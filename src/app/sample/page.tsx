@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect, FormEvent, FC } from 'react';
 import { useRouter } from 'next/navigation';
@@ -267,22 +267,8 @@ const ReportPage: FC = () => {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-amber-400">
             2026 Landscape Analysis
           </h2>
-          <p className="mt-6 text-lg text-slate-400">Prepared by Kael Research ΓÇö February 2026</p>
-          <div className="mt-8 flex justify-center gap-4 sm:gap-8 text-slate-300">
-            <div className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm10.5 5.5a.5.5 0 000-1H10V5.5a.5.5 0 00-1 0V7H8.5a.5.5 0 000 1H9v1.5a.5.5 0 001 0V8h1.5a.5.5 0 000-1H10V7h.5a.5.5 0 01.5.5c0 .25-.25.5-.5.5H10v.5a.5.5 0 001 0V8h.5a.5.5 0 00.5-.5H12v-.5a.5.5 0 01.5-.5h.5a.5.5 0 000-1h-.5A1.5 1.5 0 0012 5.5v.5h-.5a1.5 1.5 0 00-1.5 1.5v.5h.5a.5.5 0 010 1H10v.5A1.5 1.5 0 0011.5 11h.5a.5.5 0 000-1h-.5a.5.5 0 01-.5-.5V9h.5a.5.5 0 00.5-.5H12V8h.5a.5.5 0 00.5-.5zM6 6.5A1.5 1.5 0 017.5 5h.5a.5.5 0 000-1h-.5A2.5 2.5 0 005 6.5v7A2.5 2.5 0 007.5 16h5A2.5 2.5 0 0015 13.5v-7a.5.5 0 00-1 0v7a1.5 1.5 0 01-1.5 1.5h-5A1.5 1.5 0 016 13.5v-7z" clipRule="evenodd" /></svg>
-                <span>47 Pages</span>
-            </div>
-            <div className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" /></svg>
-                <span>86 Sources</span>
-            </div>
-            <div className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v2H5V5zm0 4h10v2H5V9zm0 4h10v2H5v-2z" clipRule="evenodd" /></svg>
-                <span>12 Data Tables</span>
-            </div>
+          <p className="mt-6 text-lg text-slate-400">Prepared by Kael Research G�� February 2026</p>
           </div>
-        </div>
 
         {/* Executive Summary */}
         <Section title="Executive Summary" className="prose prose-invert max-w-none prose-p:text-slate-300 prose-li:text-slate-300 prose-headings:text-white">
@@ -292,7 +278,7 @@ const ReportPage: FC = () => {
                 <StatCard label="Enterprise Adoption" value="71%" />
             </div>
             <ul className="space-y-4 text-lg">
-                <li><strong className="text-amber-400">Market Growth:</strong> $2.1B (2024) ΓåÆ $5.8B (2025) ΓåÆ $9.4B projected (2026), driven by enterprise adoption and productivity gains.</li>
+                <li><strong className="text-amber-400">Market Growth:</strong> $2.1B (2024) G�� $5.8B (2025) G�� $9.4B projected (2026), driven by enterprise adoption and productivity gains.</li>
                 <li><strong className="text-amber-400">GitHub Copilot:</strong> 42% market share, down from 55% in early 2024 as competition intensifies.</li>
                 <li><strong className="text-amber-400">Cursor:</strong> Breakout story with 3.2M users, ~$200M ARR, and +340% YoY growth, signaling demand for integrated, codebase-aware tools.</li>
                 <li><strong className="text-amber-400">Strategic Shift:</strong> The market is rapidly moving beyond simple "assistants" to more powerful agentic coding workflows.</li>
@@ -581,3 +567,4 @@ export default function SamplePage() {
 
   return showReport ? <ReportPage /> : <EmailGate onSuccess={handleSuccess} />;
 }
+
