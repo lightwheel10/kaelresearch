@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, FormEvent, FC } from 'react';
 import { useRouter } from 'next/navigation';
@@ -232,13 +232,6 @@ const ReportPage: FC = () => {
       </section>
     );
 
-    const StatCard: FC<{ label: string; value: string | number }> = ({ label, value }) => (
-        <div className="bg-slate-900 p-6 rounded-lg border border-slate-800 text-center">
-            <p className="text-sm text-slate-400">{label}</p>
-            <p className="text-2xl sm:text-3xl font-bold text-amber-400 mt-1">{value}</p>
-        </div>
-    );
-    
     const CustomTooltip = ({ active, payload, label }: any) => {
         if (active && payload && payload.length) {
             return (
@@ -267,18 +260,13 @@ const ReportPage: FC = () => {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-amber-400">
             2026 Landscape Analysis
           </h2>
-          <p className="mt-6 text-lg text-slate-400">Prepared by Kael Research G�� February 2026</p>
+          <p className="mt-6 text-lg text-slate-400">Prepared by Kael Research — February 2026</p>
           </div>
 
         {/* Executive Summary */}
         <Section title="Executive Summary" className="prose prose-invert max-w-none prose-p:text-slate-300 prose-li:text-slate-300 prose-headings:text-white">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <StatCard label="Market Size (2025)" value="$5.8B" />
-                <StatCard label="Projected (2026)" value="$9.4B" />
-                <StatCard label="Enterprise Adoption" value="71%" />
-            </div>
             <ul className="space-y-4 text-lg">
-                <li><strong className="text-amber-400">Market Growth:</strong> $2.1B (2024) G�� $5.8B (2025) G�� $9.4B projected (2026), driven by enterprise adoption and productivity gains.</li>
+                <li><strong className="text-amber-400">Market Growth:</strong> $2.1B (2024) to $5.8B (2025) to $9.4B projected (2026), driven by enterprise adoption and productivity gains.</li>
                 <li><strong className="text-amber-400">GitHub Copilot:</strong> 42% market share, down from 55% in early 2024 as competition intensifies.</li>
                 <li><strong className="text-amber-400">Cursor:</strong> Breakout story with 3.2M users, ~$200M ARR, and +340% YoY growth, signaling demand for integrated, codebase-aware tools.</li>
                 <li><strong className="text-amber-400">Strategic Shift:</strong> The market is rapidly moving beyond simple "assistants" to more powerful agentic coding workflows.</li>
@@ -567,4 +555,5 @@ export default function SamplePage() {
 
   return showReport ? <ReportPage /> : <EmailGate onSuccess={handleSuccess} />;
 }
+
 
