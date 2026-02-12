@@ -93,8 +93,7 @@ export default function Home() {
           </h1>
           
           <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Your competitors are making decisions with gut feelings and ChatGPT hallucinations. 
-            Get research that's sourced, verified, and ready for your board meeting ΓÇö in 3 days.
+            Your competitors are making decisions with gut feelings and ChatGPT hallucinations. We do the actual research — sourced, verified, numbers you can put in front of investors. Done in 3 days.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -224,9 +223,9 @@ export default function Home() {
               <ul className="space-y-4">
                 {[
                   "Every claim sourced",
-                  "Cross-verified by 3 AI models + human analyst",
+                  "Triple-checked by AI, then verified by a human",
                   "Full segment breakdown with data tables",
-                  "Actionable strategic recommendations"
+                  "Specific next steps you can actually act on"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-slate-200">
                     <svg className="w-5 h-5 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -238,7 +237,7 @@ export default function Home() {
               </ul>
 
               <div className="mt-8 pt-8 border-t border-amber-900/30 text-amber-400/80 text-sm font-medium">
-                Delivered: 3 business days, board-ready PDF
+                Delivered in 3 business days as a polished PDF
               </div>
             </div>
           </div>
@@ -263,12 +262,12 @@ export default function Home() {
               {
                 step: "02",
                 title: "We Go Deep",
-                desc: "3 SOTA AI models analyze thousands of sources. Human analysts verify every claim."
+                desc: "Three AI models cross-check thousands of sources against each other. Then a human analyst goes through every number and claim."
               },
               {
                 step: "03",
                 title: "You Decide",
-                desc: "Receive a polished, sourced PDF. Data tables, strategy, ready for investors."
+                desc: "You get a PDF with sourced data, clear analysis, and specific recommendations. Put it in front of investors as-is."
               }
             ].map((item, i) => (
               <div key={i} className="relative flex flex-col items-center text-center">
@@ -331,9 +330,9 @@ export default function Home() {
 
           {/* Stats */}
           <div className="w-full md:w-1/2 md:pl-10">
-            <h2 className="text-3xl font-bold mb-6">Board-Ready Intelligence</h2>
+            <h2 className="text-3xl font-bold mb-6">What You Actually Get</h2>
             <p className="text-slate-400 text-lg mb-10">
-              We don't just dump data. We synthesize it into a coherent narrative backed by hard numbers.
+              Not a data dump. Every report tells a clear story — what's happening, why it matters, and what you should do about it.
             </p>
             
             <div className="grid grid-cols-2 gap-6">
@@ -399,7 +398,7 @@ export default function Home() {
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
               <h3 className="text-lg font-medium text-slate-300 mb-2">Deep Dive</h3>
               <div className="text-3xl font-bold text-white mb-6">$299<span className="text-sm text-slate-500 font-normal"> /report</span></div>
-              <p className="text-sm text-slate-400 mb-8 h-10">Investment-grade due diligence and strategic analysis.</p>
+              <p className="text-sm text-slate-400 mb-8 h-10">The kind of analysis you'd hand to a VC or put in a board deck.</p>
               <a href="mailto:contact@kaelresearch.com?subject=Deep Dive Report" className="block w-full py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-center font-medium transition-colors mb-8 border border-slate-700">Request Deep Dive</a>
               <ul className="space-y-3 text-sm text-slate-300">
                 <li className="flex gap-2"><CheckIcon /> 30-50 pages</li>
@@ -421,11 +420,11 @@ export default function Home() {
           </div>
           <div className="space-y-4">
             {[
-              { q: "How is this different from just using ChatGPT?", a: "ChatGPT is a generalist that hallucinates numbers. We use 3 specialized models cross-referenced against each other, connected to real data sources, and every claim is verified by a human analyst before delivery. You get sourced facts, not plausible fiction." },
+              { q: "How is this different from just using ChatGPT?", a: "ChatGPT makes up numbers. It sounds confident, but try putting those figures in a pitch deck — they fall apart under scrutiny. We run three AI models against each other to catch errors, pull from real databases, and then a human checks every number before it goes out. You get citations, not vibes." },
               { q: "What sources do you use?", a: "Public filings, industry databases (Statista, Gartner, etc.), patent records, job postings, app store data, social signals, verified reviews, and more. Every source is cited in the report." },
               { q: "How fast can I get a report?", a: "Standard delivery is 5 business days. Growth plan clients get priority 3-day turnaround. Need it faster? Talk to us." },
-              { q: "Can I request any topic?", a: "If it can be researched, we can cover it. SaaS, fintech, healthtech, e-commerce, developer tools, consumer apps — you name it. We scope feasibility within 24 hours of your brief." },
-              { q: "What if I'm not satisfied?", a: "Every plan includes revision rounds. If the report doesn't meet the brief, we revise it at no extra cost. We'd rather over-deliver than lose your trust." }
+              { q: "Can I request any topic?", a: "Pretty much anything in tech and business. SaaS, fintech, healthtech, e-commerce, dev tools, consumer apps. Send us the brief and we'll tell you within 24 hours if we can do it and what it'll cover." },
+              { q: "What if I'm not satisfied?", a: "Every plan comes with revision rounds. If the report misses the mark, we fix it — no extra charge. We're building a business on repeat clients, so burning you on the first report would be stupid." }
             ].map((faq, i) => (
               <div key={i} className="border border-slate-800 rounded-lg bg-slate-900/50 overflow-hidden">
                 <button onClick={() => toggleFaq(i)} className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none">
@@ -469,5 +468,6 @@ export default function Home() {
     </main>
   );
 }
+
 
 
