@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
-function CheckIcon({ color = "text-slate-500" }: { color?: string }) {
+function CheckIcon({ color = "text-gray-400" }: { color?: string }) {
   return (
     <svg className={`w-4 h-4 ${color} flex-shrink-0 mt-0.5`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -49,10 +49,10 @@ function EmailModal({ isOpen, onClose, onSuccess }: { isOpen: boolean; onClose: 
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4" onClick={onClose}>
-      <div className="bg-slate-900 border border-slate-700 rounded-2xl p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
-        <h3 className="text-2xl font-bold text-white mb-2">Get the Free Sample Report</h3>
-        <p className="text-slate-400 text-sm mb-6">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4" onClick={onClose}>
+      <div className="bg-white border border-gray-200 rounded-2xl p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
+        <h3 className="text-2xl font-bold mb-2" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Get the Free Sample Report</h3>
+        <p className="text-gray-500 text-sm mb-6">
           Enter your email and we'll unlock the full sample report instantly. No spam, no sequences.
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -61,19 +61,22 @@ function EmailModal({ isOpen, onClose, onSuccess }: { isOpen: boolean; onClose: 
             value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder="you@company.com"
-            className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
+            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#C9A84C] transition-colors"
             autoFocus
           />
-          {error && <p className="text-red-400 text-sm">{error}</p>}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-amber-600 hover:bg-amber-500 disabled:opacity-50 text-white font-medium rounded-lg transition-colors"
+            className="w-full py-3 text-white font-medium rounded-lg transition-colors disabled:opacity-50"
+            style={{ backgroundColor: '#C9A84C' }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
           >
             {loading ? 'Sending...' : 'Send Me the Report'}
           </button>
         </form>
-        <p className="text-slate-500 text-xs mt-4 text-center">We send one thing: the report. That's it.</p>
+        <p className="text-gray-400 text-xs mt-4 text-center">We send one thing: the report. That's it.</p>
       </div>
     </div>
   );
@@ -90,39 +93,37 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     e.preventDefault();
     if (!form.email || !form.message) return;
     setLoading(true);
-    // Save to waitlist with the email, then open mailto as fallback
     await fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: form.email }),
     });
-    // Open mailto
     window.location.href = `mailto:contact@kaelresearch.com?subject=Inquiry from ${form.name}&body=${encodeURIComponent(form.message)}%0A%0AFrom: ${form.name} (${form.email})`;
     setSent(true);
     setLoading(false);
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4" onClick={onClose}>
-      <div className="bg-slate-900 border border-slate-700 rounded-2xl p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4" onClick={onClose}>
+      <div className="bg-white border border-gray-200 rounded-2xl p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
         {sent ? (
           <div className="text-center py-4">
-            <div className="text-3xl mb-3">✓</div>
-            <h3 className="text-xl font-bold text-white mb-2">Email client opened</h3>
-            <p className="text-slate-400 text-sm">If your email client didn't open, reach us at contact@kaelresearch.com</p>
-            <button onClick={onClose} className="mt-4 px-6 py-2 bg-slate-800 rounded-lg text-white hover:bg-slate-700 transition-colors">Close</button>
+            <div className="text-3xl mb-3" style={{ color: '#C9A84C' }}>✓</div>
+            <h3 className="text-xl font-bold mb-2" style={{ color: '#1B2A4A' }}>Email client opened</h3>
+            <p className="text-gray-500 text-sm">If your email client didn't open, reach us at contact@kaelresearch.com</p>
+            <button onClick={onClose} className="mt-4 px-6 py-2 bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors">Close</button>
           </div>
         ) : (
           <>
-            <h3 className="text-2xl font-bold text-white mb-2">Get in Touch</h3>
-            <p className="text-slate-400 text-sm mb-6">Tell us what you're working on. We'll scope it within 24 hours.</p>
+            <h3 className="text-2xl font-bold mb-2" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Get in Touch</h3>
+            <p className="text-gray-500 text-sm mb-6">Tell us what you're working on. We'll scope it within 24 hours.</p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
                 placeholder="Your name"
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#C9A84C] transition-colors"
               />
               <input
                 type="email"
@@ -130,7 +131,7 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                 onChange={e => setForm({ ...form, email: e.target.value })}
                 placeholder="you@company.com"
                 required
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#C9A84C] transition-colors"
               />
               <textarea
                 value={form.message}
@@ -138,12 +139,15 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                 placeholder="What do you need researched?"
                 required
                 rows={3}
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#C9A84C] transition-colors resize-none"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-amber-600 hover:bg-amber-500 disabled:opacity-50 text-white font-medium rounded-lg transition-colors"
+                className="w-full py-3 text-white font-medium rounded-lg transition-colors disabled:opacity-50"
+                style={{ backgroundColor: '#C9A84C' }}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
               >
                 {loading ? 'Opening...' : 'Send Message'}
               </button>
@@ -175,7 +179,6 @@ export default function Home() {
   };
 
   const handleSampleClick = () => {
-    // Check if already submitted email
     if (typeof window !== 'undefined' && localStorage.getItem('kael_email')) {
       router.push('/sample');
       return;
@@ -199,36 +202,35 @@ export default function Home() {
   };
 
   return (
-    <main className={`min-h-screen bg-slate-950 text-slate-50 ${inter.className} selection:bg-amber-500/30 selection:text-emerald-200 overflow-x-hidden`}>
+    <main className={`min-h-screen bg-white text-[#333333] ${inter.className} selection:bg-[#C9A84C]/20 selection:text-[#1B2A4A] overflow-x-hidden`}>
       
       <EmailModal isOpen={showEmailModal} onClose={() => setShowEmailModal(false)} onSuccess={handleEmailSuccess} />
       <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
 
-      {/* Background Gradients */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-900/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-amber-900/5 rounded-full blur-[120px]" />
-        <div className="absolute top-[40%] left-[60%] w-[20%] h-[20%] bg-slate-800/20 rounded-full blur-[100px]" />
-      </div>
-
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/50">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
-            <span className="text-white">KAEL</span>
-            <span className="text-amber-400">RESEARCH</span>
+            <span style={{ color: '#1B2A4A' }}>KAEL</span>
+            <span style={{ color: '#C9A84C' }}>RESEARCH</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-            <button onClick={() => scrollToSection('how-it-works')} className="hover:text-white transition-colors">How It Works</button>
-            <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Pricing</button>
-            <button onClick={() => scrollToSection('faq')} className="hover:text-white transition-colors">FAQ</button>
-            <button onClick={handleSampleClick} className="bg-amber-600 hover:bg-amber-500 text-white px-5 py-2.5 rounded-full transition-all">
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+            <button onClick={() => scrollToSection('how-it-works')} className="hover:text-[#1B2A4A] transition-colors">How It Works</button>
+            <button onClick={() => scrollToSection('pricing')} className="hover:text-[#1B2A4A] transition-colors">Pricing</button>
+            <button onClick={() => scrollToSection('faq')} className="hover:text-[#1B2A4A] transition-colors">FAQ</button>
+            <button
+              onClick={handleSampleClick}
+              className="text-white px-5 py-2.5 rounded-full transition-colors"
+              style={{ backgroundColor: '#C9A84C' }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
+            >
               Get a Free Sample
             </button>
           </div>
 
-          <button className="md:hidden text-slate-300" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button className="md:hidden text-gray-600" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
@@ -236,11 +238,11 @@ export default function Home() {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden bg-slate-950 border-b border-slate-800 p-6 flex flex-col gap-4">
-            <button onClick={() => scrollToSection('how-it-works')} className="text-left text-slate-300 hover:text-white">How It Works</button>
-            <button onClick={() => scrollToSection('pricing')} className="text-left text-slate-300 hover:text-white">Pricing</button>
-            <button onClick={() => scrollToSection('faq')} className="text-left text-slate-300 hover:text-white">FAQ</button>
-            <button onClick={handleSampleClick} className="bg-amber-600 text-white px-5 py-2.5 rounded-full w-full">Get a Free Sample</button>
+          <div className="md:hidden bg-white border-b border-gray-200 p-6 flex flex-col gap-4">
+            <button onClick={() => scrollToSection('how-it-works')} className="text-left text-gray-600 hover:text-[#1B2A4A]">How It Works</button>
+            <button onClick={() => scrollToSection('pricing')} className="text-left text-gray-600 hover:text-[#1B2A4A]">Pricing</button>
+            <button onClick={() => scrollToSection('faq')} className="text-left text-gray-600 hover:text-[#1B2A4A]">FAQ</button>
+            <button onClick={handleSampleClick} className="text-white px-5 py-2.5 rounded-full w-full" style={{ backgroundColor: '#C9A84C' }}>Get a Free Sample</button>
           </div>
         )}
       </nav>
@@ -248,29 +250,35 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative z-10 pt-32 pb-20 md:pt-48 md:pb-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/50 border border-slate-800 text-xs font-medium text-amber-400 mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F9FAFB] border border-gray-200 text-xs font-medium mb-8" style={{ color: '#C9A84C' }}>
             <span className="relative flex h-2 w-2">
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: '#C9A84C' }}></span>
             </span>
             Now accepting Q2 2026 clients
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>
             You Could Google It.<br />
-            <span className="text-white">Or You Could Know It.</span>
+            <span style={{ color: '#1B2A4A' }}>Or You Could Know It.</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
             Your competitors are making decisions with gut feelings and ChatGPT hallucinations. We do the actual research — sourced, verified, numbers you can put in front of investors. Done in 3 days.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button onClick={handleSampleClick} className="w-full sm:w-auto bg-amber-600 hover:bg-amber-500 text-white text-lg font-medium px-8 py-4 rounded-full transition-all">
+            <button
+              onClick={handleSampleClick}
+              className="w-full sm:w-auto text-white text-lg font-medium px-8 py-4 rounded-full transition-colors"
+              style={{ backgroundColor: '#C9A84C' }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
+            >
               Get a Free Sample Report
             </button>
             <button 
               onClick={() => scrollToSection('comparison')}
-              className="w-full sm:w-auto bg-transparent hover:bg-slate-900 text-slate-300 hover:text-white text-lg font-medium px-8 py-4 rounded-full border border-slate-800 hover:border-slate-700 transition-all"
+              className="w-full sm:w-auto bg-transparent hover:bg-gray-50 text-gray-600 hover:text-[#1B2A4A] text-lg font-medium px-8 py-4 rounded-full border border-gray-300 hover:border-gray-400 transition-colors"
             >
               See Example Output
             </button>
@@ -279,9 +287,9 @@ export default function Home() {
       </section>
 
       {/* The Problem Section */}
-      <section className="py-20 px-6 border-t border-slate-900 bg-slate-950/50">
+      <section className="py-20 px-6 border-t border-gray-100 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16">Sound Familiar?</h2>
+          <h2 className="text-3xl font-bold text-center mb-16" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Sound Familiar?</h2>
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {[
@@ -289,7 +297,7 @@ export default function Home() {
                 title: "Investor meeting in 5 days",
                 desc: "You need TAM numbers, competitor analysis, and a market map. You've been Googling for 3 hours and have 47 tabs open.",
                 icon: (
-                  <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6" style={{ color: '#C9A84C' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 )
@@ -298,7 +306,7 @@ export default function Home() {
                 title: "Competitor just raised $20M",
                 desc: "What are they building? Who are they hiring? Where are they expanding? Your team is guessing.",
                 icon: (
-                  <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6" style={{ color: '#C9A84C' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                   </svg>
                 )
@@ -307,55 +315,54 @@ export default function Home() {
                 title: "Board wants a GTM strategy",
                 desc: "For a new market you've never operated in. Due Thursday. You're one person.",
                 icon: (
-                  <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6" style={{ color: '#C9A84C' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 )
               }
             ].map((card, i) => (
-              <div key={i} className="p-8 rounded-2xl bg-slate-900/50 border border-slate-800 transition-all hover:bg-slate-900/80 group">
-                <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-amber-900/20 transition-colors">
+              <div key={i} className="p-8 rounded-2xl bg-white border border-gray-200 transition-colors hover:border-gray-300 group">
+                <div className="w-12 h-12 bg-[#F9FAFB] border border-gray-200 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#C9A84C]/10 transition-colors">
                   {card.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-4 text-slate-100">{card.title}</h3>
-                <p className="text-slate-400 leading-relaxed">{card.desc}</p>
+                <h3 className="text-xl font-semibold mb-4" style={{ color: '#1B2A4A' }}>{card.title}</h3>
+                <p className="text-gray-500 leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
 
-          <p className="text-center text-slate-400 text-lg">
+          <p className="text-center text-gray-500 text-lg">
             You could spend 20 hours stitching together half-sourced data. 
-            <span className="block sm:inline text-white font-medium mt-2 sm:mt-0 sm:ml-2">Or you could spend $149 and have it Tuesday.</span>
+            <span className="block sm:inline font-medium mt-2 sm:mt-0 sm:ml-2" style={{ color: '#1B2A4A' }}>Or you could spend $149 and have it Tuesday.</span>
           </p>
         </div>
       </section>
 
       {/* Comparison Section */}
       <section id="comparison" className="py-24 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-slate-900/20 skew-y-3 transform origin-top-left scale-110 pointer-events-none" />
         <div className="max-w-6xl mx-auto relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">ChatGPT vs. Kael Research</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>ChatGPT vs. Kael Research</h2>
           
-          <div className="grid md:grid-cols-2 gap-0 border border-slate-800 rounded-3xl overflow-hidden bg-slate-950 shadow-2xl">
-            <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-slate-800 bg-red-950/5 relative">
-              <div className="absolute top-0 left-0 w-full h-1 bg-red-500/20" />
+          <div className="grid md:grid-cols-2 gap-0 border border-gray-200 rounded-3xl overflow-hidden bg-white shadow-lg">
+            <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-200 relative">
+              <div className="absolute top-0 left-0 w-full h-1 bg-red-400/40" />
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-300">DIY with ChatGPT</h3>
+                <h3 className="text-xl font-semibold text-gray-500">DIY with ChatGPT</h3>
               </div>
               
-              <div className="mb-8 p-4 bg-slate-900/50 rounded-xl border border-slate-800 font-mono text-sm text-slate-400 italic">
+              <div className="mb-8 p-4 bg-gray-50 rounded-xl border border-gray-200 font-mono text-sm text-gray-500 italic">
                 &quot;The developer tools market is estimated to be worth $45 billion...&quot;
               </div>
 
               <ul className="space-y-4">
                 {["No source cited", "Number may be hallucinated", "No segment breakdown", "Generic, surface-level"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-slate-400">
-                    <svg className="w-5 h-5 text-red-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <li key={i} className="flex items-center gap-3 text-gray-500">
+                    <svg className="w-5 h-5 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                     {item}
@@ -363,21 +370,21 @@ export default function Home() {
                 ))}
               </ul>
               
-              <div className="mt-8 pt-8 border-t border-slate-800/50 text-slate-500 text-sm">
+              <div className="mt-8 pt-8 border-t border-gray-200 text-gray-400 text-sm">
                 Time spent: ~6 hours of prompting and verifying
               </div>
             </div>
 
-            <div className="p-8 md:p-12 bg-amber-950/5 relative">
-              <div className="absolute top-0 left-0 w-full h-1 bg-amber-500" />
+            <div className="p-8 md:p-12 relative">
+              <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: '#C9A84C' }} />
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-amber-900/30 flex items-center justify-center border border-amber-500/20">
-                  <span className="text-amber-400 font-bold">K</span>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center border" style={{ backgroundColor: '#C9A84C10', borderColor: '#C9A84C40' }}>
+                  <span className="font-bold" style={{ color: '#C9A84C' }}>K</span>
                 </div>
-                <h3 className="text-xl font-semibold text-amber-400">Kael Research</h3>
+                <h3 className="text-xl font-semibold" style={{ color: '#C9A84C' }}>Kael Research</h3>
               </div>
 
-              <div className="mb-8 p-4 bg-amber-950/20 rounded-xl border border-amber-500/20 font-mono text-sm text-amber-100">
+              <div className="mb-8 p-4 rounded-xl border font-mono text-sm" style={{ backgroundColor: '#C9A84C08', borderColor: '#C9A84C30', color: '#1B2A4A' }}>
                 &quot;The developer tools market reached $48.7B in 2025 (Gartner, Feb 2026), growing at 14.2% CAGR, with infrastructure...&quot;
               </div>
 
@@ -388,8 +395,8 @@ export default function Home() {
                   "Full segment breakdown with data tables",
                   "Specific next steps you can actually act on"
                 ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-slate-200">
-                    <svg className="w-5 h-5 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <li key={i} className="flex items-center gap-3" style={{ color: '#333333' }}>
+                    <svg className="w-5 h-5 shrink-0" style={{ color: '#C9A84C' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                     </svg>
                     {item}
@@ -397,7 +404,7 @@ export default function Home() {
                 ))}
               </ul>
 
-              <div className="mt-8 pt-8 border-t border-amber-900/30 text-amber-400/80 text-sm font-medium">
+              <div className="mt-8 pt-8 border-t text-sm font-medium" style={{ borderColor: '#C9A84C30', color: '#C9A84C' }}>
                 Delivered in 3 business days as a polished PDF
               </div>
             </div>
@@ -406,12 +413,12 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-20 px-6">
+      <section id="how-it-works" className="py-20 px-6 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16">How It Works</h2>
+          <h2 className="text-3xl font-bold text-center mb-16" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>How It Works</h2>
           
           <div className="grid md:grid-cols-3 gap-12 relative">
-            <div className="hidden md:block absolute top-8 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-slate-800 via-amber-900 to-slate-800" />
+            <div className="hidden md:block absolute top-8 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-gray-200 via-[#C9A84C]/30 to-gray-200" />
             
             {[
               { step: "01", title: "Brief Us", desc: "Tell us what decision you're trying to make. We scope it in 24 hours." },
@@ -419,11 +426,11 @@ export default function Home() {
               { step: "03", title: "You Decide", desc: "You get a PDF with sourced data, clear analysis, and specific recommendations. Put it in front of investors as-is." }
             ].map((item, i) => (
               <div key={i} className="relative flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 text-amber-400 font-bold text-xl flex items-center justify-center mb-6 shadow-lg z-10">
+                <div className="w-16 h-16 rounded-2xl bg-white border border-gray-200 font-bold text-xl flex items-center justify-center mb-6 shadow-sm z-10" style={{ color: '#C9A84C' }}>
                   {item.step}
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
-                <p className="text-slate-400 max-w-xs">{item.desc}</p>
+                <h3 className="text-xl font-semibold mb-3" style={{ color: '#1B2A4A' }}>{item.title}</h3>
+                <p className="text-gray-500 max-w-xs">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -431,21 +438,20 @@ export default function Home() {
       </section>
 
       {/* Sample Report Mockup */}
-      <section className="py-24 px-6 bg-slate-900/30 border-y border-slate-900">
+      <section className="py-24 px-6 bg-white border-y border-gray-100">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
           
           <div className="w-full md:w-1/2 relative group cursor-pointer" onClick={handleSampleClick}>
-            <div className="absolute inset-0 bg-amber-500/20 blur-[50px] rounded-full opacity-20 group-hover:opacity-30 transition-opacity" />
-            <div className="relative bg-white text-slate-900 p-8 rounded-lg shadow-2xl transition-transform duration-300 hover:scale-[1.02] min-h-[500px] flex flex-col">
-              <div className="flex justify-between items-center mb-8 border-b border-slate-200 pb-4">
-                <span className="font-bold tracking-tight">KAEL RESEARCH</span>
+            <div className="relative bg-white text-gray-900 p-8 rounded-lg shadow-lg border border-gray-200 transition-transform duration-300 hover:scale-[1.02] min-h-[500px] flex flex-col">
+              <div className="flex justify-between items-center mb-8 border-b border-gray-200 pb-4">
+                <span className="font-bold tracking-tight" style={{ color: '#1B2A4A' }}>KAEL <span style={{ color: '#C9A84C' }}>RESEARCH</span></span>
                 <span className="text-xs font-mono text-red-600 border border-red-200 bg-red-50 px-2 py-1 rounded">CONFIDENTIAL</span>
               </div>
               
-              <h3 className="text-3xl font-serif font-bold mb-2">SaaS Market Analysis:</h3>
-              <h4 className="text-xl text-slate-600 mb-12">Developer Tools 2026 Outlook</h4>
+              <h3 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Georgia, serif', color: '#1B2A4A' }}>SaaS Market Analysis:</h3>
+              <h4 className="text-xl text-gray-500 mb-12">Developer Tools 2026 Outlook</h4>
               
-              <div className="space-y-3 font-mono text-sm text-slate-600 mb-auto">
+              <div className="space-y-3 font-mono text-sm text-gray-500 mb-auto">
                 {[
                   ["Executive Summary", "03"],
                   ["Market Sizing (TAM/SAM)", "08"],
@@ -453,21 +459,20 @@ export default function Home() {
                   ["Pricing Analysis", "24"],
                   ["Strategic Recommendations", "42"]
                 ].map(([title, page], i) => (
-                  <div key={i} className="flex justify-between border-b border-dotted border-slate-300 pb-1">
+                  <div key={i} className="flex justify-between border-b border-dotted border-gray-300 pb-1">
                     <span>{title}</span>
                     <span>{page}</span>
                   </div>
                 ))}
               </div>
               
-              <div className="mt-12 flex gap-4 text-xs text-slate-400">
+              <div className="mt-12 flex gap-4 text-xs text-gray-400">
                 <span>Prepared for: Client Name</span>
                 <span className="ml-auto">Feb 2026</span>
               </div>
 
-              {/* Click to read overlay */}
-              <div className="absolute inset-0 bg-black/0 hover:bg-black/5 rounded-lg transition-colors flex items-end justify-center pb-6">
-                <span className="bg-amber-600 text-white text-sm font-medium px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 bg-black/0 hover:bg-black/[0.02] rounded-lg transition-colors flex items-end justify-center pb-6">
+                <span className="text-white text-sm font-medium px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: '#C9A84C' }}>
                   Click to read the full report
                 </span>
               </div>
@@ -475,8 +480,8 @@ export default function Home() {
           </div>
 
           <div className="w-full md:w-1/2 md:pl-10">
-            <h2 className="text-3xl font-bold mb-6">What You Actually Get</h2>
-            <p className="text-slate-400 text-lg mb-10">
+            <h2 className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>What You Actually Get</h2>
+            <p className="text-gray-500 text-lg mb-10">
               Not a data dump. Every report tells a clear story — what's happening, why it matters, and what you should do about it.
             </p>
             
@@ -487,14 +492,20 @@ export default function Home() {
                 { label: "Sources Cited", val: "86" },
                 { label: "Delivery Time", val: "3 Days" }
               ].map((stat, i) => (
-                <div key={i} className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-                  <div className="text-2xl font-bold text-white mb-1">{stat.val}</div>
-                  <div className="text-sm text-slate-500">{stat.label}</div>
+                <div key={i} className="p-4 rounded-xl bg-[#F9FAFB] border border-gray-200">
+                  <div className="text-2xl font-bold mb-1" style={{ color: '#1B2A4A' }}>{stat.val}</div>
+                  <div className="text-sm text-gray-500">{stat.label}</div>
                 </div>
               ))}
             </div>
 
-            <button onClick={handleSampleClick} className="mt-8 bg-amber-600 hover:bg-amber-500 text-white font-medium px-6 py-3 rounded-full transition-colors">
+            <button
+              onClick={handleSampleClick}
+              className="mt-8 text-white font-medium px-6 py-3 rounded-full transition-colors"
+              style={{ backgroundColor: '#C9A84C' }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
+            >
               Read the Full Sample
             </button>
           </div>
@@ -502,20 +513,20 @@ export default function Home() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="py-24 px-6">
+      <section id="pricing" className="py-24 px-6 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Transparent Pricing</h2>
-            <p className="text-slate-400">No retainers required. Pay per report or subscribe for continuous intelligence.</p>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Transparent Pricing</h2>
+            <p className="text-gray-500">No retainers required. Pay per report or subscribe for continuous intelligence.</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
-            <div className="p-8 rounded-2xl bg-slate-900/30 border border-slate-800 hover:border-slate-700 transition-colors">
-              <h3 className="text-lg font-medium text-slate-300 mb-2">Starter</h3>
-              <div className="text-3xl font-bold text-white mb-6">$149<span className="text-sm text-slate-500 font-normal"> /report</span></div>
-              <p className="text-sm text-slate-400 mb-8 h-10">Perfect for quick validation of a single hypothesis or market.</p>
-              <button onClick={() => handlePricingClick('starter')} className="w-full py-3 rounded-lg border border-slate-700 hover:bg-slate-800 text-white font-medium transition-colors mb-8">Get Started</button>
-              <ul className="space-y-3 text-sm text-slate-400">
+            <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 transition-colors">
+              <h3 className="text-lg font-medium text-gray-500 mb-2">Starter</h3>
+              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$149<span className="text-sm text-gray-400 font-normal"> /report</span></div>
+              <p className="text-sm text-gray-500 mb-8 h-10">Perfect for quick validation of a single hypothesis or market.</p>
+              <button onClick={() => handlePricingClick('starter')} className="w-full py-3 rounded-lg border border-gray-300 hover:bg-gray-50 font-medium transition-colors mb-8" style={{ color: '#1B2A4A' }}>Get Started</button>
+              <ul className="space-y-3 text-sm text-gray-500">
                 <li className="flex gap-2"><CheckIcon /> Single topic coverage</li>
                 <li className="flex gap-2"><CheckIcon /> 15-25 pages</li>
                 <li className="flex gap-2"><CheckIcon /> 5-day delivery</li>
@@ -524,29 +535,37 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="p-8 rounded-2xl bg-slate-900 border border-amber-500/50 relative">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-lg">
+            <div className="p-8 rounded-2xl bg-white border-2 relative" style={{ borderColor: '#C9A84C' }}>
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-md" style={{ backgroundColor: '#C9A84C' }}>
                 Most Popular
               </div>
-              <h3 className="text-lg font-medium text-amber-400 mb-2">Growth</h3>
-              <div className="text-3xl font-bold text-white mb-6">$499<span className="text-sm text-slate-500 font-normal"> /month</span></div>
-              <p className="text-sm text-slate-400 mb-8 h-10">For teams that need ongoing competitor tracking and market updates.</p>
-              <button onClick={() => handlePricingClick('growth')} className="w-full py-3 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-medium transition-colors mb-8">Subscribe Now</button>
-              <ul className="space-y-3 text-sm text-slate-300">
-                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> 2 deep-dive reports/mo</li>
-                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> Weekly competitor alerts</li>
-                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> 3-day priority delivery</li>
-                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> Unlimited revisions</li>
-                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> Slack/email delivery</li>
+              <h3 className="text-lg font-medium mb-2" style={{ color: '#C9A84C' }}>Growth</h3>
+              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$499<span className="text-sm text-gray-400 font-normal"> /month</span></div>
+              <p className="text-sm text-gray-500 mb-8 h-10">For teams that need ongoing competitor tracking and market updates.</p>
+              <button
+                onClick={() => handlePricingClick('growth')}
+                className="w-full py-3 rounded-lg text-white font-medium transition-colors mb-8"
+                style={{ backgroundColor: '#C9A84C' }}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
+              >
+                Subscribe Now
+              </button>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> 2 deep-dive reports/mo</li>
+                <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> Weekly competitor alerts</li>
+                <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> 3-day priority delivery</li>
+                <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> Unlimited revisions</li>
+                <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> Slack/email delivery</li>
               </ul>
             </div>
 
-            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-              <h3 className="text-lg font-medium text-slate-300 mb-2">Deep Dive</h3>
-              <div className="text-3xl font-bold text-white mb-6">$299<span className="text-sm text-slate-500 font-normal"> /report</span></div>
-              <p className="text-sm text-slate-400 mb-8 h-10">The kind of analysis you'd hand to a VC or put in a board deck.</p>
-              <button onClick={() => handlePricingClick('deep-dive')} className="w-full py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-medium transition-colors mb-8 border border-slate-700">Request Deep Dive</button>
-              <ul className="space-y-3 text-sm text-slate-300">
+            <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 transition-colors">
+              <h3 className="text-lg font-medium text-gray-500 mb-2">Deep Dive</h3>
+              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$299<span className="text-sm text-gray-400 font-normal"> /report</span></div>
+              <p className="text-sm text-gray-500 mb-8 h-10">The kind of analysis you'd hand to a VC or put in a board deck.</p>
+              <button onClick={() => handlePricingClick('deep-dive')} className="w-full py-3 rounded-lg bg-[#1B2A4A] hover:bg-[#243757] text-white font-medium transition-colors mb-8">Request Deep Dive</button>
+              <ul className="space-y-3 text-sm text-gray-600">
                 <li className="flex gap-2"><CheckIcon /> 30-50 pages</li>
                 <li className="flex gap-2"><CheckIcon /> Executive summary + appendix</li>
                 <li className="flex gap-2"><CheckIcon /> 2 revision rounds</li>
@@ -559,10 +578,10 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-24 relative">
+      <section id="faq" className="py-24 relative bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Frequently Asked Questions</h2>
           </div>
           <div className="space-y-4">
             {[
@@ -572,15 +591,15 @@ export default function Home() {
               { q: "Can I request any topic?", a: "Pretty much anything in tech and business. SaaS, fintech, healthtech, e-commerce, dev tools, consumer apps. Send us the brief and we'll tell you within 24 hours if we can do it and what it'll cover." },
               { q: "What if I'm not satisfied?", a: "Every plan comes with revision rounds. If the report misses the mark, we fix it — no extra charge. We're building a business on repeat clients, so burning you on the first report would be stupid." }
             ].map((faq, i) => (
-              <div key={i} className="border border-slate-800 rounded-lg bg-slate-900/50 overflow-hidden">
+              <div key={i} className="border border-gray-200 rounded-lg bg-white overflow-hidden">
                 <button onClick={() => toggleFaq(i)} className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none">
-                  <span className="text-white font-medium">{faq.q}</span>
-                  <svg className={`w-5 h-5 text-amber-500 transform transition-transform duration-200 flex-shrink-0 ${openFaqIndex === i ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <span className="font-medium" style={{ color: '#1B2A4A' }}>{faq.q}</span>
+                  <svg className={`w-5 h-5 transform transition-transform duration-200 flex-shrink-0 ${openFaqIndex === i ? 'rotate-180' : ''}`} style={{ color: '#C9A84C' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
                 <div className={`px-6 transition-all duration-300 ease-in-out overflow-hidden ${openFaqIndex === i ? 'max-h-48 py-4 opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
-                  <p className="text-slate-400 text-sm leading-relaxed">{faq.a}</p>
+                  <p className="text-gray-500 text-sm leading-relaxed">{faq.a}</p>
                 </div>
               </div>
             ))}
@@ -589,15 +608,21 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-gradient-to-b from-slate-950 to-amber-950/20">
+      <section className="py-24" style={{ background: 'linear-gradient(to bottom, #F9FAFB, #F0EDE4)' }}>
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Stop Googling.<br />Start Knowing.</h2>
-          <p className="text-xl text-slate-400 mb-10">Get a sample report on your industry — free. See the quality before you commit.</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Stop Googling.<br />Start Knowing.</h2>
+          <p className="text-xl text-gray-500 mb-10">Get a sample report on your industry — free. See the quality before you commit.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button onClick={handleSampleClick} className="px-8 py-4 text-lg font-bold text-slate-950 bg-white hover:bg-slate-200 rounded-full transition-all">
+            <button
+              onClick={handleSampleClick}
+              className="px-8 py-4 text-lg font-bold text-white rounded-full transition-colors"
+              style={{ backgroundColor: '#1B2A4A' }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#243757')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#1B2A4A')}
+            >
               Get Your Free Sample
             </button>
-            <button onClick={() => setShowContactModal(true)} className="px-8 py-4 text-lg font-medium text-white border border-slate-700 hover:bg-slate-900 rounded-full transition-all">
+            <button onClick={() => setShowContactModal(true)} className="px-8 py-4 text-lg font-medium text-gray-600 border border-gray-300 hover:bg-white hover:text-[#1B2A4A] rounded-full transition-colors">
               Talk to Us
             </button>
           </div>
@@ -605,16 +630,16 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 border-t border-slate-900 py-12">
+      <footer className="py-12" style={{ backgroundColor: '#1B2A4A' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left">
-              <span className="text-xl font-bold text-white tracking-tight">KAEL <span className="text-amber-500">RESEARCH</span></span>
-              <p className="text-slate-500 text-sm mt-2">{'\u00A9'} 2026 Kael Research. All rights reserved.</p>
+              <span className="text-xl font-bold text-white tracking-tight">KAEL <span style={{ color: '#C9A84C' }}>RESEARCH</span></span>
+              <p className="text-white/50 text-sm mt-2">{'\u00A9'} 2026 Kael Research. All rights reserved.</p>
             </div>
             <div className="flex items-center gap-6">
-              <button onClick={() => setShowContactModal(true)} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Contact</button>
-              <a href="mailto:contact@kaelresearch.com" className="text-slate-400 hover:text-amber-400 text-sm transition-colors">contact@kaelresearch.com</a>
+              <button onClick={() => setShowContactModal(true)} className="text-white/60 hover:text-[#C9A84C] text-sm transition-colors">Contact</button>
+              <a href="mailto:contact@kaelresearch.com" className="text-white/60 hover:text-[#C9A84C] text-sm transition-colors">contact@kaelresearch.com</a>
             </div>
           </div>
         </div>

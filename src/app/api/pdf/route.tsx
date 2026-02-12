@@ -11,18 +11,20 @@ Font.registerHyphenationCallback(word => [word]);
 
 // ── Colors ────────────────────────────────────────────────────────────
 const C = {
-  bg: '#0f172a',
-  card: '#1e293b',
-  border: '#334155',
-  text: '#cbd5e1',
-  dim: '#64748b',
-  white: '#f8fafc',
-  amber: '#f59e0b',
-  green: '#22c55e',
-  red: '#ef4444',
-  blue: '#3b82f6',
-  purple: '#8b5cf6',
-  emerald: '#10b981',
+  bg: '#FFFFFF',
+  card: '#F7F8FA',
+  border: '#E5E7EB',
+  text: '#333333',
+  dim: '#6B7280',
+  white: '#1B2A4A',
+  amber: '#C9A84C',
+  green: '#7A9A7E',
+  red: '#C06060',
+  blue: '#4A6FA5',
+  purple: '#8B7AAF',
+  emerald: '#7A9A7E',
+  divider: '#D1D5DB',
+  tableHead: '#F3F4F6',
 };
 
 // ── Styles ────────────────────────────────────────────────────────────
@@ -38,7 +40,7 @@ const s = StyleSheet.create({
   h3: { fontSize: 13, fontWeight: 700, color: C.white, marginBottom: 6, marginTop: 10, fontFamily: 'Helvetica-Bold' },
   h4: { fontSize: 11, fontWeight: 700, color: C.white, marginBottom: 4, fontFamily: 'Helvetica-Bold' },
   body: { fontSize: 9.5, color: C.text, lineHeight: 1.6, marginBottom: 8 },
-  small: { fontSize: 8, color: '#94a3b8', lineHeight: 1.5, marginBottom: 6 },
+  small: { fontSize: 8, color: '#6B7280', lineHeight: 1.5, marginBottom: 6 },
   source: { fontSize: 7, color: C.dim, marginTop: 4 },
   label: { fontSize: 7, fontWeight: 700, color: C.amber, letterSpacing: 1.5, marginBottom: 4, fontFamily: 'Helvetica-Bold' },
   row: { flexDirection: 'row', gap: 10 },
@@ -47,32 +49,32 @@ const s = StyleSheet.create({
   mb12: { marginBottom: 12 },
   mb16: { marginBottom: 16 },
   mb24: { marginBottom: 24 },
-  statCard: { flex: 1, backgroundColor: C.card, borderRadius: 6, padding: 12, alignItems: 'center' },
-  statVal: { fontSize: 20, fontWeight: 700, color: C.amber, marginBottom: 2, fontFamily: 'Helvetica-Bold' },
-  statLabel: { fontSize: 8, fontWeight: 700, color: C.white, marginBottom: 1, textAlign: 'center' as const, fontFamily: 'Helvetica-Bold' },
+  statCard: { flex: 1, backgroundColor: C.card, borderRadius: 6, padding: 12, alignItems: 'center', borderWidth: 1, borderColor: C.border },
+  statVal: { fontSize: 20, fontWeight: 700, color: C.white, marginBottom: 2, fontFamily: 'Helvetica-Bold' },
+  statLabel: { fontSize: 8, fontWeight: 700, color: '#333333', marginBottom: 1, textAlign: 'center' as const, fontFamily: 'Helvetica-Bold' },
   statSub: { fontSize: 7, color: C.dim, textAlign: 'center' as const },
-  card: { backgroundColor: C.card, borderRadius: 6, padding: 14, marginBottom: 8 },
-  insight: { borderLeftWidth: 2, borderLeftColor: C.amber, paddingLeft: 12, paddingVertical: 8, marginVertical: 10 },
+  card: { backgroundColor: C.card, borderRadius: 6, padding: 14, marginBottom: 8, borderWidth: 1, borderColor: C.border },
+  insight: { borderLeftWidth: 2, borderLeftColor: C.amber, paddingLeft: 12, paddingVertical: 8, marginVertical: 10, backgroundColor: '#FEFDFB' },
   insightLabel: { fontSize: 7, fontWeight: 700, color: C.amber, letterSpacing: 1, marginBottom: 2, fontFamily: 'Helvetica-Bold' },
   insightText: { fontSize: 9, color: C.text, lineHeight: 1.6 },
-  divider: { borderBottomWidth: 1, borderBottomColor: C.border, marginBottom: 14, marginTop: 6 },
+  divider: { borderBottomWidth: 1, borderBottomColor: C.divider, marginBottom: 14, marginTop: 6 },
   sectionTag: { fontSize: 7, fontWeight: 700, color: C.amber, letterSpacing: 1, marginBottom: 6, fontFamily: 'Helvetica-Bold' },
   bullet: { flexDirection: 'row', gap: 6, marginBottom: 5 },
   bulletDot: { width: 4, height: 4, borderRadius: 2, backgroundColor: C.amber, marginTop: 4 },
   bulletText: { flex: 1, fontSize: 9, color: C.text, lineHeight: 1.55 },
-  tHead: { flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: C.border, paddingBottom: 5, marginBottom: 3 },
+  tHead: { flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: C.border, paddingBottom: 5, marginBottom: 3, backgroundColor: C.tableHead },
   tHeadCell: { fontSize: 7, fontWeight: 700, color: C.dim, letterSpacing: 0.5, fontFamily: 'Helvetica-Bold' },
-  tRow: { flexDirection: 'row', paddingVertical: 4, borderBottomWidth: 1, borderBottomColor: '#1e293b' },
+  tRow: { flexDirection: 'row', paddingVertical: 4, borderBottomWidth: 1, borderBottomColor: C.border },
   tCell: { fontSize: 8.5, color: C.text },
   tCellBold: { fontSize: 8.5, color: C.white, fontWeight: 700, fontFamily: 'Helvetica-Bold' },
   barRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 5 },
   barLabel: { width: 75, fontSize: 8, color: C.text },
-  barTrack: { flex: 1, height: 12, backgroundColor: '#0f172a', borderRadius: 6 },
+  barTrack: { flex: 1, height: 12, backgroundColor: '#E5E7EB', borderRadius: 6 },
   barFill: { height: 12, borderRadius: 6 },
-  recCard: { flexDirection: 'row', gap: 10, backgroundColor: C.card, borderRadius: 6, padding: 12, marginBottom: 7 },
-  recNum: { fontSize: 20, fontWeight: 700, color: 'rgba(245,158,11,0.3)', fontFamily: 'Helvetica-Bold' },
+  recCard: { flexDirection: 'row', gap: 10, backgroundColor: C.card, borderRadius: 6, padding: 12, marginBottom: 7, borderWidth: 1, borderColor: C.border },
+  recNum: { fontSize: 20, fontWeight: 700, color: 'rgba(201,168,76,0.35)', fontFamily: 'Helvetica-Bold' },
   recTitle: { fontSize: 10, fontWeight: 700, color: C.white, marginBottom: 2, fontFamily: 'Helvetica-Bold' },
-  recText: { fontSize: 8, color: '#94a3b8', lineHeight: 1.55 },
+  recText: { fontSize: 8, color: '#6B7280', lineHeight: 1.55 },
 });
 
 // ── Helpers ───────────────────────────────────────────────────────────
@@ -127,30 +129,30 @@ const BarChart = () => {
         {[0, 5, 10, 15, 20, 25].map(v => {
           const y = py + ch - (v / mx) * ch;
           return <React.Fragment key={v}>
-            <SvgLine x1={px} y1={y} x2={w - 10} y2={y} stroke="#1e293b" strokeWidth={0.5} />
-            <Text x={px - 5} y={y + 3} style={{ fontSize: 6.5, color: '#64748b' }} textAnchor="end">${v}B</Text>
+            <SvgLine x1={px} y1={y} x2={w - 10} y2={y} stroke="#E5E7EB" strokeWidth={0.5} />
+            <Text x={px - 5} y={y + 3} style={{ fontSize: 6.5, color: '#6B7280' }} textAnchor="end">${v}B</Text>
           </React.Fragment>;
         })}
         {data.map((d, i) => {
           const gx = px + i * gw + gw / 2;
           return <React.Fragment key={i}>
             {[
-              { v: d.tam, c: '#334155', o: -bw * 1.15 },
-              { v: d.sam, c: '#78716c', o: 0 },
-              { v: d.som, c: '#f59e0b', o: bw * 1.15 },
+              { v: d.tam, c: '#94A3B8', o: -bw * 1.15 },
+              { v: d.sam, c: '#4A6FA5', o: 0 },
+              { v: d.som, c: '#C9A84C', o: bw * 1.15 },
             ].map((b, j) => {
               const bh = (b.v / mx) * ch;
               return <Rect key={j} x={gx + b.o - bw / 2} y={py + ch - bh} width={bw} height={bh} fill={b.c} rx={2} />;
             })}
-            <Text x={gx} y={h - 5} style={{ fontSize: 7, color: '#94a3b8' }} textAnchor="middle">{d.year}</Text>
+            <Text x={gx} y={h - 5} style={{ fontSize: 7, color: '#6B7280' }} textAnchor="middle">{d.year}</Text>
           </React.Fragment>;
         })}
       </Svg>
       <View style={[s.row, { justifyContent: 'center', gap: 16, marginTop: 2 }]}>
-        {[{ l: 'TAM', c: '#334155' }, { l: 'SAM', c: '#78716c' }, { l: 'SOM (Captured)', c: '#f59e0b' }].map((x, i) => (
+        {[{ l: 'TAM', c: '#94A3B8' }, { l: 'SAM', c: '#4A6FA5' }, { l: 'SOM (Captured)', c: '#C9A84C' }].map((x, i) => (
           <View key={i} style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             <View style={{ width: 8, height: 8, borderRadius: 2, backgroundColor: x.c }} />
-            <Text style={{ fontSize: 7, color: '#64748b' }}>{x.l}</Text>
+            <Text style={{ fontSize: 7, color: '#6B7280' }}>{x.l}</Text>
           </View>
         ))}
       </View>
@@ -174,8 +176,8 @@ const Report = () => (
       <Text style={{ fontSize: 34, fontWeight: 700, color: C.white, textAlign: 'center', lineHeight: 1.15, marginBottom: 10, fontFamily: 'Helvetica-Bold' }}>
         The AI Code{'\n'}Assistant Market
       </Text>
-      <Text style={{ fontSize: 16, color: '#94a3b8', textAlign: 'center', marginBottom: 30 }}>2026 Landscape Analysis</Text>
-      <View style={{ borderTopWidth: 1, borderTopColor: C.border, paddingTop: 16, alignItems: 'center' }}>
+      <Text style={{ fontSize: 16, color: '#6B7280', textAlign: 'center', marginBottom: 30 }}>2026 Landscape Analysis</Text>
+      <View style={{ borderTopWidth: 1, borderTopColor: C.divider, paddingTop: 16, alignItems: 'center' }}>
         <Text style={{ fontSize: 8, color: C.dim }}>February 2026 — 47 Pages — 86 Sources — 12 Data Tables</Text>
       </View>
       <View style={{ position: 'absolute', bottom: 40, flexDirection: 'row', gap: 6, alignItems: 'center' }}>
@@ -190,7 +192,7 @@ const Report = () => (
         <Text style={s.label}>TABLE OF CONTENTS</Text>
         <View style={s.mb16} />
         {[['01','Executive Summary'],['02','Market Sizing & Growth'],['03','Competitive Landscape'],['04','Feature Comparison'],['05','Pricing Analysis'],['06','User Adoption Trends'],['07','Strategic Recommendations'],['08','Methodology']].map(([n,t],i) => (
-          <View key={i} style={{ flexDirection: 'row', paddingVertical: 9, borderBottomWidth: 1, borderBottomColor: '#1e293b' }}>
+          <View key={i} style={{ flexDirection: 'row', paddingVertical: 9, borderBottomWidth: 1, borderBottomColor: C.border }}>
             <Text style={{ fontSize: 9, fontWeight: 700, color: C.amber, width: 28, fontFamily: 'Helvetica-Bold' }}>{n}</Text>
             <Text style={{ fontSize: 10.5, color: C.white, flex: 1 }}>{t}</Text>
           </View>
@@ -263,13 +265,13 @@ const Report = () => (
         <Text style={s.h3}>Market Share by Revenue (2025 Est.)</Text>
         <View style={[s.card, s.mb12]}>
           {[
-            { n: 'GitHub Copilot', s: 42, r: '$2.44B', g: '+68%', c: C.amber },
-            { n: 'Cursor', s: 10, r: '$0.58B', g: '+340%', c: C.blue },
-            { n: 'Windsurf (Codeium)', s: 7, r: '$0.41B', g: '+185%', c: C.emerald },
-            { n: 'Amazon Q Developer', s: 6, r: '$0.35B', g: '+42%', c: C.purple },
-            { n: 'Tabnine', s: 4, r: '$0.23B', g: '+15%', c: C.red },
-            { n: 'JetBrains AI', s: 3.5, r: '$0.20B', g: '+120%', c: '#ec4899' },
-            { n: 'Others', s: 27.5, r: '$1.42B', g: '—', c: '#475569' },
+            { n: 'GitHub Copilot', s: 42, r: '$2.44B', g: '+68%', c: '#1B2A4A' },
+            { n: 'Cursor', s: 10, r: '$0.58B', g: '+340%', c: '#4A6FA5' },
+            { n: 'Windsurf (Codeium)', s: 7, r: '$0.41B', g: '+185%', c: '#7A9A7E' },
+            { n: 'Amazon Q Developer', s: 6, r: '$0.35B', g: '+42%', c: '#8B7AAF' },
+            { n: 'Tabnine', s: 4, r: '$0.23B', g: '+15%', c: '#C06060' },
+            { n: 'JetBrains AI', s: 3.5, r: '$0.20B', g: '+120%', c: '#B07090' },
+            { n: 'Others', s: 27.5, r: '$1.42B', g: '—', c: '#94A3B8' },
           ].map((x, i) => (
             <View key={i} style={[s.tRow, { alignItems: 'center' }]}>
               <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: x.c, marginRight: 8 }} />
@@ -285,12 +287,12 @@ const Report = () => (
         <Text style={s.h3}>YoY Revenue Growth (2025 vs 2024)</Text>
         <View style={[s.card, s.mb12]}>
           {[
-            { n: 'Cursor', v: 340, c: C.blue },
-            { n: 'Windsurf', v: 185, c: C.emerald },
-            { n: 'JetBrains AI', v: 120, c: '#ec4899' },
-            { n: 'Copilot', v: 68, c: C.amber },
-            { n: 'Amazon Q', v: 42, c: C.purple },
-            { n: 'Tabnine', v: 15, c: C.red },
+            { n: 'Cursor', v: 340, c: '#4A6FA5' },
+            { n: 'Windsurf', v: 185, c: '#7A9A7E' },
+            { n: 'JetBrains AI', v: 120, c: '#B07090' },
+            { n: 'Copilot', v: 68, c: '#C9A84C' },
+            { n: 'Amazon Q', v: 42, c: '#8B7AAF' },
+            { n: 'Tabnine', v: 15, c: '#C06060' },
           ].map((x, i) => <HBar key={i} label={x.n} value={x.v} max={400} color={x.c} />)}
         </View>
 
@@ -364,11 +366,11 @@ const Report = () => (
         <Text style={s.h3}>Developer Satisfaction (NPS)</Text>
         <View style={[s.card, s.mb12]}>
           {[
-            { n: 'Cursor', v: 62, c: C.green },
-            { n: 'Windsurf', v: 45, c: C.green },
-            { n: 'Copilot', v: 38, c: C.amber },
-            { n: 'Amazon Q', v: 12, c: C.amber },
-            { n: 'Tabnine', v: 8, c: C.red },
+            { n: 'Cursor', v: 62, c: '#7A9A7E' },
+            { n: 'Windsurf', v: 45, c: '#7A9A7E' },
+            { n: 'Copilot', v: 38, c: '#C9A84C' },
+            { n: 'Amazon Q', v: 12, c: '#C9A84C' },
+            { n: 'Tabnine', v: 8, c: '#C06060' },
           ].map((x, i) => <HBar key={i} label={x.n} value={x.v} max={80} color={x.c} />)}
           <Text style={s.source}>NPS = Net Promoter Score (-100 to +100)</Text>
         </View>
@@ -400,11 +402,11 @@ const Report = () => (
     <Ftr /></Page>
 
     {/* Back Cover */}
-    <Page size="A4" style={[s.page, { justifyContent: 'center', alignItems: 'center' }]}>
+    <Page size="A4" style={[s.page, { justifyContent: 'center', alignItems: 'center', backgroundColor: '#F7F8FA' }]}>
       <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 4, backgroundColor: C.amber }} />
       <Text style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, color: C.white, marginBottom: 3, fontFamily: 'Helvetica-Bold' }}>KAEL <Text style={{ color: C.amber }}>RESEARCH</Text></Text>
       <Text style={{ fontSize: 7, color: C.dim, letterSpacing: 2, marginBottom: 25 }}>MARKET INTELLIGENCE</Text>
-      <Text style={{ fontSize: 10, color: '#94a3b8', textAlign: 'center', marginBottom: 5 }}>Need this level of analysis for your market?</Text>
+      <Text style={{ fontSize: 10, color: '#333333', textAlign: 'center', marginBottom: 5 }}>Need this level of analysis for your market?</Text>
       <Text style={{ fontSize: 8.5, color: C.dim, textAlign: 'center', maxWidth: 280, marginBottom: 20 }}>Full reports include regulatory analysis, regional breakdowns, investment tracking, and 5-year forecasting models.</Text>
       <Text style={{ fontSize: 10, fontWeight: 700, color: C.amber, fontFamily: 'Helvetica-Bold' }}>contact@kaelresearch.com</Text>
       <Text style={{ fontSize: 8, color: C.dim, marginTop: 3 }}>kaelresearch.com</Text>
