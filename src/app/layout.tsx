@@ -18,6 +18,18 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.svg',
   },
+  openGraph: {
+    title: "Kael Research — Market Intelligence That Moves Markets",
+    description: "Sourced, verified market research reports delivered in 3 days.",
+    url: "https://kaelresearch.com",
+    siteName: "Kael Research",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Kael Research — Market Intelligence",
+    description: "Sourced, verified market research. Delivered in 3 days.",
+  },
 };
 
 export default function RootLayout({

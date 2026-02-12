@@ -82,25 +82,50 @@ function EmailModal({ isOpen, onClose, onSuccess }: { isOpen: boolean; onClose: 
   );
 }
 
-function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+function ContactModal({ isOpen, onClose, defaultMessage = '' }: { isOpen: boolean; onClose: () => void; defaultMessage?: string }) {
+  const [form, setForm] = useState({ name: '', email: '', message: defaultMessage });
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState('');
+
+  // Update message when defaultMessage changes
+  React.useEffect(() => {
+    if (defaultMessage) {
+      setForm(f => ({ ...f, message: defaultMessage }));
+    }
+  }, [defaultMessage]);
+
+  // Reset state when modal opens
+  React.useEffect(() => {
+    if (isOpen) {
+      setSent(false);
+      setError('');
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.email || !form.message) return;
+    if (!form.name || !form.email || !form.message) return;
+    setError('');
     setLoading(true);
-    await fetch('/api/subscribe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: form.email }),
-    });
-    window.location.href = `mailto:contact@kaelresearch.com?subject=Inquiry from ${form.name}&body=${encodeURIComponent(form.message)}%0A%0AFrom: ${form.name} (${form.email})`;
-    setSent(true);
-    setLoading(false);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSent(true);
+      } else {
+        setError('Something went wrong. Try again.');
+      }
+    } catch {
+      setError('Network error. Try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -109,8 +134,8 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
         {sent ? (
           <div className="text-center py-4">
             <svg className="w-8 h-8 mx-auto mb-3" style={{ color: '#C9A84C' }} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-            <h3 className="text-xl font-bold mb-2" style={{ color: '#1B2A4A' }}>Email client opened</h3>
-            <p className="text-gray-500 text-sm">If your email client didn't open, reach us at contact@kaelresearch.com</p>
+            <h3 className="text-xl font-bold mb-2" style={{ color: '#1B2A4A' }}>Message Sent!</h3>
+            <p className="text-gray-500 text-sm">We'll get back to you within 24 hours.</p>
             <button onClick={onClose} className="mt-4 px-6 py-2 bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors">Close</button>
           </div>
         ) : (
@@ -123,6 +148,7 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
                 placeholder="Your name"
+                required
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#C9A84C] transition-colors"
               />
               <input
@@ -141,6 +167,7 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                 rows={3}
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#C9A84C] transition-colors resize-none"
               />
+              {error && <p className="text-red-500 text-sm">{error}</p>}
               <button
                 type="submit"
                 disabled={loading}
@@ -149,7 +176,7 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                 onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
                 onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
               >
-                {loading ? 'Opening...' : 'Send Message'}
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </>
@@ -164,6 +191,7 @@ export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
+  const [defaultMessage, setDefaultMessage] = useState('');
   const router = useRouter();
 
   const toggleFaq = (index: number) => {
@@ -193,19 +221,20 @@ export default function Home() {
 
   const handlePricingClick = (plan: string) => {
     if (plan === 'starter') {
-      window.location.href = 'mailto:contact@kaelresearch.com?subject=Starter Report ($149)&body=Hi, I\'d like to order a Starter report. Here\'s what I need researched:%0A%0A[Describe your topic/question here]';
+      setDefaultMessage("Hi, I'd like to order a Starter report ($149). Here's what I need researched:\n\n[Describe your topic/question here]");
     } else if (plan === 'growth') {
-      window.location.href = 'mailto:contact@kaelresearch.com?subject=Growth Plan ($499/mo)&body=Hi, I\'m interested in the Growth subscription. Here\'s what my team needs:%0A%0A[Describe your ongoing research needs]';
+      setDefaultMessage("Hi, I'm interested in the Growth subscription ($499/mo). Here's what my team needs:\n\n[Describe your ongoing research needs]");
     } else {
-      window.location.href = 'mailto:contact@kaelresearch.com?subject=Deep Dive Report ($299)&body=Hi, I need a comprehensive Deep Dive report for:%0A%0A[Describe your topic and what decisions it will inform]';
+      setDefaultMessage("Hi, I need a comprehensive Deep Dive report ($299) for:\n\n[Describe your topic and what decisions it will inform]");
     }
+    setShowContactModal(true);
   };
 
   return (
     <main className={`min-h-screen bg-white text-[#333333] ${inter.className} selection:bg-[#C9A84C]/20 selection:text-[#1B2A4A] overflow-x-hidden`}>
       
       <EmailModal isOpen={showEmailModal} onClose={() => setShowEmailModal(false)} onSuccess={handleEmailSuccess} />
-      <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
+      <ContactModal isOpen={showContactModal} onClose={() => { setShowContactModal(false); setDefaultMessage(''); }} defaultMessage={defaultMessage} />
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
@@ -639,7 +668,7 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-6">
               <button onClick={() => setShowContactModal(true)} className="text-white/60 hover:text-[#C9A84C] text-sm transition-colors">Contact</button>
-              <a href="mailto:contact@kaelresearch.com" className="text-white/60 hover:text-[#C9A84C] text-sm transition-colors">contact@kaelresearch.com</a>
+              <span className="text-white/60 text-sm">contact@kaelresearch.com</span>
             </div>
           </div>
         </div>
