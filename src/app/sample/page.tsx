@@ -242,10 +242,14 @@ export default function SampleReportPage() {
             <span className="text-white">KAEL</span>
             <span className="text-amber-400">RESEARCH</span>
           </Link>
-          <div className="flex items-center gap-4">
-            <span className="text-xs uppercase tracking-widest text-amber-400 border border-amber-400/30 px-3 py-1 rounded-full">
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:inline text-xs uppercase tracking-widest text-amber-400 border border-amber-400/30 px-3 py-1 rounded-full">
               Sample Report
             </span>
+            <a href="/api/pdf" className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white text-sm px-4 py-2 rounded-full transition-colors border border-slate-700">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+              Download PDF
+            </a>
             <Link href="/#pricing" className="hidden md:block bg-amber-600 hover:bg-amber-500 text-white text-sm px-4 py-2 rounded-full transition-colors">
               Order a Report
             </Link>
