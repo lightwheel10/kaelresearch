@@ -48,10 +48,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Failed to save email' }, { status: 500 });
     }
 
-    // Send welcome email (fire and forget — don't block the response)
-    sendWelcomeEmail(cleanEmail).catch((err) =>
-      console.error('Failed to send welcome email:', err)
-    );
+    // Send welcome email before returning (Vercel kills the function after response)
+    try {
+      await sendWelcomeEmail(cleanEmail);
+    } catch (err) {
+      console.error('Failed to send welcome email:', err);
+      // Don't fail the request if email fails — waitlist entry is saved
+    }
 
     return NextResponse.json({ success: true });
   } catch {
