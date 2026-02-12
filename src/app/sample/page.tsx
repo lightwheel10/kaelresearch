@@ -86,7 +86,7 @@ const EmailGate: FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
         </h1>
         {/* Gold rule */}
         <div className="mx-auto my-4 w-16 h-px" style={{ backgroundColor: GOLD }} />
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>Unlock Premium Market Insights</h2>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>Access Premium Market Insights</h2>
         <p className="text-slate-400 mb-8">Enter your email to access our exclusive sample report on the AI Code Assistant Market.</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -323,7 +323,7 @@ const ReportPage: FC = () => {
             The AI Code Assistant Market
           </h1>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mt-2" style={{ color: GOLD, fontFamily: 'Georgia, "Times New Roman", serif' }}>
-            2026 Landscape Analysis
+            2026 Market Report
           </h2>
           {/* Gold rule */}
           <div className="mx-auto mt-8 mb-6 w-24 h-px" style={{ backgroundColor: GOLD }} />
@@ -353,7 +353,7 @@ const ReportPage: FC = () => {
             {[
               { label: 'Market Growth:', text: '$2.1B (2024) to $5.8B (2025) to $9.4B projected (2026), driven by enterprise adoption and productivity gains.' },
               { label: 'GitHub Copilot:', text: '42% market share, down from 55% in early 2024 as competition intensifies.' },
-              { label: 'Cursor:', text: 'Breakout story with 3.2M users, ~$200M ARR, and +340% YoY growth, signaling demand for integrated, codebase-aware tools.' },
+              { label: 'Cursor:', text: 'Breakout story with 3.2M users, ~$200M ARR, and +340% YoY growth, Developers want editors built around AI, not AI bolted onto editors.' },
               { label: 'Strategic Shift:', text: 'The market is rapidly moving beyond simple "assistants" to more powerful agentic coding workflows.' },
               { label: 'Pricing Power:', text: "Free tiers haven\u2019t collapsed the market; developers and businesses are willing to pay $20-40/month for premium features." },
               { label: 'M&A Activity:', text: 'Expect 2-3 significant acquisitions by major cloud or platform players by the end of 2027.' },

@@ -176,7 +176,7 @@ const Report = () => (
       <Text style={{ fontSize: 34, fontWeight: 700, color: C.white, textAlign: 'center', lineHeight: 1.15, marginBottom: 10, fontFamily: 'Helvetica-Bold' }}>
         The AI Code{'\n'}Assistant Market
       </Text>
-      <Text style={{ fontSize: 16, color: '#6B7280', textAlign: 'center', marginBottom: 30 }}>2026 Landscape Analysis</Text>
+      <Text style={{ fontSize: 16, color: '#6B7280', textAlign: 'center', marginBottom: 30 }}>2026 Market Report</Text>
       <View style={{ borderTopWidth: 1, borderTopColor: C.divider, paddingTop: 16, alignItems: 'center' }}>
         <Text style={{ fontSize: 8, color: C.dim }}>February 2026 — 47 Pages — 86 Sources — 12 Data Tables</Text>
       </View>

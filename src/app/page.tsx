@@ -53,7 +53,7 @@ function EmailModal({ isOpen, onClose, onSuccess }: { isOpen: boolean; onClose: 
       <div className="bg-white border border-gray-200 rounded-2xl p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
         <h3 className="text-2xl font-bold mb-2" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Get the Free Sample Report</h3>
         <p className="text-gray-500 text-sm mb-6">
-          Enter your email and we'll unlock the full sample report instantly. No spam, no sequences.
+          Enter your email and the full sample report is yours. No spam, no sequences.
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
