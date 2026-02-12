@@ -1,17 +1,17 @@
-﻿'use client';
+﻿node.exe : Loaded cached credentials.
+At C:\Users\mddti\AppData\Roaming\npm\gemini.ps1:22 char:14
++ ...    $input | & "node$exe"  "$basedir/node_modules/@google/gemini-cli/d ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Loaded cached credentials.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Hook registry initialized with 0 hook entries
+'use client';
 
 import React, { useState } from 'react';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
-
-function CheckIcon({ color = "text-slate-500" }: { color?: string }) {
-  return (
-    <svg className={`w-4 h-4 ${color} flex-shrink-0 mt-0.5`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-    </svg>
-  );
-}
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -390,82 +390,4 @@ export default function Home() {
                 <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> 2 deep-dive reports/mo</li>
                 <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> Weekly competitor alerts</li>
                 <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> 3-day priority delivery</li>
-                <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> Unlimited revisions</li>
-                <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> Slack/email delivery</li>
-              </ul>
-            </div>
-
-            {/* Deep Dive */}
-            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-              <h3 className="text-lg font-medium text-slate-300 mb-2">Deep Dive</h3>
-              <div className="text-3xl font-bold text-white mb-6">$299<span className="text-sm text-slate-500 font-normal"> /report</span></div>
-              <p className="text-sm text-slate-400 mb-8 h-10">Investment-grade due diligence and strategic analysis.</p>
-              <a href="mailto:contact@kaelresearch.com?subject=Deep Dive Report" className="block w-full py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-center font-medium transition-colors mb-8 border border-slate-700">Request Deep Dive</a>
-              <ul className="space-y-3 text-sm text-slate-300">
-                <li className="flex gap-2"><CheckIcon /> 30-50 pages</li>
-                <li className="flex gap-2"><CheckIcon /> Executive summary + appendix</li>
-                <li className="flex gap-2"><CheckIcon /> 2 revision rounds</li>
-                <li className="flex gap-2"><CheckIcon /> Raw data access</li>
-                <li className="flex gap-2"><CheckIcon /> 86+ sources cited</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="py-24 relative">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-          </div>
-          <div className="space-y-4">
-            {[
-              { q: "How is this different from just using ChatGPT?", a: "ChatGPT is a generalist that hallucinates numbers. We use 3 specialized models cross-referenced against each other, connected to real data sources, and every claim is verified by a human analyst before delivery. You get sourced facts, not plausible fiction." },
-              { q: "What sources do you use?", a: "Public filings, industry databases (Statista, Gartner, etc.), patent records, job postings, app store data, social signals, verified reviews, and more. Every source is cited in the report." },
-              { q: "How fast can I get a report?", a: "Standard delivery is 5 business days. Growth plan clients get priority 3-day turnaround. Need it faster? Talk to us." },
-              { q: "Can I request any topic?", a: "If it can be researched, we can cover it. SaaS, fintech, healthtech, e-commerce, developer tools, consumer apps — you name it. We scope feasibility within 24 hours of your brief." },
-              { q: "What if I'm not satisfied?", a: "Every plan includes revision rounds. If the report doesn't meet the brief, we revise it at no extra cost. We'd rather over-deliver than lose your trust." }
-            ].map((faq, i) => (
-              <div key={i} className="border border-slate-800 rounded-lg bg-slate-900/50 overflow-hidden">
-                <button onClick={() => toggleFaq(i)} className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none">
-                  <span className="text-white font-medium">{faq.q}</span>
-                  <svg className={`w-5 h-5 text-emerald-500 transform transition-transform duration-200 flex-shrink-0 ${openFaqIndex === i ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div className={`px-6 transition-all duration-300 ease-in-out overflow-hidden ${openFaqIndex === i ? 'max-h-48 py-4 opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
-                  <p className="text-slate-400 text-sm leading-relaxed">{faq.a}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-24 bg-gradient-to-b from-slate-950 to-emerald-950/20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Stop Googling.<br />Start Knowing.</h2>
-          <p className="text-xl text-slate-400 mb-10">Get a sample report on your industry — free. See the quality before you commit.</p>
-          <a href="mailto:contact@kaelresearch.com?subject=Free Sample Report Request" className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-950 bg-white hover:bg-slate-200 rounded-full transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-            Request Your Free Sample
-          </a>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-slate-950 border-t border-slate-900 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-center md:text-left">
-              <span className="text-xl font-bold text-white tracking-tight">KAEL <span className="text-emerald-500">RESEARCH</span></span>
-              <p className="text-slate-500 text-sm mt-2">{'\u00A9'} 2026 Kael Research. All rights reserved.</p>
-            </div>
-            <a href="mailto:contact@kaelresearch.com" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">contact@kaelresearch.com</a>
-          </div>
-        </div>
-      </footer>
-    </main>
-  );
-}
+                <li className="flex gap-2"><CheckIcon color="text-emerald-400" />
