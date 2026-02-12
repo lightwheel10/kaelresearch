@@ -108,7 +108,7 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
       <div className="bg-white border border-gray-200 rounded-2xl p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
         {sent ? (
           <div className="text-center py-4">
-            <div className="text-3xl mb-3" style={{ color: '#C9A84C' }}>✓</div>
+            <svg className="w-8 h-8 mx-auto mb-3" style={{ color: '#C9A84C' }} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
             <h3 className="text-xl font-bold mb-2" style={{ color: '#1B2A4A' }}>Email client opened</h3>
             <p className="text-gray-500 text-sm">If your email client didn't open, reach us at contact@kaelresearch.com</p>
             <button onClick={onClose} className="mt-4 px-6 py-2 bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors">Close</button>

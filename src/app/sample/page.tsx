@@ -666,14 +666,14 @@ const ReportPage: FC = () => {
           <div className="bg-white rounded-lg border p-6 sm:p-8 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
-                { icon: '📊', text: 'Combination of primary and secondary research, including reports from Gartner, IDC, and Forrester, plus developer surveys from Stack Overflow and JetBrains.' },
-                { icon: '🎙️', text: '34 structured interviews conducted with engineering leaders and senior developers from October 2025 to January 2026.' },
-                { icon: '📐', text: 'Bottom-up market sizing model based on developer population, adoption rates, and pricing tiers.' },
-                { icon: '🧪', text: 'Hands-on, in-depth product testing of all major platforms covered in the report.' },
-              ].map((item, idx) => (
+                'Combination of primary and secondary research, including reports from Gartner, IDC, and Forrester, plus developer surveys from Stack Overflow and JetBrains.',
+                '34 structured interviews conducted with engineering leaders and senior developers from October 2025 to January 2026.',
+                'Bottom-up market sizing model based on developer population, adoption rates, and pricing tiers.',
+                'Hands-on, in-depth product testing of all major platforms covered in the report.',
+              ].map((text, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
-                  <p className="text-sm leading-relaxed" style={{ color: CHARCOAL }}>{item.text}</p>
+                  <span className="mt-1.5 flex-shrink-0 h-2 w-2 rounded-full" style={{ backgroundColor: GOLD }} />
+                  <p className="text-sm leading-relaxed" style={{ color: CHARCOAL }}>{text}</p>
                 </div>
               ))}
             </div>
