@@ -258,12 +258,12 @@ export default function Home() {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>
-            You Could Google It.<br />
-            <span style={{ color: '#1B2A4A' }}>Or You Could Know It.</span>
+            Market Intelligence.<br />
+            <span style={{ color: '#C9A84C' }}>Decisions Made Certain.</span>
           </h1>
           
           <p className="text-lg md:text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Your competitors are making decisions with gut feelings and ChatGPT hallucinations. We do the actual research — sourced, verified, numbers you can put in front of investors. Done in 3 days.
+            Sourced data. Verified numbers. Actionable strategy. We deliver the research your competitors wish they had — ready for investors, boards, and product teams. In 3 days.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -610,8 +610,8 @@ export default function Home() {
       {/* Final CTA */}
       <section className="py-24" style={{ background: 'linear-gradient(to bottom, #F9FAFB, #F0EDE4)' }}>
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Stop Googling.<br />Start Knowing.</h2>
-          <p className="text-xl text-gray-500 mb-10">Get a sample report on your industry — free. See the quality before you commit.</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Ready to Move with Confidence?</h2>
+          <p className="text-xl text-gray-500 mb-10">See the quality of our work firsthand. Download a free sample report.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={handleSampleClick}
