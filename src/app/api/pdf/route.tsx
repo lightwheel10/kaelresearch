@@ -124,7 +124,7 @@ const BarChart = () => {
   const cw = w - px - 10, ch = h - py - 25, gw = cw / 4, bw = 20;
   return (
     <View style={[s.card, s.mb12]}>
-      <Text style={s.h4}>Market Size (2023-2026P) — Billions USD</Text>
+      <Text style={s.h4}>Market Size (2023-2026P) - Billions USD</Text>
       <Svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
         {[0, 5, 10, 15, 20, 25].map(v => {
           const y = py + ch - (v / mx) * ch;
@@ -178,7 +178,7 @@ const Report = () => (
       </Text>
       <Text style={{ fontSize: 16, color: '#6B7280', textAlign: 'center', marginBottom: 30 }}>2026 Market Report</Text>
       <View style={{ borderTopWidth: 1, borderTopColor: C.divider, paddingTop: 16, alignItems: 'center' }}>
-        <Text style={{ fontSize: 8, color: C.dim }}>February 2026 — 47 Pages — 86 Sources — 12 Data Tables</Text>
+        <Text style={{ fontSize: 8, color: C.dim }}>February 2026</Text>
       </View>
       <View style={{ position: 'absolute', bottom: 40, flexDirection: 'row', gap: 6, alignItems: 'center' }}>
         <View style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: C.red }} />
@@ -210,15 +210,15 @@ const Report = () => (
           <Stat v="42%" l="Copilot Share" sub="Down from 55% in 2024" />
           <Stat v="76%" l="Dev Adoption" sub="Tried AI coding tools" />
         </View>
-        <Text style={s.body}>The AI code assistant market has moved from curiosity to infrastructure. What was a $2.1B market in 2024 has grown to an estimated $5.8B in 2025, and we project it will reach $9.4B by end of 2026. The growth is no longer driven by early adopters — it is driven by procurement teams.</Text>
+        <Text style={s.body}>The AI code assistant market has moved from curiosity to infrastructure. What was a $2.1B market in 2024 has grown to an estimated $5.8B in 2025, and we project it will reach $9.4B by end of 2026. The growth is no longer driven by early adopters - it is driven by procurement teams.</Text>
         <Text style={[s.h3]}>Key Findings</Text>
         <B t="GitHub Copilot holds ~42% market share by revenue, but its dominance is eroding. It held 55% in early 2024. Cursor and Windsurf are the primary beneficiaries. (GitHub financial disclosures, 2025)" />
         <B t="Cursor has become the breakout story of 2025, growing from ~200K users in early 2024 to 3.2M by Q4 2025, with ARR crossing $200M. (The Information, 2025)" />
         <B t="Enterprise adoption reached a tipping point. 71% of companies with 500+ engineers now provide an AI coding tool as standard. (McKinsey, 2025)" />
-        <B t='The "assistant" framing is dying. The market is shifting toward agentic coding — tools that execute multi-step tasks autonomously.' />
+        <B t='The "assistant" framing is dying. The market is shifting toward agentic coding - tools that execute multi-step tasks autonomously.' />
         <B t="Free tiers from Amazon and Google have not collapsed the market. Developers pay $20-40/month for tools that measurably improve output." />
         <B t="We expect 2-3 acquisitions of mid-tier players by major cloud/DevTool platforms by end of 2027." />
-        <Ins t="In 2023, only 35% of the addressable market was captured. By 2025, that figure reached 67%. Enterprise deals are the primary driver — when Shopify rolls out Copilot to all engineers, that is thousands of seats converting overnight." />
+        <Ins t="In 2023, only 35% of the addressable market was captured. By 2025, that figure reached 67%. Enterprise deals are the primary driver - when Shopify rolls out Copilot to all engineers, that is thousands of seats converting overnight." />
       </View>
     <Ftr /></Page>
 
@@ -232,7 +232,7 @@ const Report = () => (
           {[
             { v: '32M', t: 'Developer Population', d: 'Professional developers worldwide in 2025, up from 27M in 2022.' },
             { v: '27-55%', t: 'Productivity Gains', d: 'Improvement in task completion speed across multiple studies.' },
-            { v: '3.2M', t: 'Cursor Users', d: 'From 200K in early 2024 — the fastest growth in the category.' },
+            { v: '3.2M', t: 'Cursor Users', d: 'From 200K in early 2024 - the fastest growth in the category.' },
           ].map((x, i) => (
             <View key={i} style={[s.card, s.col]}>
               <Text style={[s.statVal, { fontSize: 16 }]}>{x.v}</Text>
@@ -271,7 +271,7 @@ const Report = () => (
             { n: 'Amazon Q Developer', s: 6, r: '$0.35B', g: '+42%', c: '#8B7AAF' },
             { n: 'Tabnine', s: 4, r: '$0.23B', g: '+15%', c: '#C06060' },
             { n: 'JetBrains AI', s: 3.5, r: '$0.20B', g: '+120%', c: '#B07090' },
-            { n: 'Others', s: 27.5, r: '$1.42B', g: '—', c: '#94A3B8' },
+            { n: 'Others', s: 27.5, r: '$1.42B', g: '-', c: '#94A3B8' },
           ].map((x, i) => (
             <View key={i} style={[s.tRow, { alignItems: 'center' }]}>
               <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: x.c, marginRight: 8 }} />
@@ -296,7 +296,7 @@ const Report = () => (
           ].map((x, i) => <HBar key={i} label={x.n} value={x.v} max={400} color={x.c} />)}
         </View>
 
-        <Ins t='Cursor went from a niche VS Code fork to $580M estimated revenue in under two years. Their insight: developers do not want AI inside their editor — they want an editor built around AI.' />
+        <Ins t='Cursor went from a niche VS Code fork to $580M estimated revenue in under two years. Their insight: developers do not want AI inside their editor - they want an editor built around AI.' />
       </View>
     <Ftr /></Page>
 
@@ -375,7 +375,7 @@ const Report = () => (
           <Text style={s.source}>NPS = Net Promoter Score (-100 to +100)</Text>
         </View>
 
-        <Ins t="Copilot dominance increases with company size — Microsoft enterprise sales at work. But in small teams, Cursor has near-parity. This is how market share shifts begin." />
+        <Ins t="Copilot dominance increases with company size - Microsoft enterprise sales at work. But in small teams, Cursor has near-parity. This is how market share shifts begin." />
       </View>
     <Ftr /></Page>
 

@@ -329,7 +329,7 @@ const ReportPage: FC = () => {
           <div className="mx-auto mt-8 mb-6 w-24 h-px" style={{ backgroundColor: GOLD }} />
           {/* Metadata */}
           <p className="text-sm tracking-wide" style={{ color: '#6B7280' }}>
-            47 Pages · 86 Sources · 12 Data Tables · February 2026
+            February 2026
           </p>
           <p className="mt-3 text-sm" style={{ color: '#9CA3AF' }}>Prepared by Kael Research</p>
         </div>
