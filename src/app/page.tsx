@@ -30,12 +30,12 @@ export default function Home() {
   };
 
   return (
-    <main className={`min-h-screen bg-slate-950 text-slate-50 ${inter.className} selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-hidden`}>
+    <main className={`min-h-screen bg-slate-950 text-slate-50 ${inter.className} selection:bg-amber-500/30 selection:text-emerald-200 overflow-x-hidden`}>
       
       {/* Background Gradients */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-900/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-900/10 rounded-full blur-[120px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-900/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-amber-900/5 rounded-full blur-[120px]" />
         <div className="absolute top-[40%] left-[60%] w-[20%] h-[20%] bg-slate-800/20 rounded-full blur-[100px]" />
       </div>
 
@@ -44,7 +44,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
             <span className="text-white">KAEL</span>
-            <span className="text-emerald-400">RESEARCH</span>
+            <span className="text-amber-400">RESEARCH</span>
           </div>
 
           {/* Desktop Nav */}
@@ -52,7 +52,7 @@ export default function Home() {
             <button onClick={() => scrollToSection('how-it-works')} className="hover:text-white transition-colors">How It Works</button>
             <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Pricing</button>
             <button onClick={() => scrollToSection('faq')} className="hover:text-white transition-colors">FAQ</button>
-            <button className="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-full transition-all shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)] hover:shadow-[0_0_20px_-3px_rgba(16,185,129,0.5)]">
+            <button className="bg-amber-600 hover:bg-amber-500 text-white px-5 py-2.5 rounded-full transition-all  hover:">
               Get a Free Sample
             </button>
           </div>
@@ -71,7 +71,7 @@ export default function Home() {
             <button onClick={() => scrollToSection('how-it-works')} className="text-left text-slate-300 hover:text-white">How It Works</button>
             <button onClick={() => scrollToSection('pricing')} className="text-left text-slate-300 hover:text-white">Pricing</button>
             <button onClick={() => scrollToSection('faq')} className="text-left text-slate-300 hover:text-white">FAQ</button>
-            <button className="bg-emerald-600 text-white px-5 py-2.5 rounded-full w-full">Get a Free Sample</button>
+            <button className="bg-amber-600 text-white px-5 py-2.5 rounded-full w-full">Get a Free Sample</button>
           </div>
         )}
       </nav>
@@ -79,10 +79,10 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative z-10 pt-32 pb-20 md:pt-48 md:pb-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/50 border border-slate-800 text-xs font-medium text-emerald-400 mb-8 animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/50 border border-slate-800 text-xs font-medium text-amber-400 mb-8 animate-fade-in-up">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
             </span>
             Now accepting Q2 2026 clients
           </div>
@@ -98,7 +98,7 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white text-lg font-medium px-8 py-4 rounded-full transition-all shadow-[0_0_20px_-5px_rgba(16,185,129,0.4)] hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.6)]">
+            <button className="w-full sm:w-auto bg-amber-600 hover:bg-amber-500 text-white text-lg font-medium px-8 py-4 rounded-full transition-all  hover:">
               Get a Free Sample Report
             </button>
             <button 
@@ -122,7 +122,7 @@ export default function Home() {
                 title: "Investor meeting in 5 days",
                 desc: "You need TAM numbers, competitor analysis, and a market map. You've been Googling for 3 hours and have 47 tabs open.",
                 icon: (
-                  <svg className="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 )
@@ -131,7 +131,7 @@ export default function Home() {
                 title: "Competitor just raised $20M",
                 desc: "What are they building? Who are they hiring? Where are they expanding? Your team is guessing.",
                 icon: (
-                  <svg className="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                   </svg>
                 )
@@ -140,14 +140,14 @@ export default function Home() {
                 title: "Board wants a GTM strategy",
                 desc: "For a new market you've never operated in. Due Thursday. You're one person.",
                 icon: (
-                  <svg className="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 )
               }
             ].map((card, i) => (
-              <div key={i} className="p-8 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-emerald-500/30 transition-all hover:bg-slate-900/80 group">
-                <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-emerald-900/20 transition-colors">
+              <div key={i} className="p-8 rounded-2xl bg-slate-900/50 border border-slate-800 transition-all hover:bg-slate-900/80 group">
+                <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-amber-900/20 transition-colors">
                   {card.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-slate-100">{card.title}</h3>
@@ -208,16 +208,16 @@ export default function Home() {
             </div>
 
             {/* Right: Kael */}
-            <div className="p-8 md:p-12 bg-emerald-950/5 relative">
-              <div className="absolute top-0 left-0 w-full h-1 bg-emerald-500" />
+            <div className="p-8 md:p-12 bg-amber-950/5 relative">
+              <div className="absolute top-0 left-0 w-full h-1 bg-amber-500" />
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-emerald-900/30 flex items-center justify-center border border-emerald-500/20">
-                  <span className="text-emerald-400 font-bold">K</span>
+                <div className="w-10 h-10 rounded-full bg-amber-900/30 flex items-center justify-center border border-amber-500/20">
+                  <span className="text-amber-400 font-bold">K</span>
                 </div>
-                <h3 className="text-xl font-semibold text-emerald-400">Kael Research</h3>
+                <h3 className="text-xl font-semibold text-amber-400">Kael Research</h3>
               </div>
 
-              <div className="mb-8 p-4 bg-emerald-950/20 rounded-xl border border-emerald-500/20 font-mono text-sm text-emerald-100">
+              <div className="mb-8 p-4 bg-amber-950/20 rounded-xl border border-amber-500/20 font-mono text-sm text-amber-100">
                 "The developer tools market reached $48.7B in 2025 (Gartner, Feb 2026), growing at 14.2% CAGR, with infrastructure..."
               </div>
 
@@ -229,7 +229,7 @@ export default function Home() {
                   "Actionable strategic recommendations"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-slate-200">
-                    <svg className="w-5 h-5 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                     </svg>
                     {item}
@@ -237,7 +237,7 @@ export default function Home() {
                 ))}
               </ul>
 
-              <div className="mt-8 pt-8 border-t border-emerald-900/30 text-emerald-400/80 text-sm font-medium">
+              <div className="mt-8 pt-8 border-t border-amber-900/30 text-amber-400/80 text-sm font-medium">
                 Delivered: 3 business days, board-ready PDF
               </div>
             </div>
@@ -252,7 +252,7 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-12 relative">
             {/* Connecting Line (Desktop) */}
-            <div className="hidden md:block absolute top-8 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-slate-800 via-emerald-900 to-slate-800" />
+            <div className="hidden md:block absolute top-8 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-slate-800 via-amber-900 to-slate-800" />
             
             {[
               {
@@ -272,7 +272,7 @@ export default function Home() {
               }
             ].map((item, i) => (
               <div key={i} className="relative flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 text-emerald-400 font-bold text-xl flex items-center justify-center mb-6 shadow-lg z-10">
+                <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 text-amber-400 font-bold text-xl flex items-center justify-center mb-6 shadow-lg z-10">
                   {item.step}
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
@@ -289,7 +289,7 @@ export default function Home() {
           
           {/* Document Mockup */}
           <div className="w-full md:w-1/2 relative group perspective-1000">
-            <div className="absolute inset-0 bg-emerald-500/20 blur-[50px] rounded-full opacity-20 group-hover:opacity-30 transition-opacity" />
+            <div className="absolute inset-0 bg-amber-500/20 blur-[50px] rounded-full opacity-20 group-hover:opacity-30 transition-opacity" />
             <div className="relative bg-white text-slate-900 p-8 rounded-lg shadow-2xl transform transition-transform duration-500 md:group-hover:rotate-y-2 md:group-hover:rotate-x-2 min-h-[500px] flex flex-col">
               <div className="flex justify-between items-center mb-8 border-b border-slate-200 pb-4">
                 <span className="font-bold tracking-tight">KAEL RESEARCH</span>
@@ -378,20 +378,20 @@ export default function Home() {
             </div>
 
             {/* Growth */}
-            <div className="p-8 rounded-2xl bg-slate-900 border border-emerald-500/50 relative shadow-[0_0_40px_-10px_rgba(16,185,129,0.2)]">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-lg">
+            <div className="p-8 rounded-2xl bg-slate-900 border border-amber-500/50 relative ">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-lg">
                 Most Popular
               </div>
-              <h3 className="text-lg font-medium text-emerald-400 mb-2">Growth</h3>
+              <h3 className="text-lg font-medium text-amber-400 mb-2">Growth</h3>
               <div className="text-3xl font-bold text-white mb-6">$499<span className="text-sm text-slate-500 font-normal"> /month</span></div>
               <p className="text-sm text-slate-400 mb-8 h-10">For teams that need ongoing competitor tracking and market updates.</p>
-              <button className="w-full py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition-colors mb-8 shadow-lg shadow-emerald-900/20">Subscribe Now</button>
+              <button className="w-full py-3 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-medium transition-colors mb-8 ">Subscribe Now</button>
               <ul className="space-y-3 text-sm text-slate-300">
-                <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> 2 deep-dive reports/mo</li>
-                <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> Weekly competitor alerts</li>
-                <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> 3-day priority delivery</li>
-                <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> Unlimited revisions</li>
-                <li className="flex gap-2"><CheckIcon color="text-emerald-400" /> Slack/email delivery</li>
+                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> 2 deep-dive reports/mo</li>
+                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> Weekly competitor alerts</li>
+                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> 3-day priority delivery</li>
+                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> Unlimited revisions</li>
+                <li className="flex gap-2"><CheckIcon color="text-amber-400" /> Slack/email delivery</li>
               </ul>
             </div>
 
@@ -430,7 +430,7 @@ export default function Home() {
               <div key={i} className="border border-slate-800 rounded-lg bg-slate-900/50 overflow-hidden">
                 <button onClick={() => toggleFaq(i)} className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none">
                   <span className="text-white font-medium">{faq.q}</span>
-                  <svg className={`w-5 h-5 text-emerald-500 transform transition-transform duration-200 flex-shrink-0 ${openFaqIndex === i ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className={`w-5 h-5 text-amber-500 transform transition-transform duration-200 flex-shrink-0 ${openFaqIndex === i ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
@@ -444,11 +444,11 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-gradient-to-b from-slate-950 to-emerald-950/20">
+      <section className="py-24 bg-gradient-to-b from-slate-950 to-amber-950/20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Stop Googling.<br />Start Knowing.</h2>
           <p className="text-xl text-slate-400 mb-10">Get a sample report on your industry — free. See the quality before you commit.</p>
-          <a href="mailto:contact@kaelresearch.com?subject=Free Sample Report Request" className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-950 bg-white hover:bg-slate-200 rounded-full transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+          <a href="mailto:contact@kaelresearch.com?subject=Free Sample Report Request" className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-950 bg-white hover:bg-slate-200 rounded-full transition-all ">
             Request Your Free Sample
           </a>
         </div>
@@ -459,13 +459,15 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left">
-              <span className="text-xl font-bold text-white tracking-tight">KAEL <span className="text-emerald-500">RESEARCH</span></span>
+              <span className="text-xl font-bold text-white tracking-tight">KAEL <span className="text-amber-500">RESEARCH</span></span>
               <p className="text-slate-500 text-sm mt-2">{'\u00A9'} 2026 Kael Research. All rights reserved.</p>
             </div>
-            <a href="mailto:contact@kaelresearch.com" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">contact@kaelresearch.com</a>
+            <a href="mailto:contact@kaelresearch.com" className="text-slate-400 hover:text-amber-400 text-sm transition-colors">contact@kaelresearch.com</a>
           </div>
         </div>
       </footer>
     </main>
   );
 }
+
+
