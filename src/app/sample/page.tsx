@@ -373,10 +373,10 @@ const ReportPage: FC = () => {
         {/* ═══ 02 — Market Sizing ═══ */}
         <section className="py-16 sm:py-20">
           <SectionHeader number="02" title="Market Sizing" />
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-stretch">
+            <div className="lg:col-span-2 flex flex-col">
               <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Market Potential (TAM, SAM, SOM) in $USD Billions</h3>
-              <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+              <div className="bg-white rounded-lg border p-4 shadow-sm flex-1" style={{ borderColor: '#E5E7EB' }}>
                 <ChartWrapper>
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={marketSizingData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
@@ -393,10 +393,10 @@ const ReportPage: FC = () => {
                 </ChartWrapper>
               </div>
             </div>
-            <div>
+            <div className="flex flex-col">
               <h3 className="text-xl font-bold mb-4" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Key Factors</h3>
               {/* Growth Drivers card */}
-              <div className="bg-white rounded-lg p-5 shadow-sm mb-4" style={{ borderLeft: `4px solid ${SAGE}`, border: '1px solid #E5E7EB', borderLeftColor: SAGE }}>
+              <div className="bg-white rounded-lg p-5 shadow-sm mb-4 flex-1" style={{ borderLeft: `4px solid ${SAGE}`, border: '1px solid #E5E7EB', borderLeftColor: SAGE }}>
                 <h4 className="font-bold mb-3" style={{ color: SAGE }}>Growth Drivers</h4>
                 <ul className="space-y-2 text-sm" style={{ color: CHARCOAL }}>
                   <li className="flex items-start gap-2"><span className="mt-1.5 flex-shrink-0 h-2 w-2 rounded-full" style={{ backgroundColor: SAGE }} /><span><strong style={{ color: NAVY }}>Scale:</strong> 32 Million developers worldwide presents a massive user base.</span></li>
@@ -405,7 +405,7 @@ const ReportPage: FC = () => {
                 </ul>
               </div>
               {/* Growth Constraints card */}
-              <div className="bg-white rounded-lg p-5 shadow-sm" style={{ borderLeft: '4px solid #C0392B', border: '1px solid #E5E7EB', borderLeftColor: '#C0392B' }}>
+              <div className="bg-white rounded-lg p-5 shadow-sm flex-1" style={{ borderLeft: '4px solid #C0392B', border: '1px solid #E5E7EB', borderLeftColor: '#C0392B' }}>
                 <h4 className="font-bold mb-3" style={{ color: '#C0392B' }}>Growth Constraints</h4>
                 <ul className="space-y-2 text-sm" style={{ color: CHARCOAL }}>
                   <li className="flex items-start gap-2"><span className="mt-1.5 flex-shrink-0 h-2 w-2 rounded-full" style={{ backgroundColor: '#C0392B' }} /><span><strong style={{ color: NAVY }}>Security (34%):</strong> Concerns about code/IP leakage remain a primary barrier.</span></li>
@@ -501,10 +501,10 @@ const ReportPage: FC = () => {
         {/* ═══ 04 — Feature Comparison ═══ */}
         <section className="py-16 sm:py-20">
           <SectionHeader number="04" title="Feature Comparison" />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+            <div className="flex flex-col">
               <h3 className="text-xl font-bold mb-4 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Core Capabilities Score (0-100)</h3>
-              <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+              <div className="bg-white rounded-lg border p-4 shadow-sm flex-1" style={{ borderColor: '#E5E7EB' }}>
                 <ChartWrapper>
                   <ResponsiveContainer width="100%" height="100%">
                     <RadarChart cx="50%" cy="50%" outerRadius="80%" data={featureRadarData}>
@@ -521,9 +521,9 @@ const ReportPage: FC = () => {
                 </ChartWrapper>
               </div>
             </div>
-            <div>
+            <div className="flex flex-col">
               <h3 className="text-xl font-bold mb-6 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Feature Matrix</h3>
-              <div className="overflow-x-auto bg-white rounded-lg border shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+              <div className="overflow-x-auto bg-white rounded-lg border shadow-sm flex-1" style={{ borderColor: '#E5E7EB' }}>
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr style={{ backgroundColor: NAVY }}>
