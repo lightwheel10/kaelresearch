@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export async function sendWelcomeEmail(to: string) {
+export async function sendWelcomeEmail(to: string, pdfBuffer?: Buffer) {
   const html = `
     <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #1B2A4A;">
       <div style="padding: 40px 30px; background: #0F1A2E;">
@@ -18,20 +18,18 @@ export async function sendWelcomeEmail(to: string) {
       </div>
       
       <div style="padding: 30px; background: #ffffff;">
-        <p style="font-size: 16px; line-height: 1.6;">Thanks for downloading our sample report.</p>
+        <p style="font-size: 16px; line-height: 1.6;">Here's the sample report you requested. It's attached as a PDF.</p>
         
         <p style="font-size: 16px; line-height: 1.6;">
-          We build market intelligence reports for companies that need real analysis, not recycled blog posts wrapped in charts. 
-          Each report is built from primary data — patent filings, job postings, funding rounds, technical benchmarks — not summaries of other summaries.
+          This one covers the AI Code Assistant market — competitor positioning, 
+          patent filings, hiring signals, pricing models. We pulled data from 86 primary sources 
+          to put it together.
         </p>
 
         <p style="font-size: 16px; line-height: 1.6;">
-          If your team needs a custom report on a specific market, technology, or competitive landscape, reply to this email. 
-          We'll scope it out and give you a timeline.
-        </p>
-
-        <p style="font-size: 16px; line-height: 1.6;">
-          No sales calls. No 47-slide decks about our "methodology." Just the research.
+          If you need something similar for a different market or technology, 
+          reply to this email with a rough brief. We'll tell you what's possible 
+          and how long it would take. No pitch deck, no discovery call.
         </p>
 
         <p style="font-size: 16px; line-height: 1.6; color: #666;">
@@ -41,16 +39,26 @@ export async function sendWelcomeEmail(to: string) {
       </div>
       
       <div style="padding: 20px 30px; background: #f5f5f5; font-size: 12px; color: #999;">
-        You're receiving this because you downloaded a report from Kael Research. 
-        No spam, no newsletters — just this one email.
+        You got this because you downloaded a report from kaelresearch.com. One email, that's it.
       </div>
     </div>
   `;
 
+  const attachments = pdfBuffer
+    ? [
+        {
+          filename: 'Kael-Research-AI-Code-Assistants-2026.pdf',
+          content: pdfBuffer,
+          contentType: 'application/pdf',
+        },
+      ]
+    : [];
+
   await transporter.sendMail({
     from: '"Kael Research" <contact@kaelresearch.com>',
     to,
-    subject: 'Your report is ready — and a quick intro',
+    subject: 'Your report — AI Code Assistants 2026',
     html,
+    attachments,
   });
 }

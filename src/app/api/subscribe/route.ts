@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { sendWelcomeEmail } from '@/lib/email';
+import { generatePdfBuffer } from '@/lib/pdf';
 import { isRateLimited } from '@/lib/rate-limit';
 import { isValidEmail } from '@/lib/validation';
 import { checkCors } from '@/lib/cors';
@@ -46,10 +47,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Always send welcome email (even for existing — they may not have received it)
+    // Generate PDF and send welcome email
     try {
-      await sendWelcomeEmail(cleanEmail);
-      console.log('Welcome email sent to:', cleanEmail);
+      const pdfBuffer = await generatePdfBuffer();
+      await sendWelcomeEmail(cleanEmail, pdfBuffer);
+      console.log('Welcome email with PDF sent to:', cleanEmail);
     } catch (err) {
       console.error('Failed to send welcome email:', err);
     }
