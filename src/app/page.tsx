@@ -483,10 +483,10 @@ export default function Home() {
               <div className="space-y-3 font-mono text-sm text-gray-500 mb-auto">
                 {[
                   ["Executive Summary", "03"],
-                  ["Market Sizing (TAM/SAM)", "08"],
-                  ["Competitor Matrix", "15"],
-                  ["Pricing Analysis", "24"],
-                  ["Strategic Recommendations", "42"]
+                  ["Market Sizing (TAM/SAM)", "06"],
+                  ["Competitor Matrix", "12"],
+                  ["Pricing Analysis", "20"],
+                  ["Strategic Recommendations", "28"]
                 ].map(([title, page], i) => (
                   <div key={i} className="flex justify-between border-b border-dotted border-gray-300 pb-1">
                     <span>{title}</span>
@@ -516,9 +516,9 @@ export default function Home() {
             
             <div className="grid grid-cols-2 gap-6">
               {[
-                { label: "Pages of Analysis", val: "47" },
-                { label: "Data Tables", val: "12" },
-                { label: "Sources Cited", val: "86" },
+                { label: "Pages of Analysis", val: "30+" },
+                { label: "Data Tables", val: "8+" },
+                { label: "Sources Cited", val: "50+" },
                 { label: "Delivery Time", val: "3 Days" }
               ].map((stat, i) => (
                 <div key={i} className="p-4 rounded-xl bg-[#F9FAFB] border border-gray-200">
@@ -599,7 +599,7 @@ export default function Home() {
                 <li className="flex gap-2"><CheckIcon /> Executive summary + appendix</li>
                 <li className="flex gap-2"><CheckIcon /> 2 revision rounds</li>
                 <li className="flex gap-2"><CheckIcon /> Raw data access</li>
-                <li className="flex gap-2"><CheckIcon /> 86+ sources cited</li>
+                <li className="flex gap-2"><CheckIcon /> 50+ sources cited</li>
               </ul>
             </div>
           </div>
