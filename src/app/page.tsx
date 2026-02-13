@@ -221,11 +221,11 @@ export default function Home() {
 
   const handlePricingClick = (plan: string) => {
     if (plan === 'starter') {
-      setDefaultMessage("Hi, I'd like to order a Starter report ($149). Here's what I need researched:\n\n[Describe your topic/question here]");
+      setDefaultMessage("Hi, I'd like to order a Starter report ($299). Here's what I need researched:\n\n[Describe your topic/question here]");
     } else if (plan === 'growth') {
-      setDefaultMessage("Hi, I'm interested in the Growth subscription ($499/mo). Here's what my team needs:\n\n[Describe your ongoing research needs]");
+      setDefaultMessage("Hi, I'm interested in the Growth subscription ($799/mo). Here's what my team needs:\n\n[Describe your ongoing research needs]");
     } else {
-      setDefaultMessage("Hi, I need a comprehensive Deep Dive report ($299) for:\n\n[Describe your topic and what decisions it will inform]");
+      setDefaultMessage("Hi, I need a comprehensive Deep Dive report ($599) for:\n\n[Describe your topic and what decisions it will inform]");
     }
     setShowContactModal(true);
   };
@@ -362,7 +362,7 @@ export default function Home() {
 
           <p className="text-center text-gray-500 text-lg">
             You could spend 20 hours stitching together half-sourced data. 
-            <span className="block sm:inline font-medium mt-2 sm:mt-0 sm:ml-2" style={{ color: '#1B2A4A' }}>Or you could spend $149 and have it Tuesday.</span>
+            <span className="block sm:inline font-medium mt-2 sm:mt-0 sm:ml-2" style={{ color: '#1B2A4A' }}>Or you could spend $299 and have it Tuesday.</span>
           </p>
         </div>
       </section>
@@ -552,7 +552,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
             <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 transition-colors">
               <h3 className="text-lg font-medium text-gray-500 mb-2">Starter</h3>
-              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$149<span className="text-sm text-gray-400 font-normal"> /report</span></div>
+              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$299<span className="text-sm text-gray-400 font-normal"> /report</span></div>
               <p className="text-sm text-gray-500 mb-8 h-10">Perfect for quick validation of a single hypothesis or market.</p>
               <button onClick={() => handlePricingClick('starter')} className="w-full py-3 rounded-lg border border-gray-300 hover:bg-gray-50 font-medium transition-colors mb-8" style={{ color: '#1B2A4A' }}>Get Started</button>
               <ul className="space-y-3 text-sm text-gray-500">
@@ -569,7 +569,7 @@ export default function Home() {
                 Most Popular
               </div>
               <h3 className="text-lg font-medium mb-2" style={{ color: '#C9A84C' }}>Growth</h3>
-              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$499<span className="text-sm text-gray-400 font-normal"> /month</span></div>
+              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$799<span className="text-sm text-gray-400 font-normal"> /month</span></div>
               <p className="text-sm text-gray-500 mb-8 h-10">For teams that need ongoing competitor tracking and market updates.</p>
               <button
                 onClick={() => handlePricingClick('growth')}
@@ -591,7 +591,7 @@ export default function Home() {
 
             <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 transition-colors">
               <h3 className="text-lg font-medium text-gray-500 mb-2">Deep Dive</h3>
-              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$299<span className="text-sm text-gray-400 font-normal"> /report</span></div>
+              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$599<span className="text-sm text-gray-400 font-normal"> /report</span></div>
               <p className="text-sm text-gray-500 mb-8 h-10">The kind of analysis you'd hand to a VC or put in a board deck.</p>
               <button onClick={() => handlePricingClick('deep-dive')} className="w-full py-3 rounded-lg bg-[#1B2A4A] hover:bg-[#243757] text-white font-medium transition-colors mb-8">Request Deep Dive</button>
               <ul className="space-y-3 text-sm text-gray-600">
