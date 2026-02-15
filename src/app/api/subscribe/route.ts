@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
 
-    const { email } = await req.json();
+    const { email, source } = await req.json();
 
     if (!isValidEmail(email)) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 });
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     if (!existing) {
       const { error } = await supabase
         .from('waitlist')
-        .insert({ email: cleanEmail });
+        .insert({ email: cleanEmail, source: source || 'unknown' });
 
       if (error) {
         console.error('Supabase insert error:', error);

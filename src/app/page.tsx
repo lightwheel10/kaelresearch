@@ -33,7 +33,7 @@ function EmailModal({ isOpen, onClose, onSuccess }: { isOpen: boolean; onClose: 
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, source: 'sample_download' }),
       });
       if (res.ok) {
         localStorage.setItem('kael_email', email);
@@ -561,7 +561,7 @@ export default function Home() {
               const res = await fetch('/api/subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email, source: 'newsletter_signup' }),
               });
               if (res.ok) {
                 input.value = '';
