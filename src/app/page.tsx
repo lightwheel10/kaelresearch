@@ -221,11 +221,11 @@ export default function Home() {
 
   const handlePricingClick = (plan: string) => {
     if (plan === 'starter') {
-      setDefaultMessage("Hi, I'd like to order a Starter report ($299). Here's what I need researched:\n\n[Describe your topic/question here]");
+      setDefaultMessage("Hi, I'm interested in the Weekly AI Brief ($49/mo). Here's what sectors I'm most interested in:\n\n[Describe your focus areas]");
     } else if (plan === 'growth') {
-      setDefaultMessage("Hi, I'm interested in the Growth subscription ($799/mo). Here's what my team needs:\n\n[Describe your ongoing research needs]");
+      setDefaultMessage("Hi, I'm interested in a Research Retainer ($3K/mo). Here's what my team needs:\n\n[Describe your ongoing research needs]");
     } else {
-      setDefaultMessage("Hi, I need a comprehensive Deep Dive report ($599) for:\n\n[Describe your topic and what decisions it will inform]");
+      setDefaultMessage("Hi, I need a Strategic Project ($10K+). Here's the scope:\n\n[Describe your topic and what decisions it will inform]");
     }
     setShowContactModal(true);
   };
@@ -246,6 +246,7 @@ export default function Home() {
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
             <button onClick={() => scrollToSection('how-it-works')} className="hover:text-[#1B2A4A] transition-colors">How It Works</button>
+            <button onClick={() => scrollToSection('newsletter')} className="hover:text-[#1B2A4A] transition-colors">Newsletter</button>
             <button onClick={() => scrollToSection('pricing')} className="hover:text-[#1B2A4A] transition-colors">Pricing</button>
             <button onClick={() => scrollToSection('faq')} className="hover:text-[#1B2A4A] transition-colors">FAQ</button>
             <button
@@ -362,7 +363,7 @@ export default function Home() {
 
           <p className="text-center text-gray-500 text-lg">
             You could spend 20 hours stitching together half-sourced data. 
-            <span className="block sm:inline font-medium mt-2 sm:mt-0 sm:ml-2" style={{ color: '#1B2A4A' }}>Or you could spend $299 and have it Tuesday.</span>
+            <span className="block sm:inline font-medium mt-2 sm:mt-0 sm:ml-2" style={{ color: '#1B2A4A' }}>Or you could let us handle it.</span>
           </p>
         </div>
       </section>
@@ -541,26 +542,72 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Newsletter Section */}
+      <section id="newsletter" className="py-24 px-6 bg-white border-t border-gray-100">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F9FAFB] border border-gray-200 text-xs font-medium mb-6" style={{ color: '#C9A84C' }}>
+            Free weekly research
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>AI Market Intelligence, Weekly</h2>
+          <p className="text-lg text-gray-500 mb-8 max-w-xl mx-auto">
+            Every week we break down one AI market with real numbers, sourced data, and specific takeaways. Built for founders and investors who need to make decisions, not just stay informed.
+          </p>
+          <form onSubmit={async (e) => {
+            e.preventDefault();
+            const input = (e.target as HTMLFormElement).querySelector('input') as HTMLInputElement;
+            const email = input?.value;
+            if (!email || !email.includes('@')) return;
+            try {
+              const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+              });
+              if (res.ok) {
+                input.value = '';
+                alert('You\'re in. Check your inbox for a welcome email.');
+              }
+            } catch { /* ignore */ }
+          }} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="you@company.com"
+              className="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#C9A84C] transition-colors"
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 text-white font-medium rounded-lg transition-colors whitespace-nowrap"
+              style={{ backgroundColor: '#C9A84C' }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
+            >
+              Subscribe Free
+            </button>
+          </form>
+          <p className="text-gray-400 text-xs mt-3">No spam. Unsubscribe anytime. We also send the free sample report as a welcome gift.</p>
+        </div>
+      </section>
+
       {/* Pricing */}
       <section id="pricing" className="py-24 px-6 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Transparent Pricing</h2>
-            <p className="text-gray-500">No retainers required. Pay per report or subscribe for continuous intelligence.</p>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>When You Need More Than a Newsletter</h2>
+            <p className="text-gray-500">From weekly briefs to full research retainers. Start free, upgrade when ready.</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
             <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 transition-colors">
-              <h3 className="text-lg font-medium text-gray-500 mb-2">Starter</h3>
-              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$299<span className="text-sm text-gray-400 font-normal"> /report</span></div>
-              <p className="text-sm text-gray-500 mb-8 h-10">Perfect for quick validation of a single hypothesis or market.</p>
-              <button onClick={() => handlePricingClick('starter')} className="w-full py-3 rounded-lg border border-gray-300 hover:bg-gray-50 font-medium transition-colors mb-8" style={{ color: '#1B2A4A' }}>Get Started</button>
+              <h3 className="text-lg font-medium text-gray-500 mb-2">Weekly AI Brief</h3>
+              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$49<span className="text-sm text-gray-400 font-normal"> /month</span></div>
+              <p className="text-sm text-gray-500 mb-8 h-10">Curated AI market research delivered weekly. Built for founders making decisions.</p>
+              <button onClick={() => handlePricingClick('starter')} className="w-full py-3 rounded-lg border border-gray-300 hover:bg-gray-50 font-medium transition-colors mb-8" style={{ color: '#1B2A4A' }}>Start Reading</button>
               <ul className="space-y-3 text-sm text-gray-500">
-                <li className="flex gap-2"><CheckIcon /> Single topic coverage</li>
-                <li className="flex gap-2"><CheckIcon /> 15-25 pages</li>
-                <li className="flex gap-2"><CheckIcon /> 5-day delivery</li>
-                <li className="flex gap-2"><CheckIcon /> 1 revision round</li>
-                <li className="flex gap-2"><CheckIcon /> 30+ verified sources</li>
+                <li className="flex gap-2"><CheckIcon /> Weekly market analysis</li>
+                <li className="flex gap-2"><CheckIcon /> Competitor tracking alerts</li>
+                <li className="flex gap-2"><CheckIcon /> Sourced data, not summaries</li>
+                <li className="flex gap-2"><CheckIcon /> Sector deep-dives monthly</li>
+                <li className="flex gap-2"><CheckIcon /> Cancel anytime</li>
               </ul>
             </div>
 
@@ -568,9 +615,9 @@ export default function Home() {
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-md" style={{ backgroundColor: '#C9A84C' }}>
                 Most Popular
               </div>
-              <h3 className="text-lg font-medium mb-2" style={{ color: '#C9A84C' }}>Growth</h3>
-              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$799<span className="text-sm text-gray-400 font-normal"> /month</span></div>
-              <p className="text-sm text-gray-500 mb-8 h-10">For teams that need ongoing competitor tracking and market updates.</p>
+              <h3 className="text-lg font-medium mb-2" style={{ color: '#C9A84C' }}>Research Retainer</h3>
+              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$3K<span className="text-sm text-gray-400 font-normal"> /month</span></div>
+              <p className="text-sm text-gray-500 mb-8 h-10">Your own research analyst on retainer. Custom reports, competitive intel, market maps on demand.</p>
               <button
                 onClick={() => handlePricingClick('growth')}
                 className="w-full py-3 rounded-lg text-white font-medium transition-colors mb-8"
@@ -578,26 +625,26 @@ export default function Home() {
                 onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
                 onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
               >
-                Subscribe Now
+                Let&apos;s Talk
               </button>
               <ul className="space-y-3 text-sm text-gray-600">
-                <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> 2 deep-dive reports/mo</li>
+                <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> 2 custom reports/month</li>
                 <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> Weekly competitor alerts</li>
                 <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> 3-day priority delivery</li>
+                <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> Monthly strategy call</li>
                 <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> Unlimited revisions</li>
-                <li className="flex gap-2"><CheckIcon color="text-[#C9A84C]" /> Slack/email delivery</li>
               </ul>
             </div>
 
             <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 transition-colors">
-              <h3 className="text-lg font-medium text-gray-500 mb-2">Deep Dive</h3>
-              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$599<span className="text-sm text-gray-400 font-normal"> /report</span></div>
-              <p className="text-sm text-gray-500 mb-8 h-10">The kind of analysis you'd hand to a VC or put in a board deck.</p>
-              <button onClick={() => handlePricingClick('deep-dive')} className="w-full py-3 rounded-lg bg-[#1B2A4A] hover:bg-[#243757] text-white font-medium transition-colors mb-8">Request Deep Dive</button>
+              <h3 className="text-lg font-medium text-gray-500 mb-2">Strategic Project</h3>
+              <div className="text-3xl font-bold mb-6" style={{ color: '#1B2A4A' }}>$10K+<span className="text-sm text-gray-400 font-normal"> one-off</span></div>
+              <p className="text-sm text-gray-500 mb-8 h-10">Board-ready analysis. The kind of research you put in front of investors or acquirers.</p>
+              <button onClick={() => handlePricingClick('deep-dive')} className="w-full py-3 rounded-lg bg-[#1B2A4A] hover:bg-[#243757] text-white font-medium transition-colors mb-8">Request a Scope</button>
               <ul className="space-y-3 text-sm text-gray-600">
                 <li className="flex gap-2"><CheckIcon /> 30-50 pages</li>
                 <li className="flex gap-2"><CheckIcon /> Executive summary + appendix</li>
-                <li className="flex gap-2"><CheckIcon /> 2 revision rounds</li>
+                <li className="flex gap-2"><CheckIcon /> Due diligence grade</li>
                 <li className="flex gap-2"><CheckIcon /> Raw data access</li>
                 <li className="flex gap-2"><CheckIcon /> 50+ sources cited</li>
               </ul>
@@ -668,7 +715,7 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-6">
               <button onClick={() => setShowContactModal(true)} className="text-white/60 hover:text-[#C9A84C] text-sm transition-colors">Contact</button>
-              <span className="text-white/60 text-sm">contact@kaelresearch.com</span>
+              <span className="text-white/60 text-sm">kaeltiwari@kaelresearch.com</span>
             </div>
           </div>
         </div>
