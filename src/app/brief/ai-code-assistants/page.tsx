@@ -106,7 +106,7 @@ const SectionHeader: FC<{ number: string; title: string }> = ({ number, title })
   <div className="relative mb-10">
     <div className="w-full h-px mb-8" style={{ backgroundColor: GOLD, opacity: 0.3 }} />
     <div className="flex items-baseline gap-4">
-      <span className="text-5xl sm:text-6xl font-bold leading-none select-none" style={{ color: GOLD, opacity: 0.15, fontFamily: 'Georgia, serif' }}>{number}</span>
+      <span className="text-3xl sm:text-5xl md:text-6xl font-bold leading-none select-none" style={{ color: GOLD, opacity: 0.15, fontFamily: 'Georgia, serif' }}>{number}</span>
       <h2 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: NAVY, fontFamily: 'Georgia, serif' }}>{title}</h2>
     </div>
   </div>
@@ -245,7 +245,7 @@ const BriefContent: FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-10">
             {statCards.map((s) => (
               <div key={s.label} className="bg-white rounded-lg p-6 text-center shadow-sm" style={{ borderTop: `3px solid ${GOLD}`, border: '1px solid #E5E7EB', borderTopColor: GOLD }}>
-                <p className="text-3xl sm:text-4xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, serif' }}>{s.value}</p>
+                <p className="text-xl sm:text-3xl md:text-4xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, serif' }}>{s.value}</p>
                 <p className="text-sm mt-2" style={{ color: '#6B7280' }}>{s.label}</p>
               </div>
             ))}
@@ -338,7 +338,7 @@ const BriefContent: FC = () => {
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie data={marketShareData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={'80%'} labelLine={false}
-                        label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
+                        label={typeof window !== 'undefined' && window.innerWidth < 768 ? false : ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
                           const RADIAN = Math.PI / 180;
                           const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
                           const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -352,6 +352,15 @@ const BriefContent: FC = () => {
                     </PieChart>
                   </ResponsiveContainer>
                 </ChartWrapper>
+                {/* Mobile legend */}
+                <div className="sm:hidden mt-4 grid grid-cols-2 gap-2">
+                  {marketShareData.map((entry) => (
+                    <div key={entry.name} className="flex items-center gap-2 text-xs">
+                      <span className="flex-shrink-0 w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }} />
+                      <span style={{ color: CHARCOAL }}>{entry.name} ({entry.value}%)</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
             <div>
@@ -375,8 +384,8 @@ const BriefContent: FC = () => {
           {/* Competitor Data Table */}
           <div className="mt-12">
             <h3 className="text-xl font-bold mb-6" style={{ color: NAVY, fontFamily: 'Georgia, serif' }}>Competitor Breakdown</h3>
-            <div className="overflow-x-auto bg-white rounded-lg border shadow-sm" style={{ borderColor: '#E5E7EB' }}>
-              <table className="w-full text-left border-collapse">
+            <div className="overflow-x-auto bg-white rounded-lg border shadow-sm" style={{ borderColor: '#E5E7EB', WebkitOverflowScrolling: 'touch' }}>
+              <table className="w-full text-left border-collapse min-w-[500px]">
                 <thead>
                   <tr style={{ backgroundColor: NAVY }}>
                     <th className="p-4 text-sm font-bold text-white">Company</th>
@@ -422,7 +431,7 @@ const BriefContent: FC = () => {
               { value: '$2.3B', label: 'Last Round Raised' },
             ].map((s) => (
               <div key={s.label} className="bg-white rounded-lg p-5 text-center shadow-sm" style={{ borderTop: `3px solid ${SLATE_BLUE}`, border: '1px solid #E5E7EB', borderTopColor: SLATE_BLUE }}>
-                <p className="text-2xl sm:text-3xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, serif' }}>{s.value}</p>
+                <p className="text-lg sm:text-2xl md:text-3xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, serif' }}>{s.value}</p>
                 <p className="text-xs mt-2" style={{ color: '#6B7280' }}>{s.label}</p>
               </div>
             ))}
@@ -458,7 +467,7 @@ const BriefContent: FC = () => {
                   { label: 'Jun 2025 Valuation', value: '$9.9B' },
                   { label: 'Nov 2025 Valuation', value: '$29.3B (raised $2.3B)' },
                 ].map((item) => (
-                  <div key={item.label} className="flex justify-between items-center p-4 rounded-lg bg-white border shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+                  <div key={item.label} className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-4 rounded-lg bg-white border shadow-sm gap-1" style={{ borderColor: '#E5E7EB' }}>
                     <span className="text-sm font-medium" style={{ color: '#6B7280' }}>{item.label}</span>
                     <span className="text-sm font-bold" style={{ color: NAVY }}>{item.value}</span>
                   </div>
@@ -497,8 +506,8 @@ const BriefContent: FC = () => {
             </div>
             <div className="flex flex-col">
               <h3 className="text-xl font-bold mb-6 text-center" style={{ color: NAVY, fontFamily: 'Georgia, serif' }}>Feature Matrix</h3>
-              <div className="overflow-x-auto bg-white rounded-lg border shadow-sm flex-1" style={{ borderColor: '#E5E7EB' }}>
-                <table className="w-full text-left border-collapse">
+              <div className="overflow-x-auto bg-white rounded-lg border shadow-sm flex-1" style={{ borderColor: '#E5E7EB', WebkitOverflowScrolling: 'touch' }}>
+                <table className="w-full text-left border-collapse min-w-[600px]">
                   <thead>
                     <tr style={{ backgroundColor: NAVY }}>
                       <th className="p-3 text-sm font-bold text-white">Feature</th>
@@ -540,7 +549,7 @@ const BriefContent: FC = () => {
                   { name: 'Windsurf Advanced', price: '$60/mo', note: 'Higher usage limits' },
                   { name: 'Tabnine Pro', price: '$12/mo', note: '' },
                 ].map((item) => (
-                  <div key={item.name} className="flex justify-between items-center p-5 rounded-lg bg-white border shadow-sm" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
+                  <div key={item.name} className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-5 rounded-lg bg-white border shadow-sm gap-2" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
                     <div>
                       <span className="font-medium" style={{ color: CHARCOAL }}>{item.name}</span>
                       {item.note && <p className="text-xs mt-1" style={{ color: '#9CA3AF' }}>{item.note}</p>}
@@ -560,7 +569,7 @@ const BriefContent: FC = () => {
                   { name: 'Windsurf Enterprise', price: 'Custom', note: 'On-premise available' },
                   { name: 'Amazon Q Developer', price: '$19/u/mo', note: 'AWS integration, security scanning' },
                 ].map((item) => (
-                  <div key={item.name} className="flex justify-between items-center p-5 rounded-lg bg-white border shadow-sm" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
+                  <div key={item.name} className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-5 rounded-lg bg-white border shadow-sm gap-2" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
                     <div>
                       <span className="font-medium" style={{ color: CHARCOAL }}>{item.name}</span>
                       {item.note && <p className="text-xs mt-1" style={{ color: '#9CA3AF' }}>{item.note}</p>}
@@ -634,7 +643,7 @@ const BriefContent: FC = () => {
               { value: '81%', label: 'Cite productivity as #1 benefit' },
             ].map((s) => (
               <div key={s.label} className="p-5 rounded-lg border text-center shadow-sm" style={{ backgroundColor: '#F0F4FA', borderColor: '#E5E7EB' }}>
-                <p className="text-3xl font-bold" style={{ color: GOLD }}>{s.value}</p>
+                <p className="text-xl sm:text-3xl font-bold" style={{ color: GOLD }}>{s.value}</p>
                 <p className="text-xs mt-2" style={{ color: '#6B7280' }}>{s.label}</p>
               </div>
             ))}
@@ -673,8 +682,8 @@ const BriefContent: FC = () => {
           <p className="text-base leading-relaxed mb-8" style={{ color: CHARCOAL }}>
             Total disclosed funding into AI code assistant startups in 2024–2025 exceeds <strong>$4 billion</strong>. Cursor alone accounts for over $3.3B. Key investors with repeat exposure: Thrive Capital, Andreessen Horowitz, Index Ventures, Benchmark, General Catalyst.
           </p>
-          <div className="overflow-x-auto bg-white rounded-lg border shadow-sm" style={{ borderColor: '#E5E7EB' }}>
-            <table className="w-full text-left border-collapse">
+          <div className="overflow-x-auto bg-white rounded-lg border shadow-sm" style={{ borderColor: '#E5E7EB', WebkitOverflowScrolling: 'touch' }}>
+            <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
                 <tr style={{ backgroundColor: NAVY }}>
                   <th className="px-4 py-3 text-sm font-bold text-white">Company</th>
