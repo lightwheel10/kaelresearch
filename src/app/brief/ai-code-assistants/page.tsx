@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect, FormEvent, FC } from 'react';
-import { useRouter } from 'next/navigation';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import {
   BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, AreaChart, Area,
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
@@ -46,7 +47,7 @@ const EmailGate: FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
         <p className="text-slate-400 mb-8">Enter your email to access our free market brief on the AI Code Assistant Market.</p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your.email@company.com" className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-md text-white placeholder-slate-400 focus:ring-2 focus:outline-none" required disabled={loading} />
-          <button type="submit" disabled={loading} className="w-full font-bold py-3 px-4 rounded-md disabled:opacity-50 transition-all hover:opacity-90" style={{ backgroundColor: GOLD, color: NAVY }}>{loading ? 'Unlocking...' : 'Access Brief'}</button>
+          <button type="submit" disabled={loading} className="w-full font-bold py-3 px-4 rounded-full disabled:opacity-50 transition-all hover:opacity-90" style={{ backgroundColor: GOLD, color: NAVY }}>{loading ? 'Unlocking...' : 'Access Brief'}</button>
         </form>
         {error && <p className="text-red-400 mt-4">{error}</p>}
         <p className="text-xs text-slate-500 mt-6">We respect your privacy. No spam.</p>
@@ -56,34 +57,6 @@ const EmailGate: FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
 };
 
 /* ─── Helper Components ─── */
-const BriefHeader: FC = () => {
-  const router = useRouter();
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b" style={{ backgroundColor: 'rgba(27,42,74,0.95)', borderColor: 'rgba(255,255,255,0.1)' }}>
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <a href="/" className="text-xl font-bold tracking-wide"><span className="text-white">KAEL</span><span style={{ color: GOLD }}>RESEARCH</span></a>
-          <div className="flex items-center gap-2 sm:gap-4">
-            <a href="/briefs" className="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white transition-colors">All Briefs</a>
-            <button onClick={() => router.push('/#pricing')} className="font-bold py-2 px-4 rounded-md text-sm transition-all hover:opacity-90" style={{ backgroundColor: GOLD, color: NAVY }}>Order a Report</button>
-          </div>
-        </div>
-      </nav>
-    </header>
-  );
-};
-
-const BriefFooter: FC = () => (
-  <footer className="border-t" style={{ backgroundColor: NAVY, borderColor: 'rgba(255,255,255,0.1)' }}>
-    <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8 text-center text-slate-400">
-      <p className="text-lg font-bold tracking-wide"><span className="text-white">KAEL</span><span style={{ color: GOLD }}>RESEARCH</span></p>
-      <p className="mt-2 text-sm text-slate-300">Copyright &copy; 2026. All rights reserved.</p>
-      <a href="mailto:kaeltiwari@kaelresearch.com" className="mt-2 inline-block text-sm text-slate-300 hover:underline">kaeltiwari@kaelresearch.com</a>
-      <div className="mt-4"><a href="#top" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">↑ Back to Top</a></div>
-    </div>
-  </footer>
-);
-
 const ChartWrapper: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -222,7 +195,7 @@ const BriefContent: FC = () => {
 
   return (
     <div id="top" className="font-sans" style={{ backgroundColor: '#FAFAFA', color: CHARCOAL }}>
-      <BriefHeader />
+      <Header />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 max-w-5xl">
 
         {/* ═══ Title ═══ */}
@@ -740,12 +713,12 @@ const BriefContent: FC = () => {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ color: NAVY, fontFamily: 'Georgia, serif' }}>Want the Full Report?</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg" style={{ color: '#6B7280' }}>This is the free brief. The full report includes 30+ pages of analysis, data tables, competitive matrices, and strategic recommendations — delivered as a polished PDF.</p>
           <div className="mt-8 flex justify-center gap-4 flex-wrap">
-            <a href="/#pricing" className="font-bold py-3 px-8 rounded-md text-base transition-all hover:opacity-90" style={{ backgroundColor: GOLD, color: NAVY }}>View Pricing</a>
-            <a href="mailto:kaeltiwari@kaelresearch.com" className="font-bold py-3 px-8 rounded-md text-base border-2 transition-all hover:opacity-80" style={{ color: NAVY, borderColor: NAVY }}>Contact Us</a>
+            <a href="/#pricing" className="font-bold py-3 px-8 rounded-full text-base transition-all hover:opacity-90" style={{ backgroundColor: GOLD, color: NAVY }}>View Pricing</a>
+            <a href="mailto:kaeltiwari@kaelresearch.com" className="font-bold py-3 px-8 rounded-full text-base border-2 transition-all hover:opacity-80" style={{ color: NAVY, borderColor: NAVY }}>Contact Us</a>
           </div>
         </div>
       </main>
-      <BriefFooter />
+      <Footer />
     </div>
   );
 };

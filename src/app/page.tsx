@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/navigation';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -187,7 +189,6 @@ function ContactModal({ isOpen, onClose, defaultMessage = '' }: { isOpen: boolea
 }
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
@@ -236,51 +237,10 @@ export default function Home() {
       <EmailModal isOpen={showEmailModal} onClose={() => setShowEmailModal(false)} onSuccess={handleEmailSuccess} />
       <ContactModal isOpen={showContactModal} onClose={() => { setShowContactModal(false); setDefaultMessage(''); }} defaultMessage={defaultMessage} />
 
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
-            <span style={{ color: '#1B2A4A' }}>KAEL</span>
-            <span style={{ color: '#C9A84C' }}>RESEARCH</span>
-          </div>
-
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-            <button onClick={() => scrollToSection('how-it-works')} className="hover:text-[#1B2A4A] transition-colors">How It Works</button>
-            <a href="/briefs" className="hover:text-[#1B2A4A] transition-colors">Research</a>
-            <button onClick={() => scrollToSection('newsletter')} className="hover:text-[#1B2A4A] transition-colors">Newsletter</button>
-            <button onClick={() => scrollToSection('pricing')} className="hover:text-[#1B2A4A] transition-colors">Pricing</button>
-            <button onClick={() => scrollToSection('faq')} className="hover:text-[#1B2A4A] transition-colors">FAQ</button>
-            <button
-              onClick={handleSampleClick}
-              className="text-white px-5 py-2.5 rounded-full transition-colors"
-              style={{ backgroundColor: '#C9A84C' }}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8953f')}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#C9A84C')}
-            >
-              Get a Free Sample
-            </button>
-          </div>
-
-          <button className="md:hidden text-gray-600" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-          </button>
-        </div>
-
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-b border-gray-200 p-6 flex flex-col gap-4">
-            <button onClick={() => scrollToSection('how-it-works')} className="text-left text-gray-600 hover:text-[#1B2A4A]">How It Works</button>
-            <a href="/briefs" className="text-left text-gray-600 hover:text-[#1B2A4A]">Research</a>
-            <button onClick={() => scrollToSection('pricing')} className="text-left text-gray-600 hover:text-[#1B2A4A]">Pricing</button>
-            <button onClick={() => scrollToSection('faq')} className="text-left text-gray-600 hover:text-[#1B2A4A]">FAQ</button>
-            <button onClick={handleSampleClick} className="text-white px-5 py-2.5 rounded-full w-full" style={{ backgroundColor: '#C9A84C' }}>Get a Free Sample</button>
-          </div>
-        )}
-      </nav>
+      <Header />
 
       {/* Hero Section */}
-      <section className="relative z-10 pt-32 pb-20 md:pt-48 md:pb-32 px-6">
+      <section className="relative z-10 pt-28 pb-20 md:pt-40 md:pb-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F9FAFB] border border-gray-200 text-xs font-medium mb-8" style={{ color: '#C9A84C' }}>
             <span className="relative flex h-2 w-2">
@@ -726,21 +686,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12" style={{ backgroundColor: '#1B2A4A' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-center md:text-left">
-              <span className="text-xl font-bold text-white tracking-tight">KAEL <span style={{ color: '#C9A84C' }}>RESEARCH</span></span>
-              <p className="text-white/50 text-sm mt-2">{'\u00A9'} 2026 Kael Research. All rights reserved.</p>
-            </div>
-            <div className="flex items-center gap-6">
-              <button onClick={() => setShowContactModal(true)} className="text-white/60 hover:text-[#C9A84C] text-sm transition-colors">Contact</button>
-              <span className="text-white/60 text-sm">kaeltiwari@kaelresearch.com</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

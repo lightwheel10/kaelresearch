@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect, FormEvent, FC } from 'react';
-import { useRouter } from 'next/navigation';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import {
   BarChart,
   Bar,
@@ -101,7 +102,7 @@ const EmailGate: FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full font-bold py-3 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:opacity-90"
+            className="w-full font-bold py-3 px-4 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:opacity-90"
             style={{ backgroundColor: GOLD, color: NAVY }}
           >
             {loading ? 'Unlocking...' : 'Access Report'}
@@ -113,57 +114,6 @@ const EmailGate: FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
     </div>
   );
 };
-
-const ReportHeader: FC = () => {
-  const router = useRouter();
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b" style={{ backgroundColor: 'rgba(27,42,74,0.95)', borderColor: 'rgba(255,255,255,0.1)' }}>
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <a href="/" className="text-xl font-bold tracking-wide">
-              <span className="text-white">KAEL</span>
-              <span style={{ color: GOLD }}>RESEARCH</span>
-            </a>
-          </div>
-          <div className="flex items-center gap-2 sm:gap-4">
-            <a
-              href="/api/pdf"
-              className="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white transition-colors"
-            >
-              Download PDF
-            </a>
-            <button
-              onClick={() => router.push('/#pricing')}
-              className="font-bold py-2 px-4 rounded-md text-sm transition-all hover:opacity-90"
-              style={{ backgroundColor: GOLD, color: NAVY }}
-            >
-              Order a Report
-            </button>
-          </div>
-        </div>
-      </nav>
-    </header>
-  );
-};
-
-const ReportFooter: FC = () => (
-  <footer className="border-t" style={{ backgroundColor: NAVY, borderColor: 'rgba(255,255,255,0.1)' }}>
-    <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8 text-center text-slate-400">
-      <p className="text-lg font-bold tracking-wide">
-        <span className="text-white">KAEL</span>
-        <span style={{ color: GOLD }}>RESEARCH</span>
-      </p>
-      <p className="mt-2 text-sm text-slate-300">Copyright &copy; 2026. All rights reserved.</p>
-      <a href="mailto:contact@kaelresearch.com" className="mt-2 inline-block text-sm text-slate-300 hover:underline">
-        contact@kaelresearch.com
-      </a>
-      <div className="mt-4">
-        <a href="#top" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">↑ Back to Top</a>
-      </div>
-    </div>
-  </footer>
-);
 
 const ChartWrapper: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mounted, setMounted] = useState(false);
@@ -319,7 +269,7 @@ const ReportPage: FC = () => {
 
   return (
     <div id="top" className="font-sans" style={{ backgroundColor: '#FAFAFA', color: CHARCOAL }}>
-      <ReportHeader />
+      <Header />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 max-w-5xl">
         
         {/* ═══ Title / Cover Area ═══ */}
@@ -1107,16 +1057,16 @@ const ReportPage: FC = () => {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Need This Level of Analysis for Your Market?</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg" style={{ color: '#6B7280' }}>Our bespoke research reports give you the strategic advantage to lead, innovate, and capture market share.</p>
           <div className="mt-8 flex justify-center gap-4 flex-wrap">
-            <a href="/#pricing" className="font-bold py-3 px-8 rounded-md text-base transition-all hover:opacity-90" style={{ backgroundColor: GOLD, color: NAVY }}>
+            <a href="/#pricing" className="font-bold py-3 px-8 rounded-full text-base transition-all hover:opacity-90" style={{ backgroundColor: GOLD, color: NAVY }}>
               View Pricing
             </a>
-            <a href="mailto:contact@kaelresearch.com" className="font-bold py-3 px-8 rounded-md text-base border-2 transition-all hover:opacity-80" style={{ color: NAVY, borderColor: NAVY }}>
+            <a href="mailto:contact@kaelresearch.com" className="font-bold py-3 px-8 rounded-full text-base border-2 transition-all hover:opacity-80" style={{ color: NAVY, borderColor: NAVY }}>
               Contact Us
             </a>
           </div>
         </div>
       </main>
-      <ReportFooter />
+      <Footer />
     </div>
   );
 };

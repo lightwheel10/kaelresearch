@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Research Briefs — Kael Research",
@@ -20,10 +22,10 @@ const briefs = [
 
 export default function BriefsPage() {
   return (
-    <main className="min-h-screen bg-white text-[#333] selection:bg-[#C9A84C]/20 selection:text-[#1B2A4A]">
-      {/* Header */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+    <main className="min-h-screen bg-[#FAFAFA] text-[#333] selection:bg-[#C9A84C]/20 selection:text-[#1B2A4A]">
+      <Header />
+
+      <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
             <span style={{ color: NAVY }}>KAEL</span>
             <span style={{ color: GOLD }}>RESEARCH</span>
@@ -34,7 +36,7 @@ export default function BriefsPage() {
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-6 pt-28 pb-20">
+      <div className="max-w-5xl mx-auto px-6 pt-28 pb-20">
         {/* Page Header */}
         <div className="mb-16 text-center">
           <div className="mb-6">
@@ -81,15 +83,7 @@ export default function BriefsPage() {
       </div>
 
       {/* Footer */}
-      <footer className="py-10" style={{ backgroundColor: NAVY }}>
-        <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div>
-            <span className="text-lg font-bold text-white tracking-tight">KAEL <span style={{ color: GOLD }}>RESEARCH</span></span>
-            <p className="text-white/50 text-sm mt-1">&copy; 2026 Kael Research. All rights reserved.</p>
-          </div>
-          <a href="mailto:kaeltiwari@kaelresearch.com" className="text-white/60 text-sm hover:text-white/80 transition-colors">kaeltiwari@kaelresearch.com</a>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
