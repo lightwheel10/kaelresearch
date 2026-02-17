@@ -477,7 +477,7 @@ const BriefContent: FC = () => {
           </div>
 
           <KeyInsight>
-            Cursor&rsquo;s valuation went from $400M to $29.3B in just 15 months — a 73x increase. Its users include teams at OpenAI, Midjourney, and Perplexity, signaling that even AI companies prefer Cursor for their own development workflows. At 59x ARR, you need to believe revenue continues doubling.
+            Cursor&rsquo;s valuation went from $400M to $29.3B in just 15 months — a 73x increase. Even AI companies — OpenAI, Midjourney, Perplexity — use Cursor for their own development. At 59x ARR, you need to believe revenue continues doubling.
           </KeyInsight>
         </section>
 
@@ -659,7 +659,7 @@ const BriefContent: FC = () => {
           <SectionHeader number="08" title="Key Trends" />
           <div className="space-y-6">
             {[
-              { title: 'The IDE is the new battleground', desc: 'The shift from "AI as plugin" (Copilot in VS Code) to "AI as the IDE" (Cursor, Windsurf) represents a fundamental architectural change. When AI is the editor, it can do things plugins can\'t — multi-file edits, codebase-wide refactoring, inline diff previews.' },
+              { title: 'The IDE is the new battleground', desc: 'The shift from "AI as plugin" (Copilot in VS Code) to "AI as the IDE" (Cursor, Windsurf) is a fundamental architectural change. When AI is the editor, it can do things plugins can\'t — multi-file edits, codebase-wide refactoring, inline diff previews.' },
               { title: 'Agentic coding is the next frontier', desc: 'The market is moving from "AI that suggests code" to "AI that writes, tests, and deploys code." This shift will expand the TAM significantly — agents can do the work of junior engineers, not just speed up senior ones.' },
               { title: 'Open-source models are closing the gap', desc: 'Meta\'s Code Llama, Mistral\'s Codestral, DeepSeek Coder V2, and StarCoder 2 now approach proprietary model quality. The model layer is commoditizing — differentiation is moving to the IDE experience.' },
               { title: 'Consolidation has started', desc: 'Cognition acquiring Codeium. Cursor acquiring Supermaven. These are early signals. Companies with strong enterprise books but weaker products are acquisition candidates.' },
