@@ -25,17 +25,6 @@ export default function BriefsPage() {
     <main className="min-h-screen bg-[#FAFAFA] text-[#333] selection:bg-[#C9A84C]/20 selection:text-[#1B2A4A]">
       <Header />
 
-      <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
-            <span style={{ color: NAVY }}>KAEL</span>
-            <span style={{ color: GOLD }}>RESEARCH</span>
-          </a>
-          <a href="/#pricing" className="text-white px-4 py-2 rounded-full text-sm font-medium transition-opacity hover:opacity-90" style={{ backgroundColor: GOLD }}>
-            Order a Report
-          </a>
-        </div>
-      </nav>
-
       <div className="max-w-5xl mx-auto px-6 pt-28 pb-20">
         {/* Page Header */}
         <div className="mb-16 text-center">

@@ -204,7 +204,7 @@ export default function Home() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMenuOpen(false);
+    // menu handled by shared Header component
   };
 
   const handleSampleClick = () => {
