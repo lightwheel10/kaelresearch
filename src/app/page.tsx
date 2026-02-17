@@ -289,7 +289,7 @@ export default function Home() {
             Now accepting Q2 2026 clients
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-8" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>
             Market Intelligence.<br />
             <span style={{ color: '#C9A84C' }}>Decisions Made Certain.</span>
           </h1>
@@ -707,7 +707,7 @@ export default function Home() {
       {/* Final CTA */}
       <section className="py-24" style={{ background: 'linear-gradient(to bottom, #F9FAFB, #F0EDE4)' }}>
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Ready to Move with Confidence?</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Ready to Move with Confidence?</h2>
           <p className="text-xl text-gray-500 mb-10">See the quality of our work firsthand. Download a free sample report.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button

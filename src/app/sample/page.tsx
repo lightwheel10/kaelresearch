@@ -575,7 +575,7 @@ const ReportPage: FC = () => {
                   { label: 'Jun 2025 Valuation', value: '$9.9B' },
                   { label: 'Nov 2025 Valuation', value: '$29.3B (raised $2.3B)' },
                 ].map((item) => (
-                  <div key={item.label} className="flex justify-between items-center p-4 rounded-lg bg-white border shadow-sm" style={{ borderColor: '#E5E7EB' }}>
+                  <div key={item.label} className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-4 rounded-lg bg-white border shadow-sm gap-1" style={{ borderColor: '#E5E7EB' }}>
                     <span className="text-sm font-medium" style={{ color: '#6B7280' }}>{item.label}</span>
                     <span className="text-sm font-bold" style={{ color: NAVY }}>{item.value}</span>
                   </div>
@@ -659,8 +659,8 @@ const ReportPage: FC = () => {
             </div>
             <div className="flex flex-col">
               <h3 className="text-xl font-bold mb-6 text-center" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Feature Matrix</h3>
-              <div className="overflow-x-auto bg-white rounded-lg border shadow-sm flex-1" style={{ borderColor: '#E5E7EB' }}>
-                <table className="w-full text-left border-collapse">
+              <div className="overflow-x-auto bg-white rounded-lg border shadow-sm flex-1" style={{ borderColor: '#E5E7EB', WebkitOverflowScrolling: 'touch' }}>
+                <table className="w-full text-left border-collapse min-w-[600px]">
                   <thead>
                     <tr style={{ backgroundColor: NAVY }}>
                       <th className="p-3 text-sm font-bold text-white">Feature</th>
@@ -704,7 +704,7 @@ const ReportPage: FC = () => {
                   { name: 'Windsurf Advanced', price: '$60/mo', note: 'Higher usage limits' },
                   { name: 'Tabnine Pro', price: '$12/mo', note: '' },
                 ] as const).map((item) => (
-                  <div key={item.name} className="flex justify-between items-center p-5 rounded-lg bg-white border shadow-sm" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
+                  <div key={item.name} className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-5 rounded-lg bg-white border shadow-sm gap-2" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
                     <div>
                       <span className="font-medium" style={{ color: CHARCOAL }}>{item.name}</span>
                       {item.note && <p className="text-xs mt-1" style={{ color: '#9CA3AF' }}>{item.note}</p>}
@@ -724,7 +724,7 @@ const ReportPage: FC = () => {
                   { name: 'Windsurf Enterprise', price: 'Custom', note: 'On-premise available' },
                   { name: 'Amazon Q Developer', price: '$19/u/mo', note: 'AWS integration, security scanning' },
                 ] as const).map((item) => (
-                  <div key={item.name} className="flex justify-between items-center p-5 rounded-lg bg-white border shadow-sm" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
+                  <div key={item.name} className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-5 rounded-lg bg-white border shadow-sm gap-2" style={{ borderColor: '#E5E7EB', borderTop: `3px solid ${GOLD}` }}>
                     <div>
                       <span className="font-medium" style={{ color: CHARCOAL }}>{item.name}</span>
                       {item.note && <p className="text-xs mt-1" style={{ color: '#9CA3AF' }}>{item.note}</p>}
@@ -803,7 +803,7 @@ const ReportPage: FC = () => {
               { value: '81%', label: 'Cite productivity as #1 benefit' },
             ].map((s) => (
               <div key={s.label} className="p-5 rounded-lg border text-center shadow-sm" style={{ backgroundColor: '#F0F4FA', borderColor: '#E5E7EB' }}>
-                <p className="text-3xl font-bold" style={{ color: GOLD }}>{s.value}</p>
+                <p className="text-xl sm:text-3xl font-bold" style={{ color: GOLD }}>{s.value}</p>
                 <p className="text-xs mt-2" style={{ color: '#6B7280' }}>{s.label}</p>
               </div>
             ))}
@@ -815,7 +815,7 @@ const ReportPage: FC = () => {
               {[{size: '1-10', pct: '68%', primary: 'Cursor (34%)*', seats: 4}, {size: '11-100', pct: '74%', primary: 'Copilot (41%)*', seats: 28}, {size: '101-500', pct: '71%', primary: 'Copilot (48%)*', seats: 95}, {size: '501-5K', pct: '78%', primary: 'Copilot (52%)*', seats: 420}, {size: '5000+', pct: '65%', primary: 'Copilot (58%)*', seats: 2100}].map(item => (
                 <div key={item.size} className="p-5 rounded-lg border text-center shadow-sm" style={{ backgroundColor: '#F0F4FA', borderColor: '#E5E7EB' }}>
                   <p className="font-bold" style={{ color: NAVY }}>{item.size} <span className="text-xs" style={{ color: '#6B7280' }}>emp.</span></p>
-                  <p className="text-3xl font-bold my-2" style={{ color: GOLD }}>{item.pct}</p>
+                  <p className="text-xl sm:text-3xl font-bold my-2" style={{ color: GOLD }}>{item.pct}</p>
                   <p className="text-xs" style={{ color: '#6B7280' }}>Primary: {item.primary}</p>
                   <p className="text-xs" style={{ color: '#6B7280' }}>Avg Seats: {item.seats}</p>
                 </div>
@@ -984,7 +984,7 @@ const ReportPage: FC = () => {
                   { tier: 'Enterprise', price: '$39/user/mo', note: 'Codebase-aware, knowledge bases, fine-tuning' },
                 ].map((item) => (
                   <div key={item.tier} className="p-4 rounded-lg border" style={{ borderColor: '#E5E7EB', backgroundColor: '#F9FAFB' }}>
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
                       <span className="font-medium" style={{ color: CHARCOAL }}>{item.tier}</span>
                       <span className="font-bold" style={{ color: NAVY }}>{item.price}</span>
                     </div>
