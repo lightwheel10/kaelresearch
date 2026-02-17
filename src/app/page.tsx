@@ -509,14 +509,23 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-4" style={{ color: '#1B2A4A', fontFamily: 'Georgia, serif' }}>Latest Research</h2>
           <p className="text-gray-500 text-center mb-12">Free market briefs — sourced data, real analysis.</p>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="/brief/ai-agents" className="block p-8 rounded-2xl bg-[#F9FAFB] border border-gray-200 hover:border-gray-300 transition-colors group">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-[10px] font-bold tracking-[2px] uppercase px-2 py-0.5 rounded border" style={{ color: '#C9A84C', borderColor: 'rgba(201,168,76,0.4)', backgroundColor: 'rgba(201,168,76,0.06)' }}>Market Brief</span>
+                <span className="text-xs text-gray-400">February 2026</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2 group-hover:text-[#C9A84C] transition-colors" style={{ color: '#1B2A4A' }}>AI Agents</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">$7.6B market growing to $183B by 2033. Cognition at $10.2B. Sierra at $150M ARR. Full analysis of autonomous AI systems.</p>
+              <span className="inline-block mt-4 text-sm font-medium" style={{ color: '#C9A84C' }}>Read the brief →</span>
+            </a>
             <a href="/brief/ai-code-assistants" className="block p-8 rounded-2xl bg-[#F9FAFB] border border-gray-200 hover:border-gray-300 transition-colors group">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-[10px] font-bold tracking-[2px] uppercase px-2 py-0.5 rounded border" style={{ color: '#C9A84C', borderColor: 'rgba(201,168,76,0.4)', backgroundColor: 'rgba(201,168,76,0.06)' }}>Market Brief</span>
                 <span className="text-xs text-gray-400">February 2026</span>
               </div>
               <h3 className="text-xl font-bold mb-2 group-hover:text-[#C9A84C] transition-colors" style={{ color: '#1B2A4A' }}>AI Code Assistants</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">$8B market. Cursor at $29.3B valuation. GitHub Copilot losing enterprise share. Full competitive analysis, adoption data, and investment activity.</p>
+              <p className="text-gray-500 text-sm leading-relaxed">$8B market. Cursor at $29.3B valuation. GitHub Copilot losing enterprise share. Full competitive analysis and investment activity.</p>
               <span className="inline-block mt-4 text-sm font-medium" style={{ color: '#C9A84C' }}>Read the brief →</span>
             </a>
           </div>

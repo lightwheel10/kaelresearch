@@ -13,6 +13,13 @@ const GOLD = "#C9A84C";
 
 const briefs = [
   {
+    title: "AI Agents",
+    date: "February 2026",
+    description: "$7.6B market growing to $183B by 2033. Cognition (Devin) at $10.2B valuation. Sierra at $150M ARR. Full analysis of autonomous AI systems across coding, customer support, and enterprise.",
+    href: "/brief/ai-agents",
+    tag: "Market Brief",
+  },
+  {
     title: "AI Code Assistants",
     date: "February 2026",
     description: "$8B market. Cursor at $29.3B valuation. GitHub Copilot losing enterprise share. Full competitive analysis, adoption data, investment activity, and pricing comparison.",
