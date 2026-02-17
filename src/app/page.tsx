@@ -271,6 +271,7 @@ export default function Home() {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-200 p-6 flex flex-col gap-4">
             <button onClick={() => scrollToSection('how-it-works')} className="text-left text-gray-600 hover:text-[#1B2A4A]">How It Works</button>
+            <a href="/briefs" className="text-left text-gray-600 hover:text-[#1B2A4A]">Research</a>
             <button onClick={() => scrollToSection('pricing')} className="text-left text-gray-600 hover:text-[#1B2A4A]">Pricing</button>
             <button onClick={() => scrollToSection('faq')} className="text-left text-gray-600 hover:text-[#1B2A4A]">FAQ</button>
             <button onClick={handleSampleClick} className="text-white px-5 py-2.5 rounded-full w-full" style={{ backgroundColor: '#C9A84C' }}>Get a Free Sample</button>

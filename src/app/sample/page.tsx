@@ -192,7 +192,7 @@ const SectionHeader: FC<{ number: string; title: string }> = ({ number, title })
   <div className="relative mb-10">
     <div className="w-full h-px mb-8" style={{ backgroundColor: GOLD, opacity: 0.3 }} />
     <div className="flex items-baseline gap-4">
-      <span className="text-5xl sm:text-6xl font-bold leading-none select-none" style={{ color: GOLD, opacity: 0.15, fontFamily: 'Georgia, "Times New Roman", serif' }}>
+      <span className="text-3xl sm:text-5xl md:text-6xl font-bold leading-none select-none" style={{ color: GOLD, opacity: 0.15, fontFamily: 'Georgia, "Times New Roman", serif' }}>
         {number}
       </span>
       <h2 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>
@@ -352,7 +352,7 @@ const ReportPage: FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-10">
             {statCards.map((s) => (
               <div key={s.label} className="bg-white rounded-lg p-6 text-center shadow-sm" style={{ borderTop: `3px solid ${GOLD}`, border: '1px solid #E5E7EB', borderTopColor: GOLD }}>
-                <p className="text-3xl sm:text-4xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>{s.value}</p>
+                <p className="text-xl sm:text-3xl md:text-4xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>{s.value}</p>
                 <p className="text-sm mt-2" style={{ color: '#6B7280' }}>{s.label}</p>
               </div>
             ))}
@@ -441,25 +441,34 @@ const ReportPage: FC = () => {
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie data={marketShareData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={'80%'} labelLine={false}
-                           label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
+                           label={typeof window !== 'undefined' && window.innerWidth < 768 ? false : ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
                               const RADIAN = Math.PI / 180;
                               const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
                               const x = cx + radius * Math.cos(-midAngle * RADIAN);
                               const y = cy + radius * Math.sin(-midAngle * RADIAN);
                               const data = marketShareData[index];
                               return (
-                                  <text x={x} y={y} fill={data.color} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize={12}>
-                                      {`${data.name} (${(percent * 100).toFixed(1)}%)`}
+                                  <text x={x} y={y} fill={data.color} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize={11}>
+                                      {`${data.name} (${(percent * 100).toFixed(0)}%)`}
                                   </text>
                               );
                            }}
                       >
                         {marketShareData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                       </Pie>
-                      <Tooltip formatter={(v, name, props) => [`${props.payload.revenue} (${v}%)`, props.payload.name]} />
+                      <Tooltip formatter={(v: any, name: any, props: any) => [`${props.payload.revenue} (${v}%)`, props.payload.name]} />
                     </PieChart>
                   </ResponsiveContainer>
                 </ChartWrapper>
+                {/* Mobile legend */}
+                <div className="block md:hidden mt-4 grid grid-cols-2 gap-2">
+                  {marketShareData.map((entry) => (
+                    <div key={entry.name} className="flex items-center gap-2 text-xs">
+                      <span className="flex-shrink-0 w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }} />
+                      <span style={{ color: CHARCOAL }}>{entry.name} ({entry.value}%)</span>
+                    </div>
+                  ))}
+                </div>
                 <p className="text-xs text-center mt-2 italic" style={{ color: '#9CA3AF' }}>Market share percentages are Kael Research estimates based on available revenue data and developer surveys.</p>
               </div>
             </div>
@@ -485,8 +494,8 @@ const ReportPage: FC = () => {
           {/* Competitor Data Table */}
           <div className="mt-12">
             <h3 className="text-xl font-bold mb-6" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>Competitor Breakdown</h3>
-            <div className="overflow-x-auto bg-white rounded-lg border shadow-sm" style={{ borderColor: '#E5E7EB' }}>
-              <table className="w-full text-left border-collapse">
+            <div className="overflow-x-auto bg-white rounded-lg border shadow-sm" style={{ borderColor: '#E5E7EB', WebkitOverflowScrolling: 'touch' }}>
+              <table className="w-full text-left border-collapse min-w-[500px]">
                 <thead>
                   <tr style={{ backgroundColor: NAVY }}>
                     <th className="p-4 text-sm font-bold text-white">Company</th>
@@ -530,7 +539,7 @@ const ReportPage: FC = () => {
               { value: '$2.3B', label: 'Last Round Raised' },
             ].map((s) => (
               <div key={s.label} className="bg-white rounded-lg p-5 text-center shadow-sm" style={{ borderTop: `3px solid ${SLATE_BLUE}`, border: '1px solid #E5E7EB', borderTopColor: SLATE_BLUE }}>
-                <p className="text-2xl sm:text-3xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>{s.value}</p>
+                <p className="text-lg sm:text-2xl md:text-3xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>{s.value}</p>
                 <p className="text-xs mt-2" style={{ color: '#6B7280' }}>{s.label}</p>
               </div>
             ))}
@@ -596,7 +605,7 @@ const ReportPage: FC = () => {
               { value: '100B+', label: 'Tokens Processed Daily' },
             ].map((s) => (
               <div key={s.label} className="bg-white rounded-lg p-5 text-center shadow-sm" style={{ borderTop: `3px solid ${SAGE}`, border: '1px solid #E5E7EB', borderTopColor: SAGE }}>
-                <p className="text-2xl sm:text-3xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>{s.value}</p>
+                <p className="text-lg sm:text-2xl md:text-3xl font-bold" style={{ color: NAVY, fontFamily: 'Georgia, "Times New Roman", serif' }}>{s.value}</p>
                 <p className="text-xs mt-2" style={{ color: '#6B7280' }}>{s.label}</p>
               </div>
             ))}
