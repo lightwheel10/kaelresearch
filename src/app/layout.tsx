@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     title: "Kael Research — Market Intelligence",
     description: "Sourced, verified market research. Delivered in 3 days.",
   },
+  alternates: { canonical: "https://kaelresearch.com" },
 };
 
 export default function RootLayout({
@@ -41,6 +42,28 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Kael Research",
+              "url": "https://kaelresearch.com",
+              "logo": "https://kaelresearch.com/favicon.svg",
+              "description": "Market intelligence for venture capital and growth equity investors. Sourced data, verified numbers, actionable strategy.",
+              "email": "kaeltiwari@kaelresearch.com",
+              "founder": {
+                "@type": "Person",
+                "name": "Kael Tiwari"
+              },
+              "sameAs": [
+                "https://linkedin.com/in/kaeltiwari",
+                "https://twitter.com/kaeltiwari"
+              ]
+            })
+          }}
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-0CM3HES3R7"
           strategy="afterInteractive"

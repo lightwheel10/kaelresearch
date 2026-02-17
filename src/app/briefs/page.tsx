@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Research Briefs — Kael Research",
   description: "Free market intelligence briefs from Kael Research. Sourced data, real analysis, actionable insights for founders and investors.",
+  alternates: { canonical: "https://kaelresearch.com/briefs" },
 };
 
 const NAVY = "#1B2A4A";
