@@ -246,7 +246,7 @@ export default function Home() {
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
             <button onClick={() => scrollToSection('how-it-works')} className="hover:text-[#1B2A4A] transition-colors">How It Works</button>
-            <a href="/brief/ai-code-assistants" className="hover:text-[#1B2A4A] transition-colors">Latest Brief</a>
+            <a href="/briefs" className="hover:text-[#1B2A4A] transition-colors">Research</a>
             <button onClick={() => scrollToSection('newsletter')} className="hover:text-[#1B2A4A] transition-colors">Newsletter</button>
             <button onClick={() => scrollToSection('pricing')} className="hover:text-[#1B2A4A] transition-colors">Pricing</button>
             <button onClick={() => scrollToSection('faq')} className="hover:text-[#1B2A4A] transition-colors">FAQ</button>
