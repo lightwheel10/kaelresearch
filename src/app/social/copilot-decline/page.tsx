@@ -7,19 +7,15 @@ import {
 
 const NAVY = '#1B2A4A';
 const CORAL = '#F43F5E';
-const ELECTRIC = '#6366F1';
-const TEAL = '#14B8A6';
-const AMBER = '#F59E0B';
+const MUTED = '#94A3B8';
 
-/* Org adoption data — Aug 2025 surveys */
-const adoptionData = [
-  { name: 'Cursor', value: 43, color: ELECTRIC },
-  { name: 'Copilot', value: 37, color: NAVY },
-  { name: 'Windsurf', value: 12, color: TEAL },
-  { name: 'Others', value: 8, color: '#D1D5DB' },
+const data = [
+  { year: '2023', favorable: 77, color: NAVY },
+  { year: '2024', favorable: 72, color: NAVY },
+  { year: '2025', favorable: 60, color: CORAL },
 ];
 
-export default function CopilotDecline() {
+export default function AISentimentDrop() {
   return (
     <div style={{
       width: 1080,
@@ -31,7 +27,7 @@ export default function CopilotDecline() {
       overflow: 'hidden',
     }}>
       {/* Accent bar */}
-      <div style={{ height: 5, background: `linear-gradient(90deg, ${CORAL}, ${ELECTRIC}, ${TEAL})` }} />
+      <div style={{ height: 5, background: `linear-gradient(90deg, ${CORAL}, ${NAVY})` }} />
 
       {/* Header */}
       <div style={{ padding: '28px 56px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -39,58 +35,58 @@ export default function CopilotDecline() {
           <span style={{ color: NAVY, fontSize: 15, fontWeight: 800 }}>KAEL</span>
           <span style={{ color: CORAL, fontSize: 15, fontWeight: 800 }}>RESEARCH</span>
         </div>
-        <span style={{ color: '#9CA3AF', fontSize: 11 }}>AI Code Assistants · Enterprise Adoption 2025</span>
+        <span style={{ color: '#9CA3AF', fontSize: 11 }}>Stack Overflow Developer Survey · 2025</span>
       </div>
 
       {/* Headline */}
-      <div style={{ padding: '28px 56px 0' }}>
+      <div style={{ padding: '36px 56px 0' }}>
         <h1 style={{
           margin: 0, color: NAVY,
-          fontSize: 44, fontWeight: 900, lineHeight: 1.1, letterSpacing: -1.5,
+          fontSize: 52, fontWeight: 900, lineHeight: 1.1, letterSpacing: -2,
         }}>
-          Cursor just <span style={{ color: ELECTRIC }}>overtook</span> Copilot<br />
-          in enterprise adoption
+          devs use AI more than ever.<br />
+          they like it <span style={{ color: CORAL }}>less than ever.</span>
         </h1>
         <p style={{
-          margin: '12px 0 0', color: '#6B7280', fontSize: 16, lineHeight: 1.5, maxWidth: 600,
+          margin: '20px 0 0', color: '#6B7280', fontSize: 18, lineHeight: 1.5, maxWidth: 700,
         }}>
-          43% of engineering orgs now use Cursor vs 37% for GitHub Copilot.
-          First time a challenger has led since the AI coding boom started.
+          favorability dropped 17 points in two years while adoption hit 84%.
+          the honeymoon is over.
         </p>
       </div>
 
-      {/* THE CHART — horizontal bar chart */}
+      {/* Chart */}
       <div style={{
-        flex: 1, margin: '28px 40px 0',
+        flex: 1, margin: '32px 40px 0',
         background: '#fff', borderRadius: 16,
         border: '1px solid #E8E8E8',
-        padding: '32px 40px',
+        padding: '32px 40px 24px',
         boxShadow: '0 2px 16px rgba(0,0,0,0.04)',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
       }}>
-        <div style={{ fontSize: 11, color: '#9CA3AF', fontWeight: 600, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 20 }}>
-          ORGANIZATIONAL ADOPTION RATE
+        <div style={{ color: '#9CA3AF', fontSize: 11, fontWeight: 600, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 16 }}>
+          % of developers favorable toward AI tools
         </div>
-        <div style={{ height: 320 }}>
+
+        <div style={{ flex: 1 }}>
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={adoptionData} layout="vertical" margin={{ top: 0, right: 60, left: 0, bottom: 0 }} barSize={56}>
-              <XAxis type="number" domain={[0, 50]} hide />
-              <YAxis
-                type="category" dataKey="name" width={100}
-                tick={{ fontSize: 18, fill: NAVY, fontWeight: 700 }}
-                tickLine={false} axisLine={false}
+            <BarChart data={data} margin={{ top: 30, right: 20, left: 20, bottom: 8 }} barSize={120}>
+              <XAxis
+                dataKey="year" stroke="transparent"
+                tick={{ fontSize: 20, fill: NAVY, fontWeight: 700 }}
+                tickLine={false} axisLine={false} dy={8}
               />
-              <Bar dataKey="value" radius={[0, 8, 8, 0]}>
-                {adoptionData.map((entry, i) => (
-                  <Cell key={i} fill={entry.color} />
+              <YAxis hide domain={[0, 100]} />
+              <Bar dataKey="favorable" radius={[12, 12, 0, 0]}>
+                {data.map((entry, i) => (
+                  <Cell key={i} fill={entry.color} opacity={i === 2 ? 1 : 0.7} />
                 ))}
                 <LabelList
-                  dataKey="value"
-                  position="right"
-                  formatter={(v) => `${v}%`}
-                  style={{ fontSize: 22, fontWeight: 800, fill: NAVY }}
+                  dataKey="favorable"
+                  position="top"
+                  formatter={(v: number) => `${v}%`}
+                  style={{ fontSize: 28, fontWeight: 800, fill: NAVY }}
                 />
               </Bar>
             </BarChart>
@@ -98,7 +94,7 @@ export default function CopilotDecline() {
         </div>
       </div>
 
-      {/* Bottom stats bar */}
+      {/* Bottom stats */}
       <div style={{
         margin: '16px 40px 0',
         background: '#fff', borderRadius: 14, overflow: 'hidden',
@@ -107,10 +103,10 @@ export default function CopilotDecline() {
         display: 'flex',
       }}>
         {[
-          { label: 'Copilot subscribers', val: '4.7M', sub: 'paid users', color: NAVY },
-          { label: 'Cursor revenue', val: '$100M', sub: 'ARR (2024)', color: ELECTRIC },
-          { label: 'Copilot share', val: '42%', sub: 'paid tools mkt', color: CORAL },
-          { label: 'Cursor share', val: '18%', sub: 'paid tools mkt', color: TEAL },
+          { label: 'Use AI daily', val: '51%', sub: 'of pro devs', color: NAVY },
+          { label: 'Distrust accuracy', val: '46%', sub: 'vs 33% trust', color: CORAL },
+          { label: '#1 frustration', val: '66%', sub: '"almost right"', color: '#F59E0B' },
+          { label: 'Vibe coding?', val: '72%', sub: 'say no', color: MUTED },
         ].map((c, i) => (
           <div key={c.label} style={{
             flex: 1, padding: '18px 24px',
@@ -129,7 +125,7 @@ export default function CopilotDecline() {
 
       {/* Footer */}
       <div style={{ padding: '14px 56px 24px', display: 'flex', justifyContent: 'space-between' }}>
-        <span style={{ color: '#D1D5DB', fontSize: 10 }}>Sources: GitHub, industry surveys, Anysphere financials</span>
+        <span style={{ color: '#D1D5DB', fontSize: 10 }}>source: Stack Overflow Developer Survey 2023–2025 (n=65,000+)</span>
         <span style={{ color: '#D1D5DB', fontSize: 10 }}>kaelresearch.com</span>
       </div>
     </div>
