@@ -149,25 +149,27 @@ export default function CopilotDecline() {
       {/* Bottom stats bar */}
       <div style={{
         margin: '16px 40px 0',
-        background: NAVY, borderRadius: 14, overflow: 'hidden',
+        background: '#fff', borderRadius: 14, overflow: 'hidden',
+        border: '1px solid #E8E8E8',
+        boxShadow: '0 2px 16px rgba(0,0,0,0.04)',
         display: 'flex',
       }}>
         {[
-          { label: 'Copilot', val: '42%', sub: 'was 55%', color: '#fff' },
+          { label: 'Copilot', val: '42%', sub: 'was 55%', color: NAVY },
           { label: 'Cursor', val: '21%', sub: 'was 8%', color: ELECTRIC },
           { label: 'Windsurf', val: '12%', sub: 'was 5%', color: TEAL },
           { label: 'Augment', val: '8%', sub: 'was 3%', color: '#F59E0B' },
         ].map((c, i) => (
           <div key={c.label} style={{
             flex: 1, padding: '18px 24px',
-            borderRight: i < 3 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+            borderRight: i < 3 ? '1px solid #E8E8E8' : 'none',
           }}>
-            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 10, fontWeight: 600, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>
+            <div style={{ color: '#9CA3AF', fontSize: 10, fontWeight: 600, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>
               {c.label}
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
               <span style={{ color: c.color, fontSize: 28, fontWeight: 800, lineHeight: 1 }}>{c.val}</span>
-              <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 12 }}>{c.sub}</span>
+              <span style={{ color: '#D1D5DB', fontSize: 12 }}>{c.sub}</span>
             </div>
           </div>
         ))}
