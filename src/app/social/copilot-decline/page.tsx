@@ -2,37 +2,22 @@
 
 import React from 'react';
 import {
-  AreaChart, Area, XAxis, YAxis, ResponsiveContainer, ReferenceLine, Label,
+  BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, LabelList,
 } from 'recharts';
 
 const NAVY = '#1B2A4A';
 const CORAL = '#F43F5E';
 const ELECTRIC = '#6366F1';
 const TEAL = '#14B8A6';
+const AMBER = '#F59E0B';
 
-const data = [
-  { q: 'Q1 \'24', copilot: 55, cursor: 8, windsurf: 5 },
-  { q: 'Q2 \'24', copilot: 52, cursor: 11, windsurf: 7 },
-  { q: 'Q3 \'24', copilot: 49, cursor: 14, windsurf: 9 },
-  { q: 'Q4 \'24', copilot: 46, cursor: 17, windsurf: 10 },
-  { q: 'Q1 \'25', copilot: 44, cursor: 19, windsurf: 11 },
-  { q: 'Q2 \'25', copilot: 42, cursor: 21, windsurf: 12 },
+/* Org adoption data — Aug 2025 surveys */
+const adoptionData = [
+  { name: 'Cursor', value: 43, color: ELECTRIC },
+  { name: 'Copilot', value: 37, color: NAVY },
+  { name: 'Windsurf', value: 12, color: TEAL },
+  { name: 'Others', value: 8, color: '#D1D5DB' },
 ];
-
-/* Custom dot that shows value label on first and last points */
-const LabelDot = ({ cx, cy, index, dataKey, payload }: any) => {
-  if (index !== 0 && index !== data.length - 1) return null;
-  const val = payload[dataKey];
-  const colors: Record<string, string> = { copilot: NAVY, cursor: ELECTRIC, windsurf: TEAL };
-  const color = colors[dataKey] || NAVY;
-  return (
-    <g>
-      <circle cx={cx} cy={cy} r={6} fill="#fff" stroke={color} strokeWidth={3} />
-      <rect x={cx - 22} y={cy - 28} width={44} height={22} rx={6} fill={color} />
-      <text x={cx} y={cy - 14} textAnchor="middle" fill="#fff" fontSize={12} fontWeight={700}>{val}%</text>
-    </g>
-  );
-};
 
 export default function CopilotDecline() {
   return (
@@ -54,94 +39,61 @@ export default function CopilotDecline() {
           <span style={{ color: NAVY, fontSize: 15, fontWeight: 800 }}>KAEL</span>
           <span style={{ color: CORAL, fontSize: 15, fontWeight: 800 }}>RESEARCH</span>
         </div>
-        <span style={{ color: '#9CA3AF', fontSize: 11 }}>AI Code Assistants · 2025</span>
+        <span style={{ color: '#9CA3AF', fontSize: 11 }}>AI Code Assistants · Enterprise Adoption 2025</span>
       </div>
 
       {/* Headline */}
       <div style={{ padding: '28px 56px 0' }}>
         <h1 style={{
           margin: 0, color: NAVY,
-          fontSize: 46, fontWeight: 900, lineHeight: 1.1, letterSpacing: -1.5,
+          fontSize: 44, fontWeight: 900, lineHeight: 1.1, letterSpacing: -1.5,
         }}>
-          Copilot lost <span style={{ color: CORAL }}>13 points</span><br />
-          of enterprise share in a year
+          Cursor just <span style={{ color: ELECTRIC }}>overtook</span> Copilot<br />
+          in enterprise adoption
         </h1>
+        <p style={{
+          margin: '12px 0 0', color: '#6B7280', fontSize: 16, lineHeight: 1.5, maxWidth: 600,
+        }}>
+          43% of engineering orgs now use Cursor vs 37% for GitHub Copilot.
+          First time a challenger has led since the AI coding boom started.
+        </p>
       </div>
 
-      {/* THE CHART — big, bold, center stage */}
+      {/* THE CHART — horizontal bar chart */}
       <div style={{
-        flex: 1, margin: '24px 40px 0',
+        flex: 1, margin: '28px 40px 0',
         background: '#fff', borderRadius: 16,
         border: '1px solid #E8E8E8',
-        padding: '24px 24px 16px',
+        padding: '32px 40px',
         boxShadow: '0 2px 16px rgba(0,0,0,0.04)',
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'center',
       }}>
-        {/* Chart legend */}
-        <div style={{ display: 'flex', gap: 24, marginBottom: 8, paddingLeft: 40 }}>
-          {[
-            { label: 'GitHub Copilot', color: NAVY },
-            { label: 'Cursor', color: ELECTRIC },
-            { label: 'Windsurf', color: TEAL },
-          ].map(i => (
-            <div key={i.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <div style={{ width: 16, height: 4, borderRadius: 2, background: i.color }} />
-              <span style={{ color: '#6B7280', fontSize: 12, fontWeight: 600 }}>{i.label}</span>
-            </div>
-          ))}
+        <div style={{ fontSize: 11, color: '#9CA3AF', fontWeight: 600, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 20 }}>
+          ORGANIZATIONAL ADOPTION RATE
         </div>
-
-        <div style={{ flex: 1 }}>
+        <div style={{ height: 320 }}>
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={data} margin={{ top: 40, right: 30, left: 0, bottom: 8 }}>
-              <defs>
-                <linearGradient id="copilotFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor={NAVY} stopOpacity={0.25} />
-                  <stop offset="50%" stopColor={NAVY} stopOpacity={0.08} />
-                  <stop offset="100%" stopColor={NAVY} stopOpacity={0.01} />
-                </linearGradient>
-                <linearGradient id="cursorFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor={ELECTRIC} stopOpacity={0.3} />
-                  <stop offset="50%" stopColor={ELECTRIC} stopOpacity={0.1} />
-                  <stop offset="100%" stopColor={ELECTRIC} stopOpacity={0.01} />
-                </linearGradient>
-                <linearGradient id="tealFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor={TEAL} stopOpacity={0.25} />
-                  <stop offset="50%" stopColor={TEAL} stopOpacity={0.08} />
-                  <stop offset="100%" stopColor={TEAL} stopOpacity={0.01} />
-                </linearGradient>
-              </defs>
-              <XAxis
-                dataKey="q" stroke="transparent"
-                tick={{ fontSize: 13, fill: '#9CA3AF', fontWeight: 600 }}
-                tickLine={false} axisLine={false} dy={6}
-              />
+            <BarChart data={adoptionData} layout="vertical" margin={{ top: 0, right: 60, left: 0, bottom: 0 }} barSize={56}>
+              <XAxis type="number" domain={[0, 50]} hide />
               <YAxis
-                stroke="transparent"
-                tick={{ fontSize: 12, fill: '#D1D5DB' }}
+                type="category" dataKey="name" width={100}
+                tick={{ fontSize: 18, fill: NAVY, fontWeight: 700 }}
                 tickLine={false} axisLine={false}
-                unit="%" domain={[0, 60]} ticks={[0, 15, 30, 45, 60]}
               />
-              <Area
-                type="monotone" dataKey="copilot"
-                stroke={NAVY} fill="url(#copilotFill)" strokeWidth={3.5}
-                dot={<LabelDot dataKey="copilot" />}
-                activeDot={false}
-              />
-              <Area
-                type="monotone" dataKey="cursor"
-                stroke={ELECTRIC} fill="url(#cursorFill)" strokeWidth={3}
-                dot={<LabelDot dataKey="cursor" />}
-                activeDot={false}
-              />
-              <Area
-                type="monotone" dataKey="windsurf"
-                stroke={TEAL} fill="url(#tealFill)" strokeWidth={2.5}
-                dot={<LabelDot dataKey="windsurf" />}
-                activeDot={false}
-              />
-            </AreaChart>
+              <Bar dataKey="value" radius={[0, 8, 8, 0]}>
+                {adoptionData.map((entry, i) => (
+                  <Cell key={i} fill={entry.color} />
+                ))}
+                <LabelList
+                  dataKey="value"
+                  position="right"
+                  formatter={(v: number) => `${v}%`}
+                  style={{ fontSize: 22, fontWeight: 800, fill: NAVY }}
+                />
+              </Bar>
+            </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
@@ -155,10 +107,10 @@ export default function CopilotDecline() {
         display: 'flex',
       }}>
         {[
-          { label: 'Copilot', val: '42%', sub: 'was 55%', color: NAVY },
-          { label: 'Cursor', val: '21%', sub: 'was 8%', color: ELECTRIC },
-          { label: 'Windsurf', val: '12%', sub: 'was 5%', color: TEAL },
-          { label: 'Augment', val: '8%', sub: 'was 3%', color: '#F59E0B' },
+          { label: 'Copilot subscribers', val: '4.7M', sub: 'paid users', color: NAVY },
+          { label: 'Cursor revenue', val: '$100M', sub: 'ARR (2024)', color: ELECTRIC },
+          { label: 'Copilot share', val: '42%', sub: 'paid tools mkt', color: CORAL },
+          { label: 'Cursor share', val: '18%', sub: 'paid tools mkt', color: TEAL },
         ].map((c, i) => (
           <div key={c.label} style={{
             flex: 1, padding: '18px 24px',
@@ -176,7 +128,8 @@ export default function CopilotDecline() {
       </div>
 
       {/* Footer */}
-      <div style={{ padding: '14px 56px 24px', display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ padding: '14px 56px 24px', display: 'flex', justifyContent: 'space-between' }}>
+        <span style={{ color: '#D1D5DB', fontSize: 10 }}>Sources: GitHub, industry surveys, Anysphere financials</span>
         <span style={{ color: '#D1D5DB', fontSize: 10 }}>kaelresearch.com</span>
       </div>
     </div>
