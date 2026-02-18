@@ -301,19 +301,31 @@ const BriefContent: FC = () => {
               <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
                 <ChartWrapper>
                   <ResponsiveContainer width="100%" height="100%">
-                    <RadarChart cx="50%" cy="50%" outerRadius="70%" data={competitiveRadarData}>
+                    <RadarChart cx="50%" cy="50%" outerRadius="65%" data={competitiveRadarData}>
                       <PolarGrid stroke="#D1D5DB" />
-                      <PolarAngleAxis dataKey="subject" stroke="#6B7280" tick={{ fontSize: 11 }} />
-                      <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="#D1D5DB" />
+                      <PolarAngleAxis dataKey="subject" stroke="#6B7280" tick={{ fontSize: 10 }} />
+                      <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="#D1D5DB" tick={{ fontSize: 9 }} />
                       <Radar name="Cognition" dataKey="Cognition" stroke={NAVY} fill={NAVY} fillOpacity={0.25} />
                       <Radar name="Sierra" dataKey="Sierra" stroke={SLATE_BLUE} fill={SLATE_BLUE} fillOpacity={0.25} />
                       <Radar name="Replit" dataKey="Replit" stroke={SAGE} fill={SAGE} fillOpacity={0.25} />
                       <Radar name="OpenAI" dataKey="OpenAI" stroke={MUTED_GOLD} fill={MUTED_GOLD} fillOpacity={0.25} />
                       <Tooltip content={<CustomTooltip />} />
-                      <Legend iconSize={10} wrapperStyle={{ fontSize: '11px', lineHeight: '18px', paddingTop: '8px' }} />
                     </RadarChart>
                   </ResponsiveContainer>
                 </ChartWrapper>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-1 justify-items-center mt-2 px-2">
+                  {[
+                    { name: 'Cognition', color: NAVY },
+                    { name: 'Sierra', color: SLATE_BLUE },
+                    { name: 'Replit', color: SAGE },
+                    { name: 'OpenAI', color: MUTED_GOLD },
+                  ].map(item => (
+                    <div key={item.name} className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: item.color }} />
+                      <span className="text-xs" style={{ color: '#6B7280' }}>{item.name}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
               <p className="text-xs text-center mt-2 italic" style={{ color: '#9CA3AF' }}>Scores are Kael Research assessments based on public data.</p>
             </div>
