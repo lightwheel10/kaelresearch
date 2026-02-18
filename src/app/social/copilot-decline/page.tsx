@@ -89,7 +89,7 @@ export default function CopilotDecline() {
                 <LabelList
                   dataKey="value"
                   position="right"
-                  formatter={(v: number) => `${v}%`}
+                  formatter={(v) => `${v}%`}
                   style={{ fontSize: 22, fontWeight: 800, fill: NAVY }}
                 />
               </Bar>
