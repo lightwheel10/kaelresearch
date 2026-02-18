@@ -10,12 +10,13 @@ const CORAL = '#F43F5E';
 const TEAL = '#14B8A6';
 const ELECTRIC = '#6366F1';
 
+/* Real pricing data — sources: openai.com/api/pricing, ai.google.dev/pricing, together.ai/pricing */
 const data = [
   { model: 'GPT-4', sub: 'Mar 2023', cost: 30.00, color: NAVY },
-  { model: 'GPT-4 Turbo', sub: 'Nov 2023', cost: 10.00, color: NAVY },
-  { model: 'GPT-4o', sub: 'May 2024', cost: 2.50, color: ELECTRIC },
-  { model: 'GPT-4o mini', sub: 'Jul 2024', cost: 0.15, color: TEAL },
-  { model: 'GPT-4.1 nano', sub: 'Now', cost: 0.20, color: CORAL },
+  { model: 'GPT-4.1', sub: 'Apr 2025', cost: 2.00, color: NAVY },
+  { model: 'GPT-5 mini', sub: 'Now', cost: 0.25, color: ELECTRIC },
+  { model: 'Gemini 2.0\nFlash', sub: 'Now', cost: 0.10, color: TEAL },
+  { model: 'GPT-4.1\nnano', sub: 'Now', cost: 0.10, color: CORAL },
 ];
 
 export default function InferenceCosts() {
@@ -38,7 +39,7 @@ export default function InferenceCosts() {
           <span style={{ color: NAVY, fontSize: 15, fontWeight: 800 }}>KAEL</span>
           <span style={{ color: CORAL, fontSize: 15, fontWeight: 800 }}>RESEARCH</span>
         </div>
-        <span style={{ color: '#9CA3AF', fontSize: 11 }}>OpenAI API Pricing · Feb 2026</span>
+        <span style={{ color: '#9CA3AF', fontSize: 11 }}>AI Inference Pricing · Feb 2026</span>
       </div>
 
       {/* Headline */}
@@ -48,12 +49,12 @@ export default function InferenceCosts() {
           fontSize: 50, fontWeight: 900, lineHeight: 1.1, letterSpacing: -2,
         }}>
           GPT-4 cost $30 per million tokens.<br />
-          now it&apos;s <span style={{ color: TEAL }}>under $0.20.</span>
+          now it&apos;s <span style={{ color: TEAL }}>$0.10.</span>
         </h1>
         <p style={{
           margin: '20px 0 0', color: '#6B7280', fontSize: 18, lineHeight: 1.5, maxWidth: 700,
         }}>
-          150x cheaper in under 3 years. every startup&apos;s unit economics just changed.
+          300x cheaper in under 3 years. every startup&apos;s unit economics just changed.
         </p>
       </div>
 
@@ -68,27 +69,27 @@ export default function InferenceCosts() {
         flexDirection: 'column',
       }}>
         <div style={{ color: '#9CA3AF', fontSize: 11, fontWeight: 600, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 16 }}>
-          cost per 1M input tokens (USD)
+          cost per 1M input tokens (USD) — from official pricing pages
         </div>
 
         <div style={{ flex: 1 }}>
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={data} margin={{ top: 30, right: 20, left: 20, bottom: 8 }} barSize={90} layout="horizontal">
+            <BarChart data={data} margin={{ top: 30, right: 20, left: 20, bottom: 8 }} barSize={85}>
               <XAxis
                 dataKey="model" stroke="transparent"
-                tick={{ fontSize: 14, fill: NAVY, fontWeight: 700 }}
+                tick={{ fontSize: 13, fill: NAVY, fontWeight: 700 }}
                 tickLine={false} axisLine={false} dy={8}
               />
               <YAxis hide domain={[0, 35]} />
               <Bar dataKey="cost" radius={[10, 10, 0, 0]}>
                 {data.map((entry, i) => (
-                  <Cell key={i} fill={entry.color} opacity={i >= 3 ? 1 : 0.65} />
+                  <Cell key={i} fill={entry.color} opacity={i >= 2 ? 1 : 0.65} />
                 ))}
                 <LabelList
                   dataKey="cost"
                   position="top"
-                  formatter={(v: any) => `$${v}`}
-                  style={{ fontSize: 22, fontWeight: 800, fill: NAVY }}
+                  formatter={(v: any) => v >= 1 ? `$${v}` : `$${v.toFixed(2)}`}
+                  style={{ fontSize: 20, fontWeight: 800, fill: NAVY }}
                 />
               </Bar>
             </BarChart>
@@ -98,7 +99,7 @@ export default function InferenceCosts() {
         {/* Timeline labels */}
         <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: 4 }}>
           {data.map(d => (
-            <span key={d.model} style={{ color: '#9CA3AF', fontSize: 11, fontWeight: 500, textAlign: 'center', width: 90 }}>
+            <span key={d.model} style={{ color: '#9CA3AF', fontSize: 11, fontWeight: 500, textAlign: 'center', width: 85 }}>
               {d.sub}
             </span>
           ))}
@@ -114,10 +115,10 @@ export default function InferenceCosts() {
         display: 'flex',
       }}>
         {[
-          { label: 'Cost drop', val: '150x', sub: 'in 3 years', color: TEAL },
-          { label: 'Claude Haiku', val: '$0.25', sub: '/1M tokens', color: ELECTRIC },
-          { label: 'Gemini Flash', val: '$0.075', sub: '/1M tokens', color: '#F59E0B' },
-          { label: 'Llama 3.3', val: '$0.00', sub: 'self-hosted', color: CORAL },
+          { label: 'Cost drop', val: '300x', sub: 'in 3 years', color: TEAL },
+          { label: 'Claude Sonnet 4', val: '$3', sub: '/1M input', color: ELECTRIC },
+          { label: 'Llama 4 hosted', val: '$0.27', sub: '/1M input', color: '#F59E0B' },
+          { label: 'DeepSeek V3.1', val: '$0.60', sub: '/1M input', color: CORAL },
         ].map((c, i) => (
           <div key={c.label} style={{
             flex: 1, padding: '18px 24px',
@@ -136,7 +137,7 @@ export default function InferenceCosts() {
 
       {/* Footer */}
       <div style={{ padding: '14px 56px 24px', display: 'flex', justifyContent: 'space-between' }}>
-        <span style={{ color: '#D1D5DB', fontSize: 10 }}>source: OpenAI API pricing page, Anthropic, Google AI pricing</span>
+        <span style={{ color: '#D1D5DB', fontSize: 10 }}>sources: openai.com/api/pricing, ai.google.dev/pricing, together.ai/pricing, anthropic.com</span>
         <span style={{ color: '#D1D5DB', fontSize: 10 }}>kaelresearch.com</span>
       </div>
     </div>
