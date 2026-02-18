@@ -301,16 +301,16 @@ const BriefContent: FC = () => {
               <div className="bg-white rounded-lg border p-4 shadow-sm" style={{ borderColor: '#E5E7EB' }}>
                 <ChartWrapper>
                   <ResponsiveContainer width="100%" height="100%">
-                    <RadarChart cx="50%" cy="50%" outerRadius="80%" data={competitiveRadarData}>
+                    <RadarChart cx="50%" cy="50%" outerRadius="70%" data={competitiveRadarData}>
                       <PolarGrid stroke="#D1D5DB" />
-                      <PolarAngleAxis dataKey="subject" stroke="#6B7280" tick={{ fontSize: 12 }} />
+                      <PolarAngleAxis dataKey="subject" stroke="#6B7280" tick={{ fontSize: 11 }} />
                       <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="#D1D5DB" />
                       <Radar name="Cognition" dataKey="Cognition" stroke={NAVY} fill={NAVY} fillOpacity={0.25} />
                       <Radar name="Sierra" dataKey="Sierra" stroke={SLATE_BLUE} fill={SLATE_BLUE} fillOpacity={0.25} />
                       <Radar name="Replit" dataKey="Replit" stroke={SAGE} fill={SAGE} fillOpacity={0.25} />
                       <Radar name="OpenAI" dataKey="OpenAI" stroke={MUTED_GOLD} fill={MUTED_GOLD} fillOpacity={0.25} />
                       <Tooltip content={<CustomTooltip />} />
-                      <Legend />
+                      <Legend iconSize={10} wrapperStyle={{ fontSize: '11px', lineHeight: '18px', paddingTop: '8px' }} />
                     </RadarChart>
                   </ResponsiveContainer>
                 </ChartWrapper>
