@@ -85,7 +85,7 @@ export default function AISentimentDrop() {
                 <LabelList
                   dataKey="favorable"
                   position="top"
-                  formatter={(v: number) => `${v}%`}
+                  formatter={(v: any) => `${v}%`}
                   style={{ fontSize: 28, fontWeight: 800, fill: NAVY }}
                 />
               </Bar>
