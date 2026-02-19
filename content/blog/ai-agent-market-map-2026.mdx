@@ -1,0 +1,88 @@
+---
+title: "AI agent market map 2026: who's building what"
+description: "A breakdown of every major AI agent framework, platform, and tool — with actual adoption numbers and pricing."
+date: "2026-02-19"
+author: "Kael Tiwari"
+tags: ["ai agents", "market map", "analysis"]
+published: true
+---
+
+The AI agent market split into two camps this year: frameworks racing for developer adoption, and platforms betting on enterprise deployment. After analyzing GitHub stars, HuggingFace downloads, and funding announcements, the winners are becoming clear.
+
+## Market size and momentum
+
+The agent space got real money in 2026. CrewAI claims 100,000+ certified developers through their courses at learn.crewai.com. LangChain maintains its position as the default choice but faces performance pressure from newer frameworks. Microsoft's AutoGen shifted focus to their new Agent Framework after announcing maintenance mode for v0.2.
+
+Enterprise adoption accelerated. Accenture now allegedly ties promotions to "regular" AI adoption and tracks individual weekly AI tool logins for senior staff, according to [Financial Times reporting](https://www.ft.com). TCS signed OpenAI as their first data center customer with 100MW capacity, starting what could be power-grid scale enterprise AI deployment.
+
+India emerged as a major market force. At the India AI Impact Summit 2026, organizers claimed 300+ exhibitors, 500 sessions, 250K visitors, and billions in investment commitments. Reliance plans up to $110B in AI infrastructure over seven years, while Pine Labs is embedding OpenAI APIs directly into payment infrastructure.
+
+## Framework comparison
+
+| Name | Type | Pricing | GitHub Stars/Users | Key Feature |
+|------|------|---------|-------------------|-------------|
+| LangChain | Framework | Free/LangSmith paid | 100K+ stars | Model interoperability |
+| CrewAI | Framework | Free/AMP Suite paid | Not specified | Role-based multi-agent |
+| AutoGen | Framework | Free | 30K+ stars | Conversational agents |
+| OpenAI Assistants | API | Per-token | N/A (deprecated Aug 2026) | Native OpenAI integration |
+| Anthropic Tool Use | API | Per-token | N/A | Claude-native tools |
+
+OpenAI deprecated their Assistants API in favor of the new Responses API, marking a significant shift toward simpler mental models. The new system replaces assistants with "prompts" that can be versioned in the dashboard and threads with "conversations" that store items beyond just messages.
+
+CrewAI positioned itself as the anti-LangChain this year — completely independent, no dependencies, built from scratch. They claim 5.76x faster execution than LangGraph in certain QA tasks and tout their lean architecture. The framework offers both autonomous "Crews" for flexible decision-making and precise "Flows" for event-driven control.
+
+AutoGen's Microsoft backing kept it relevant despite the maintenance mode announcement. The new Agent Framework promises better layered architecture with Core API for message passing, AgentChat API for rapid prototyping, and Extensions API for third-party capabilities.
+
+## Platform comparison
+
+The platform battle intensified around deployment and monitoring:
+
+| Platform | Focus | Pricing | Notable Features |
+|----------|-------|---------|------------------|
+| LangSmith | Monitoring | Usage-based | LangChain native observability |
+| CrewAI AMP | Enterprise control | Enterprise pricing | Unified control plane, 24/7 support |
+| AutoGen Studio | No-code GUI | Free | Visual multi-agent workflows |
+| OpenClaw | Personal agents | Free tier | Telegram-native, cross-platform |
+
+OpenClaw gained traction in messaging-native agent deployment, particularly on Telegram. The platform offers personal AI assistants that integrate across devices and supports features like voice message transcription and real-time collaboration.
+
+## Open source model momentum
+
+HuggingFace download numbers revealed shifting preferences:
+
+- `moonshotai/Kimi-K2.5` hit 955K+ downloads with 2.2K likes — Kimi adoption is accelerating
+- `hexgrad/Kokoro-82M` dominated text-to-speech with 8.1M+ downloads — tiny models are winning distribution  
+- `MiniMaxAI/MiniMax-M2.5` showed 89.9K downloads — non-US models are gaining serious traction
+- Video generation crossed from demos to repeated use: `Lightricks/LTX-2` reached 2M+ downloads
+
+The pattern is clear: smaller, specialized models are eating market share from larger general-purpose systems. Developers want fast, focused tools over Swiss Army knife solutions.
+
+## Recent launches and announcements
+
+February 2026 brought several major developments:
+
+Funding rounds brought major capital influx. Fei-Fei Li's World Labs reportedly raised $1B from A16Z and Nvidia for world models. OpenAI approaches a funding round that could exceed $100B, with valuations potentially hitting $850B according to Bloomberg.
+
+Enterprise deals showed infrastructure scale. TCS and OpenAI's 100MW data center partnership signals AI infrastructure moving to utility scale. Circuit raised $30M for AI manufacturing platforms, showing vertical-specific agent demand.
+
+Technical updates accelerated across providers. Gemini 3.1 Pro went live on Vertex AI. New model releases included significant improvements in reasoning and tool use capabilities across major providers.
+
+Platform consolidation emerged around major approaches — framework-first (LangChain, CrewAI), platform-first (enterprise solutions), and API-first (OpenAI, Anthropic).
+
+## What this means for builders
+
+The agent market is maturing fast. Three trends matter most:
+
+Performance beats features every time. CrewAI's speed claims against LangChain reflect broader developer frustration with bloated frameworks. Lean, fast solutions are winning mindshare.
+
+Enterprise deployment patterns are hardening. The TCS-OpenAI deal and Accenture's promotion policies show enterprise AI is moving from experimentation to operational requirement. IT departments want monitoring, control planes, and SLA guarantees.
+
+**Messaging-native experiences**: Telegram bots, WhatsApp integrations, and SMS-based agents are becoming default UX patterns. The command line lost to the chat interface.
+
+If you're building agents in 2026, focus on deployment simplicity over framework complexity. The market rewarded practical tools that solve real workflow problems, not academic demonstrations of multi-agent collaboration.
+
+The infrastructure layer is consolidating around a few winners, but application opportunities remain wide open. Pick your framework based on deployment target: CrewAI for speed, LangChain for ecosystem, or native APIs for direct model integration.
+
+For more analysis on model pricing trends, read our [LLM pricing comparison Feb 2026](/blog/llm-pricing-comparison-feb-2026) and [open source vs proprietary LLMs](/blog/open-source-vs-proprietary-llms) breakdown.
+
+Want updates on agent market developments? [Subscribe to our newsletter](/#newsletter) for weekly analysis of funding, launches, and technical developments.
