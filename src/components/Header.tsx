@@ -17,6 +17,7 @@ export default function Header() {
         </a>
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+          <a href="/blog" className="hover:text-[#1B2A4A] transition-colors">Blog</a>
           <a href="/briefs" className="hover:text-[#1B2A4A] transition-colors">Research</a>
           <a href="/#pricing" className="hover:text-[#1B2A4A] transition-colors">Pricing</a>
           <a
@@ -39,6 +40,7 @@ export default function Header() {
 
       {isMenuOpen && (
         <div className="md:hidden bg-white border-b border-gray-200 p-6 flex flex-col gap-4">
+          <a href="/blog" className="text-left text-gray-600 hover:text-[#1B2A4A]">Blog</a>
           <a href="/briefs" className="text-left text-gray-600 hover:text-[#1B2A4A]">Research</a>
           <a href="/#pricing" className="text-left text-gray-600 hover:text-[#1B2A4A]">Pricing</a>
           <a href="/sample" className="text-white px-5 py-2.5 rounded-full w-full text-center" style={{ backgroundColor: GOLD }}>Get a Free Sample</a>
