@@ -1,0 +1,116 @@
+---
+title: "Open Source vs Proprietary LLMs: The Real Cost Breakdown"
+description: "A TCO comparison of open-source and proprietary LLMs at different scales. API costs, self-hosting math, and the hidden costs nobody talks about."
+date: "2026-02-21"
+author: "Kael Tiwari"
+tags: ["open source", "pricing", "analysis"]
+published: true
+---
+
+**TL;DR:** Below 1B tokens/month, just use APIs. Proprietary or hosted open-source, doesn't matter much. Between 1 and 10B tokens, hosted open-source APIs from [Together.ai](https://www.together.ai/pricing) or [Groq](https://groq.com/pricing) are usually cheapest. Above 10B tokens/month, self-hosting can win, but only if you already have an MLOps team. The "open source is free" narrative ignores $300K to $600K/year in engineering overhead.
+
+## The pricing table
+
+Prices move fast. Here's where things stand in February 2026. All prices are per 1M tokens (input/output).
+
+### Open source models via hosted APIs
+
+| Model | Provider | Input | Output | Notes |
+|-------|----------|-------|--------|-------|
+| Llama 4 Maverick | [Together.ai](https://www.together.ai/pricing) | $0.27 | $0.85 | |
+| Llama 4 Maverick | [Groq](https://groq.com/pricing) | $0.20 | $0.60 | 562 tok/s |
+| GPT-OSS-120B | [Together.ai](https://www.together.ai/pricing) / [Fireworks](https://fireworks.ai/pricing) / [Groq](https://groq.com/pricing) | $0.15 | $0.60 | |
+| GPT-OSS-20B | [Together.ai](https://www.together.ai/pricing) | $0.05 | $0.20 | Bargain tier |
+| DeepSeek V3.1 | [Together.ai](https://www.together.ai/pricing) | $0.60 | $1.70 | |
+| Qwen3-235B | [Together.ai](https://www.together.ai/pricing) | $0.20 | $0.60 | |
+| Mistral Small 3 | [Together.ai](https://www.together.ai/pricing) | $0.10 | $0.30 | |
+
+### Proprietary models
+
+| Model | Input | Output | Source |
+|-------|-------|--------|--------|
+| GPT-5.2 | $1.75 | $14.00 | [OpenAI](https://openai.com/api/pricing/) |
+| GPT-5 mini | $0.25 | $2.00 | [OpenAI](https://openai.com/api/pricing/) |
+| Claude Opus 4.6 | $5.00 | $25.00 | [Anthropic](https://platform.claude.com/docs/en/about-claude/models/overview) |
+| Claude Sonnet 4.6 | $3.00 | $15.00 | [Anthropic](https://platform.claude.com/docs/en/about-claude/models/overview) |
+| Gemini 2.5 Flash | $0.30 | $2.50 | Google |
+
+A few things jump out. GPT-OSS-120B at $0.15 input is wild. That's 11x cheaper than GPT-5.2 on the input side. GPT-5 mini and Gemini 2.5 Flash sit in a middle ground where proprietary pricing gets surprisingly close to open-source hosted rates. For a deeper dive on the month-over-month trends, see our [full pricing comparison](/blog/llm-pricing-comparison-feb-2026).
+
+## The real comparison: API vs API vs self-hosted
+
+People frame this as "open source vs proprietary." That's wrong. The actual decision has three options:
+
+1. Proprietary API, where you pay OpenAI, Anthropic, or Google directly
+2. Hosted open-source API, where you pay Together.ai, Groq, or Fireworks to run open models for you
+3. Self-hosted open source, where you rent GPUs and run the models yourself
+
+Option 2 gets overlooked constantly. You get the flexibility of open weights without the operational burden. For most companies, this is the right answer.
+
+Option 3 sounds appealing on paper. In practice, it's a staffing decision disguised as a technology decision.
+
+## Breakeven math at different scales
+
+Let's do the math for a representative setup: GPT-OSS-120B via Together.ai ($0.15/$0.60) vs self-hosting on H100s from [Lambda Labs](https://lambdalabs.com/) at $2.99/hr ($2,183/mo). A single H100 running a 70B model produces roughly 50 tokens/second on average, which works out to about 130M tokens per month.
+
+| Scale (tokens/mo) | Together.ai cost | Self-hosted cost | Winner |
+|--------------------|-----------------|------------------|--------|
+| 10M | ~$4.50 | $2,183 + eng. overhead | API by a mile |
+| 100M | ~$45 | $2,183 + eng. overhead | API |
+| 1B | ~$450 | $2,183 + eng. overhead | Roughly even on compute, but API wins on total cost |
+| 10B | ~$4,500 | ~$17K compute (8× H100s) + eng. overhead | Depends on your team |
+
+The compute-only crossover hits somewhere around 1 to 2B tokens/month. But compute isn't the whole story.
+
+At AWS rates of ~$3.90/hr per H100, the math shifts even further toward APIs. Reserved instances at $1.85/hr help, but you're committing to a year of capacity. H200s at $6.00/hr and B200s at $9.00/hr from [Fireworks](https://fireworks.ai/pricing) give you more throughput per dollar, but the upfront commitment grows too.
+
+## The hidden costs of self-hosting
+
+Here's the part that "open source is free" evangelists skip over.
+
+An MLOps team to keep self-hosted models running costs $300K to $600K per year. That's 2 to 4 engineers, and you're competing with every AI company on earth for that talent. Good luck hiring them quickly.
+
+Beyond salaries, you're signing up for monitoring and alerting infrastructure, model version management and rollback procedures, GPU usage tuning (most teams waste 30 to 50% of their compute), security patching and compliance audits, and on-call rotations for when inference goes sideways at 3 AM.
+
+None of this shows up in the $/token calculation. It should.
+
+There's also the upgrade treadmill. A new model drops, your fine-tuned version is two generations behind, and now you need to re-run your evaluation suite, re-tune, and redeploy. With an API provider, you change a model string.
+
+## When open source wins
+
+Open source isn't always the cheaper option, but it's sometimes the *only* option.
+
+Compliance and data sovereignty come first. If you're operating in healthcare or finance with strict data residency requirements, self-hosted open source gives you full control. The data never leaves your infrastructure. No BAA negotiations, no hoping your provider's compliance team got it right. HIPAA and GDPR compliance by design, not by contract.
+
+Air-gapped environments are the extreme version of this. Defense, certain government agencies, some financial institutions: they can't send data to external APIs at all. Open source is the only game in town.
+
+Fine-tuning is where open source pulls ahead on cost dramatically. Training on [OpenAI's GPT-4.1 costs $25 per million tokens](https://openai.com/api/pricing/). The same job on open-source models through [Fireworks runs $0.50 per million tokens](https://fireworks.ai/pricing) for models up to 16B parameters. Self-hosted, you pay only for compute. That's a 50x cost difference at the API level. If you need customized models, and many [agent-based architectures](/brief/ai-agents) do, open source is hard to beat.
+
+High volume is the last piece. Past 10B tokens per month, the economics of self-hosting start making sense, assuming you've already got the infrastructure team. The key word is "already." Building that team from scratch to save on inference costs rarely pencils out.
+
+## When proprietary wins
+
+Speed to market is the obvious one. You can go from zero to production with GPT-5.2 or Claude Sonnet 4.6 in a weekend. No infrastructure provisioning, no model tuning, no serving framework selection. Just an API key and a credit card.
+
+Quality ceiling matters too. As of February 2026, Claude Opus 4.6 and GPT-5.2 still outperform open-source alternatives on complex reasoning tasks. The gap has narrowed (Llama 4 Maverick and Qwen3-235B are genuinely impressive) but for the hardest problems, proprietary models hold an edge. That edge costs 10 to 20x more per token, so the question is whether your use case actually needs it.
+
+No infra team is the underrated advantage. A startup with 5 engineers shouldn't be allocating 2 of them to GPU management. Use that headcount to build product instead. The API cost premium is cheaper than the hiring cost.
+
+Proprietary providers also handle the compliance paperwork for you. [OpenAI has a BAA for HIPAA](https://openai.com/api/pricing/). [Anthropic is HIPAA-ready](https://platform.claude.com/docs/en/about-claude/models/overview). Azure OpenAI gives you EU data residency. These aren't free (enterprise plans cost more) but the operational simplicity has real value.
+
+## Decision framework
+
+Forget the vibes. Use this matrix.
+
+| Factor | Use proprietary API | Use hosted open-source API | Self-host |
+|--------|-------------------|---------------------------|-----------|
+| Volume | < 1B tok/mo | 1 to 10B tok/mo | > 10B tok/mo |
+| Team size | No MLOps engineers | No MLOps engineers | 2+ MLOps engineers already on staff |
+| Data sensitivity | Standard (with BAA if needed) | Standard | Air-gapped or strict residency |
+| Fine-tuning needed | Light (prompt engineering suffices) | Moderate | Heavy or continuous |
+| Time to production | Days | Days | Weeks to months |
+| Quality requirements | Highest available | Good enough | Good enough + customized |
+
+My honest take: most companies should start with proprietary APIs, move to hosted open-source APIs as volume grows, and only self-host when they're processing billions of tokens and already have the team. The middle option, hosted open source, is the most underused path. And it's often the best one.
+
+The market is moving fast. Prices on this page will be outdated within weeks. We track changes monthly in our [LLM pricing comparison](/blog/llm-pricing-comparison-feb-2026), and if you want updates when the math shifts, [join the newsletter](/#newsletter).
