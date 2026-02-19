@@ -7,7 +7,7 @@ tags: ["pricing", "llm", "analysis"]
 published: true
 ---
 
-**TL;DR:** Cheapest usable model is Gemini 2.0 Flash at $0.10/M input. Best value is GPT-5 mini at $0.25/M. Most expensive is Grok-4 at $30/M — 120x more than GPT-5 mini for questionable upside. Full table with all 16 models below.
+**TL;DR:** Cheapest option is OpenAI's open-source GPT-OSS-20B at $0.05/M input. Best value is GPT-5 mini at $0.25/M. Most expensive is Grok-4 at $30/M — 600x more than GPT-OSS-20B. Claude Opus 4.6 dropped to $5/$25 (down from $15/$75 on Opus 4). Full table with 18 models below.
 
 ---
 
@@ -26,9 +26,11 @@ All prices are per million tokens.
 | GPT-4.1 | OpenAI | $2.00 | $8.00 | Still widely deployed |
 | GPT-4.1 nano | OpenAI | $0.10 | $0.40 | Cheapest OpenAI option |
 | o4-mini | OpenAI | $1.10 | $4.40 | Reasoning model |
-| Claude Opus 4 | Anthropic | $15.00 | $75.00 | Premium tier, complex reasoning |
-| Claude Sonnet 4 | Anthropic | $3.00 | $15.00 | Workhorse model |
-| Claude Haiku 3.5 | Anthropic | $0.80 | $4.00 | Fast + cheap |
+| Claude Opus 4.6 | Anthropic | $5.00 | $25.00 | Top-tier reasoning + coding |
+| Claude Sonnet 4.6 | Anthropic | $3.00 | $15.00 | Workhorse model |
+| Claude Haiku 4.5 | Anthropic | $1.00 | $5.00 | Fast + cheap |
+| GPT-OSS-120B | OpenAI (open-source) | $0.15 | $0.60 | Open-weight, via hosted APIs |
+| GPT-OSS-20B | OpenAI (open-source) | $0.05 | $0.20 | Smallest open-weight option |
 | Gemini 2.5 Flash | Google | $0.30 | $2.50 | Strong on long context |
 | Gemini 2.0 Flash | Google | $0.10 | $0.40 | Budget tier |
 | Llama 4 Maverick | Meta (via API) | $0.27 | $0.85 | Open-weight, self-hostable |
@@ -38,13 +40,13 @@ All prices are per million tokens.
 | Grok-3 | xAI | $30.00 | $150.00 | Previous gen, same price as Grok-4 |
 | Grok-3-mini | xAI | $3.00 | $5.00 | Budget reasoning |
 
-*Sources: [OpenAI pricing](https://openai.com/api/pricing/), [Anthropic pricing](https://www.anthropic.com/pricing), [Google AI pricing](https://ai.google.dev/pricing), [xAI pricing](https://docs.x.ai/docs/models#models-and-pricing), [DeepSeek pricing](https://api-docs.deepseek.com/quick_start/pricing), [Together.ai](https://www.together.ai/pricing) for Llama 4 hosted inference. All checked February 2026.*
+*Sources: [OpenAI pricing](https://openai.com/api/pricing/), [Anthropic models](https://platform.claude.com/docs/en/about-claude/models/overview), [Google AI pricing](https://ai.google.dev/pricing), [xAI pricing](https://docs.x.ai/docs/models#models-and-pricing), [DeepSeek pricing](https://api-docs.deepseek.com/quick_start/pricing), [Together.ai](https://www.together.ai/pricing), [Groq](https://groq.com/pricing) for open-source model hosting. All checked February 19, 2026.*
 
 ## What stands out
 
-The 120x gap is real. GPT-5 mini at $0.25/M input vs Claude Opus 4 at $15/M input. 60x difference on input alone, 37x on output. For most production workloads, the mini-class models handle 80%+ of tasks just fine.
+The gap between cheapest and most expensive is staggering. GPT-OSS-20B at $0.05/M input vs Grok-4 at $30/M input. That's 600x. Even comparing production-grade models, GPT-5 mini at $0.25/M vs Claude Opus 4.6 at $5/M is a 20x spread. For most workloads, the cheaper models handle 80%+ of tasks just fine.
 
-xAI is pricing itself out. Grok-4 at $30/$150 per million tokens is the most expensive API on the market. That's 2x Claude Opus and 17x GPT-5.2 on input. Unless you need something Grok does better (hard to name what that is), the pricing makes no sense for production use.
+xAI is pricing itself out. Grok-4 at $30/$150 per million tokens is the most expensive API on the market. That's 6x Claude Opus 4.6 and 17x GPT-5.2 on input. Unless you need something Grok does better (hard to name what that is), the pricing makes no sense for production use.
 
 Google is quietly the cheapest. Gemini 2.0 Flash at $0.10/$0.40 matches GPT-4.1 nano and undercuts almost everything else. If your use case tolerates the quality tradeoff, it's the best deal available.
 
@@ -68,7 +70,7 @@ High-volume production (chatbots, classification, extraction): GPT-5 mini or Gem
 
 Code generation: Claude Sonnet 4 or GPT-5.2. Sonnet is generally better at following complex coding instructions. GPT-5.2 has an edge on multi-file refactoring.
 
-Research and analysis: Claude Opus 4 if budget allows. GPT-5.2 if not. These tasks benefit most from the premium models.
+Research and analysis: Claude Opus 4.6 if budget allows ($5/$25 is much more reasonable than the old Opus 4 pricing). GPT-5.2 if not.
 
 Cost-sensitive startups: Llama 4 Maverick self-hosted, or GPT-4.1 nano for API. Get to market first, pick the right model later.
 
