@@ -1,0 +1,81 @@
+---
+title: "LLM Pricing in February 2026: What Every Model Actually Costs"
+description: "A complete comparison of LLM API pricing across OpenAI, Anthropic, Google, Meta, DeepSeek, and xAI. Input and output costs per million tokens, updated February 2026."
+date: "2026-02-19"
+author: "Kael Tiwari"
+tags: ["pricing", "llm", "analysis"]
+published: true
+---
+
+If you're building on top of LLMs right now, you're probably spending more than you need to. Pricing has changed so fast over the past year that most teams are running on outdated assumptions.
+
+Here's what every major model actually costs as of February 2026, with the context that matters for choosing between them.
+
+## The Full Pricing Table
+
+All prices are per million tokens.
+
+| Model | Provider | Input | Output | Notes |
+|-------|----------|-------|--------|-------|
+| GPT-5.2 | OpenAI | $1.75 | $14.00 | Flagship, best overall quality |
+| GPT-5 mini | OpenAI | $0.25 | $2.00 | Best price/performance ratio |
+| GPT-4.1 | OpenAI | $2.00 | $8.00 | Still widely deployed |
+| GPT-4.1 nano | OpenAI | $0.10 | $0.40 | Cheapest OpenAI option |
+| o4-mini | OpenAI | $1.10 | $4.40 | Reasoning model |
+| Claude Opus 4 | Anthropic | $15.00 | $75.00 | Premium tier, complex reasoning |
+| Claude Sonnet 4 | Anthropic | $3.00 | $15.00 | Workhorse model |
+| Claude Haiku 3.5 | Anthropic | $0.80 | $4.00 | Fast + cheap |
+| Gemini 2.5 Flash | Google | $0.30 | $2.50 | Strong on long context |
+| Gemini 2.0 Flash | Google | $0.10 | $0.40 | Budget tier |
+| Llama 4 Maverick | Meta (via API) | $0.27 | $0.85 | Open-weight, self-hostable |
+| DeepSeek V3.1 | DeepSeek | $0.60 | $1.70 | Chinese lab, surprisingly strong |
+| Grok-4 | xAI | $30.00 | $150.00 | Most expensive model on market |
+| Grok-4-fast | xAI | $2.00 | $5.00 | xAI's mid-tier |
+| Grok-3 | xAI | $30.00 | $150.00 | Previous gen, same price as Grok-4 |
+| Grok-3-mini | xAI | $3.00 | $5.00 | Budget reasoning |
+
+*Sources: Official pricing pages for OpenAI, Anthropic, Google DeepMind, xAI, DeepSeek. Llama 4 pricing via Together.ai hosted inference. All checked February 2026.*
+
+## What Stands Out
+
+**The 120x gap is real.** GPT-5 mini at $0.25/M input vs Claude Opus 4 at $15/M input. That's a 60x difference on input alone — and output is 37x cheaper. For most production workloads, the mini-class models handle 80%+ of tasks just fine.
+
+**xAI is pricing itself out.** Grok-4 at $30/$150 per million tokens is the most expensive API on the market. That's 2x Claude Opus and 17x GPT-5.2 on input. Unless you need something Grok specifically does better (and it's hard to name what that is), the pricing makes no sense for production use.
+
+**Google is quietly the cheapest.** Gemini 2.0 Flash at $0.10/$0.40 matches GPT-4.1 nano and undercuts almost everything else. If your use case tolerates the quality tradeoff, it's the best deal available.
+
+**Open-weight models changed the math.** Llama 4 Maverick at $0.27/$0.85 through hosted APIs is cheap, but the real story is self-hosting. If you're running enough volume, running Llama on your own GPUs drops the effective cost below $0.10/M tokens for input. The breakeven vs API depends on your volume, but for most companies doing 10B+ tokens/month, self-hosting wins.
+
+## How to Think About This
+
+The pricing table is just the start. What actually matters:
+
+**Output tokens cost 3-8x more than input.** This is consistent across every provider. If your application generates long responses (code generation, report writing, content creation), output cost dominates your bill. Optimize for shorter, more precise outputs.
+
+**Caching changes everything.** OpenAI and Anthropic both offer prompt caching that cuts repeat-context costs by 50-90%. If you're sending the same system prompt or few-shot examples repeatedly, caching alone might cut your bill in half.
+
+**Quality differences are narrowing.** A year ago, there was a clear hierarchy: GPT-4 > Claude 3 > everything else. Now, GPT-5 mini, Claude Sonnet 4, and Gemini 2.5 Flash are all competitive for most tasks. The premium models (GPT-5.2, Opus 4) still win on complex reasoning and long-form analysis, but the gap keeps shrinking.
+
+**Latency matters more than you think.** The cheapest model that takes 8 seconds to respond might cost you more in user drop-off than a 2x more expensive model that responds in 1.5 seconds. Always benchmark latency alongside cost.
+
+## Who Should Use What
+
+**High-volume production (chatbots, classification, extraction):** GPT-5 mini or Gemini 2.0 Flash. Both under $0.50/M input with solid quality.
+
+**Code generation:** Claude Sonnet 4 or GPT-5.2. Sonnet is generally better at following complex coding instructions. GPT-5.2 has an edge on multi-file refactoring.
+
+**Research and analysis:** Claude Opus 4 if budget allows. GPT-5.2 if not. These tasks benefit most from the premium models.
+
+**Cost-sensitive startups:** Llama 4 Maverick self-hosted, or GPT-4.1 nano for API. Get to market first, optimize model choice later.
+
+## What's Coming
+
+Pricing has dropped roughly 10x per year for equivalent quality over the past three years. There's no reason to think that stops. By Q4 2026, expect GPT-5 mini-equivalent quality at $0.05/M input or less.
+
+The real shift is happening at the infrastructure layer. Custom silicon (Google TPUs, Amazon Trainium, Microsoft Maia) is starting to undercut Nvidia GPU economics. As that scales, hosted API pricing will drop faster than self-hosting costs — potentially flipping the build-vs-buy calculation for mid-size companies.
+
+We'll update this comparison monthly. [Subscribe to get updates](/#newsletter) when pricing changes.
+
+---
+
+*This analysis is part of Kael Research's ongoing coverage of AI market economics. We track pricing, adoption, and competitive dynamics across the AI industry. [See our full research briefs](/briefs) for deeper analysis on specific markets.*
