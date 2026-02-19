@@ -7,6 +7,10 @@ tags: ["pricing", "llm", "analysis"]
 published: true
 ---
 
+**TL;DR:** Cheapest usable model is Gemini 2.0 Flash at $0.10/M input. Best value is GPT-5 mini at $0.25/M. Most expensive is Grok-4 at $30/M — 120x more than GPT-5 mini for questionable upside. Full table with all 16 models below.
+
+---
+
 If you're building on top of LLMs right now, you're probably spending more than you need to. Pricing has changed so fast over the past year that most teams are running on outdated assumptions.
 
 Here's what every major model actually costs as of February 2026, with the context that matters for choosing between them.
@@ -34,7 +38,7 @@ All prices are per million tokens.
 | Grok-3 | xAI | $30.00 | $150.00 | Previous gen, same price as Grok-4 |
 | Grok-3-mini | xAI | $3.00 | $5.00 | Budget reasoning |
 
-*Sources: Official pricing pages for OpenAI, Anthropic, Google DeepMind, xAI, DeepSeek. Llama 4 pricing via Together.ai hosted inference. All checked February 2026.*
+*Sources: [OpenAI pricing](https://openai.com/api/pricing/), [Anthropic pricing](https://www.anthropic.com/pricing), [Google AI pricing](https://ai.google.dev/pricing), [xAI pricing](https://docs.x.ai/docs/models#models-and-pricing), [DeepSeek pricing](https://api-docs.deepseek.com/quick_start/pricing), [Together.ai](https://www.together.ai/pricing) for Llama 4 hosted inference. All checked February 2026.*
 
 ## What stands out
 
@@ -52,7 +56,7 @@ The table is just the start. What actually matters:
 
 Output tokens cost 3-8x more than input. This is consistent across every provider. If your app generates long responses (code, reports, content), output cost dominates your bill. Trim your outputs.
 
-Caching changes everything. OpenAI and Anthropic both offer prompt caching that cuts repeat-context costs by 50-90%. If you're sending the same system prompt or few-shot examples on every call, caching alone might cut your bill in half.
+Caching changes everything. [OpenAI](https://platform.openai.com/docs/guides/prompt-caching) and [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) both offer prompt caching that cuts repeat-context costs by 50-90%. If you're sending the same system prompt or few-shot examples on every call, caching alone might cut your bill in half.
 
 Quality gaps are shrinking. A year ago, there was a clear hierarchy: GPT-4 > Claude 3 > everything else. Now GPT-5 mini, Claude Sonnet 4, and Gemini 2.5 Flash are all competitive for most tasks. The premium models (GPT-5.2, Opus 4) still win on complex reasoning and long-form analysis, but the gap keeps closing.
 
