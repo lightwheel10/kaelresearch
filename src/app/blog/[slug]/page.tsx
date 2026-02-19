@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getAllSlugs, getPostBySlug, getAllPosts } from '@/lib/blog';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
 
 const NAVY = '#1B2A4A';
 const GOLD = '#C9A84C';
@@ -135,7 +136,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="prose prose-lg prose-gray max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:leading-relaxed prose-a:text-[#C9A84C] prose-a:no-underline hover:prose-a:underline prose-strong:text-[#1B2A4A] prose-blockquote:border-l-[#C9A84C] prose-blockquote:text-gray-600 prose-code:text-[#1B2A4A] prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-table:text-sm prose-th:text-left prose-th:font-semibold prose-th:text-[#1B2A4A] prose-td:py-2"
           style={{ fontFamily: 'Georgia, serif' }}
         >
-          <MDXRemote source={post.content} />
+          <MDXRemote source={post.content} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
         </div>
 
         {/* Author + CTA */}
