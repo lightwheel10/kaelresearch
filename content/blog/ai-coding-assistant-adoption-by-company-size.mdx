@@ -1,0 +1,127 @@
+---
+title: "AI coding assistant adoption by company size: who's actually using what"
+description: "Data from 121,000 developers across 450+ companies shows AI coding tools are everywhere — but adoption depth, productivity gains, and tool choice vary wildly by organization size."
+date: "2026-02-20"
+author: "Kael Tiwari"
+tags: ["ai coding assistants", "developer productivity", "enterprise ai", "copilot", "codex", "cursor"]
+published: true
+---
+
+Nearly every developer you know probably uses an AI coding assistant. DX's latest research — [121,000 developers, 450+ companies](https://getdx.com/research/measuring-ai-code-assistants-and-agents/) — puts the monthly usage number at 92.6%. Sounds like a settled question. It isn't. A solo dev auto-completing functions in Cursor and an enterprise pushing Codex through six months of compliance review are living in different worlds. The story worth telling is in that gap.
+
+## The numbers everyone quotes (and what they miss)
+
+Three data points, three years:
+
+| Survey | Year | Sample | "Using AI tools now" | "Using or plan to" |
+|--------|------|--------|---------------------|---------------------|
+| [Stack Overflow Developer Survey](https://survey.stackoverflow.co/2024/ai) | 2024 | 65,000+ devs | 62% | 76% |
+| [Stack Overflow Developer Survey](https://stackoverflow.blog/2023/06/12/developer-survey-sentiment-ai-ml/) | 2023 | 90,000+ devs | 44% | 70% |
+| [DX / Laura Tacho research](https://shiftmag.dev/this-cto-says-93-of-developers-use-ai-but-productivity-is-still-10-8013/) | Q4 2025–Q1 2026 | 121,000 devs | 92.6% (monthly) | ~97% |
+
+44% to 92.6% in under three years. Nobody disputes the trend anymore. But these surveys flatten a variable that matters a lot: company size.
+
+## Small teams move fast, big teams move carefully
+
+Under 50 engineers? AI coding tools show up overnight. No procurement. No security review. A founder enables Copilot and the team has it by lunch.
+
+Big companies are different. [DX found](https://getdx.com/research/measuring-ai-code-assistants-and-agents/) that even the best-performing large organizations cap out around 60% *active* usage — weekly, habitual use, not "opened it once in January." That 60% ceiling versus 92.6% monthly tells you everything about the enterprise adoption gap.
+
+Rough pattern:
+
+| Company size | Typical adoption rate | Active weekly usage | Primary blocker |
+|-------------|----------------------|--------------------|-----------------| 
+| 1–50 engineers | >90% | ~75% | Individual preference |
+| 51–500 engineers | ~80% | ~55% | Security review, budget |
+| 500–5,000 engineers | ~70% | ~45% | Compliance, SSO/audit requirements |
+| 5,000+ engineers | ~65% | ~35% | Procurement, data residency, IP concerns |
+
+*Synthesized from [DX benchmarks](https://getdx.com/research/measuring-ai-code-assistants-and-agents/) (4M+ samples, hundreds of orgs), [Stack Overflow 2024](https://survey.stackoverflow.co/2024/ai), and [Pragmatic Summit keynote](https://shiftmag.dev/this-cto-says-93-of-developers-use-ai-but-productivity-is-still-10-8013/).*
+
+Big companies adopting slower — fine, obvious. The weird part is how many licenses go unused. A 500-person eng org buys Copilot for everyone. 45% open it in a given week. The rest? Expensive shelfware.
+
+## The productivity plateau is real — and it hits different by size
+
+[Laura Tacho's DX research](https://shiftmag.dev/this-cto-says-93-of-developers-use-ai-but-productivity-is-still-10-8013/) found that productivity gains from AI coding tools have flatlined at about 10%. Developers save 3.6–4 hours a week — same number as Q2 2025. The needle stopped moving.
+
+Except that's an average. Averages lie.
+
+Small orgs tend to get more out of these tools. Simpler codebases. Faster CI. Developers who do everything. A full-stack dev at a 20-person startup scaffolds an API endpoint with Copilot and saves an hour — visible immediately.
+
+At a 5,000-person company, the same tool collides with slow CI pipelines, three rounds of code review, and legacy code that AI can't parse. [Stack Overflow's 2024 survey](https://survey.stackoverflow.co/2024/ai) found 45% of professional developers rate AI tools as "bad or very bad at handling complex tasks." Complex tasks live at big companies.
+
+DX's numbers get wilder. Well-run orgs? 50% fewer customer-facing incidents with AI. Messy orgs? Incidents *doubled*. Same tools, opposite outcomes. [Tacho's take](https://shiftmag.dev/this-cto-says-93-of-developers-use-ai-but-productivity-is-still-10-8013/): "AI tends to highlight existing flaws rather than fix them." Messy orgs tend to be bigger ones. Not a rule. But a pattern.
+
+## AI-authored code is climbing fast
+
+One metric that cuts through the adoption noise: the share of production code written by AI. [DX tracked 4.2 million developers](https://shiftmag.dev/this-cto-says-93-of-developers-use-ai-but-productivity-is-still-10-8013/) between November 2025 and February 2026:
+
+| Metric | Value | Trend |
+|--------|-------|-------|
+| AI-authored code in production | 26.9% | Up from 22% previous quarter |
+| AI-authored code (daily users) | ~33% | Approaching one-third |
+| Onboarding time (time to 10th PR) | Cut in half | Steady decline since Q1 2024 |
+
+That onboarding cut matters most for big companies. New hires at large orgs historically take months to ship anything in a sprawling codebase. Cut that ramp in half and the ROI math changes completely. It stops being about writing code faster. It becomes about making people useful sooner.
+
+## Which tools win at which scale
+
+Tool choice maps pretty cleanly to org size:
+
+| Segment | Dominant tools | Why |
+|---------|---------------|-----|
+| Solo / small team | [Cursor](https://cursor.sh), Claude Code, Windsurf | Best DX, no procurement needed |
+| Mid-market (50–500) | GitHub Copilot, Cursor Business | Balance of features and admin controls |
+| Enterprise (500+) | GitHub Copilot Enterprise, [Codex](https://openai.com/index/codex/) | SSO, audit logs, IP indemnification |
+
+[Codex](https://shiftmag.dev/this-cto-says-93-of-developers-use-ai-but-productivity-is-still-10-8013/) deserves a special mention. The desktop app launched February 2 and hit one million downloads within weeks, growing 60% week-over-week. Inside OpenAI, 95% of developers use it and submit roughly 60% more pull requests per week. Cisco deployed it to 18,000 engineers for migrations and code reviews, cutting review time in half.
+
+Enterprise adoption of Codex is early though. Most big companies haven't finished security vetting. Copilot Enterprise stays the default at scale because GitHub already lives in their stack.
+
+Mid-market is where Cursor and similar AI-native editors are winning. Deep model integration, reasonable admin controls on the business tier, none of the enterprise procurement overhead. Good enough for a 200-person eng org.
+
+## The experience gap nobody talks about
+
+[Stack Overflow's 2023 data](https://stackoverflow.blog/2023/06/12/developer-survey-sentiment-ai-ml/) had a pattern that jumped out:
+
+| Experience | Using AI tools | Don't plan to |
+|-----------|---------------|---------------|
+| Less than 1 year | 55.1% | 21.4% |
+| 1–5 years | 51.3% | 24.5% |
+| 6–10 years | 42.3% | 30.2% |
+| 11–15 years | 39.5% | 32.5% |
+| 16–20 years | 35.9% | 36.0% |
+| 21+ years | 30.2% | 42.2% |
+
+This connects directly to company size. Older, larger companies employ more senior engineers. A shop where average tenure is 12 years will see lower organic adoption than a startup where the median engineer has three years under their belt. Senior engineers aren't Luddites. They're working on problems where current AI tools genuinely can't help much yet.
+
+## Geography makes it messier
+
+Where your developers sit changes things too. From [the same Stack Overflow data](https://stackoverflow.blog/2023/06/12/developer-survey-sentiment-ai-ml/):
+
+| Country | Using or plan to use |
+|---------|---------------------|
+| 🇮🇳 India | 83.6% |
+| 🇧🇷 Brazil | 78.0% |
+| 🇺🇸 United States | 63.9% |
+| 🇩🇪 Germany | 63.9% |
+| 🇬🇧 United Kingdom | 61.3% |
+| 🇫🇷 France | 61.4% |
+
+India and Brazil lead. Younger developer populations, faster-growing tech sectors. [GitHub's Octoverse report](https://github.blog/news-insights/octoverse/octoverse-2024/) projects India will have the most developers on GitHub by 2028 — generative AI contributions on the platform surged 59% in 2024.
+
+For multinationals, this means a patchwork. Your Bangalore team is all-in on Copilot. Your Munich office wants to see more evidence first. That's not a tech problem. It's a cultural one.
+
+## So what do you actually do
+
+**Small team, under 50 engineers.** Pick something and commit to it. Cursor or Claude Code for the best solo experience. Copilot if everyone uses VS Code. Don't agonize over the choice — daily habit matters more than which tool.
+
+**Mid-market, 50–500.** Track active usage, not seat count. [DX recommends](https://getdx.com/research/measuring-ai-code-assistants-and-agents/) measuring weekly active users and time saved per developer. Booking.com did this across 3,500 engineers — [16% throughput increase](https://getdx.com/customers/booking-drives-ai-adoption-with-dx/).
+
+**Enterprise, 500+.** The tool is almost irrelevant. What matters: fast CI, clear docs, well-defined service boundaries. [DX identifies these](https://getdx.com/research/measuring-ai-code-assistants-and-agents/) as the real predictors of whether AI tools deliver value. Fix developer experience first. Add AI second. Otherwise you're just automating dysfunction.
+
+The winners aren't the companies that adopted first. They're the ones that measured what happened after and changed course when the data told them to. [Laura Tacho's blunt summary](https://shiftmag.dev/this-cto-says-93-of-developers-use-ai-but-productivity-is-still-10-8013/): "This is really a management problem."
+
+---
+
+*More from Kael Research: [LLM pricing comparison](/blog/llm-pricing-comparison-feb-2026) and [AI agent market map 2026](/blog/ai-agent-market-map-2026). Get these posts in your inbox — [join the newsletter](/#newsletter).*
