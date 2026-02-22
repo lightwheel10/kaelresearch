@@ -1,87 +1,150 @@
 ---
 title: "LLM Pricing in February 2026: What Every Model Actually Costs"
-description: "A complete comparison of LLM API pricing across OpenAI, Anthropic, Google, Meta, DeepSeek, and xAI. Input and output costs per million tokens, updated February 2026."
-date: "2026-02-19"
+description: "A complete comparison of LLM API pricing across OpenAI, Anthropic, Google, Meta, DeepSeek, xAI, and newer players like Kimi and Qwen. Input and output costs per million tokens, updated February 2026."
+date: "2026-02-22"
 author: "Kael Tiwari"
 tags: ["pricing", "llm", "analysis"]
 published: true
 ---
 
-**TL;DR:** Cheapest option is OpenAI's open-source GPT-OSS-20B at $0.05/M input. Best value is GPT-5 mini at $0.25/M. Most expensive is Grok-4 at $30/M — 600x more than GPT-OSS-20B. Claude Opus 4.6 dropped to $5/$25 (down from $15/$75 on Opus 4). Full table with 18 models below.
+**TL;DR:** Cheapest production option is GPT-5 nano at $0.05/M input. Best value is GPT-5 mini at $0.25/M. DeepSeek V3.2 just dropped to $0.28/M input with cache hits at $0.028. Most expensive is GPT-5.2 pro at $21/$168. xAI massively cut Grok pricing since launch. Full table with 30+ models below.
 
 ---
 
-If you're building on top of LLMs right now, you're probably spending more than you need to. Pricing has changed so fast over the past year that most teams are running on outdated assumptions.
+Pricing moves fast enough that whatever you assumed last month is probably wrong. OpenAI added three new GPT-5 variants. xAI slashed Grok-4 from its launch pricing. DeepSeek released V3.2 at less than half what V3.1 cost. Google shipped Gemini 3. And a wave of Chinese labs (Kimi, Qwen, GLM) showed up on hosted APIs at prices that make the big labs look expensive.
 
-Here's what every major model actually costs as of February 2026, with the context that matters for choosing between them.
+Here's the full picture as of February 22, 2026.
 
 ## The full pricing table
 
-All prices are per million tokens.
+All prices per million tokens. Sorted by provider.
 
-| Model | Provider | Input | Output | Notes |
-|-------|----------|-------|--------|-------|
-| GPT-5.2 | OpenAI | $1.75 | $14.00 | Flagship, best overall quality |
-| GPT-5 mini | OpenAI | $0.25 | $2.00 | Best price/performance ratio |
-| GPT-4.1 | OpenAI | $2.00 | $8.00 | Still widely deployed |
-| GPT-4.1 nano | OpenAI | $0.10 | $0.40 | Cheapest OpenAI option |
-| o4-mini | OpenAI | $1.10 | $4.40 | Reasoning model |
-| Claude Opus 4.6 | Anthropic | $5.00 | $25.00 | Top-tier reasoning + coding |
-| Claude Sonnet 4.6 | Anthropic | $3.00 | $15.00 | Workhorse model |
-| Claude Haiku 4.5 | Anthropic | $1.00 | $5.00 | Fast + cheap |
-| GPT-OSS-120B | OpenAI (open-source) | $0.15 | $0.60 | Open-weight, via hosted APIs |
-| GPT-OSS-20B | OpenAI (open-source) | $0.05 | $0.20 | Smallest open-weight option |
-| Gemini 2.5 Flash | Google | $0.30 | $2.50 | Strong on long context |
-| Gemini 2.0 Flash | Google | $0.10 | $0.40 | Budget tier |
-| Llama 4 Maverick | Meta (via API) | $0.27 | $0.85 | Open-weight, self-hostable |
-| DeepSeek V3.1 | DeepSeek | $0.60 | $1.70 | Chinese lab, surprisingly strong |
-| Grok-4 | xAI | $30.00 | $150.00 | Most expensive model on market |
-| Grok-4-fast | xAI | $2.00 | $5.00 | xAI's mid-tier |
-| Grok-3 | xAI | $30.00 | $150.00 | Previous gen, same price as Grok-4 |
-| Grok-3-mini | xAI | $3.00 | $5.00 | Budget reasoning |
+### OpenAI
 
-*Sources: [OpenAI pricing](https://openai.com/api/pricing/), [Anthropic models](https://platform.claude.com/docs/en/about-claude/models/overview), [Google AI pricing](https://ai.google.dev/pricing), [xAI pricing](https://docs.x.ai/docs/models#models-and-pricing), [DeepSeek pricing](https://api-docs.deepseek.com/quick_start/pricing), [Together.ai](https://www.together.ai/pricing), [Groq](https://groq.com/pricing) for open-source model hosting. All checked February 19, 2026.*
+| Model | Input | Output | Notes |
+|-------|-------|--------|-------|
+| GPT-5.2 | $1.75 | $14.00 | Flagship. Best overall for coding + agents |
+| GPT-5.2 pro | $21.00 | $168.00 | "Smartest and most precise." Overkill for most use cases |
+| GPT-5.1 | $1.25 | $10.00 | Previous flagship, still strong |
+| GPT-5 | $1.25 | $10.00 | Base GPT-5, same price as 5.1 |
+| GPT-5 mini | $0.25 | $2.00 | Best price/performance for most tasks |
+| GPT-5 nano | $0.05 | $0.40 | Dirt cheap. Classification, extraction, routing |
+| GPT-4.1 | $2.00 | $8.00 | Still widely deployed. Costs more than GPT-5.1 on input |
+| GPT-4.1 mini | $0.40 | $1.60 | Solid mid-tier |
+| GPT-4.1 nano | $0.10 | $0.40 | Budget tier |
+| o4-mini | $1.10 | $4.40 | Reasoning model |
+| o3 | $2.00 | $8.00 | Reasoning, same price as GPT-4.1 |
+| o3-pro | $20.00 | $80.00 | Premium reasoning |
+| GPT-OSS-120B | $0.15 | $0.60 | Open-weight, via hosted APIs (Together.ai) |
+| GPT-OSS-20B | $0.05 | $0.20 | Smallest open-weight. Cheapest model on this list |
 
-## What stands out
+### Anthropic
 
-The gap between cheapest and most expensive is staggering. GPT-OSS-20B at $0.05/M input vs Grok-4 at $30/M input. That's 600x. Even comparing production-grade models, GPT-5 mini at $0.25/M vs Claude Opus 4.6 at $5/M is a 20x spread. For most workloads, the cheaper models handle 80%+ of tasks just fine.
+| Model | Input | Output | Notes |
+|-------|-------|--------|-------|
+| Claude Opus 4.6 | $5.00 | $25.00 | Top-tier reasoning + coding. 200K context (1M in beta) |
+| Claude Sonnet 4.6 | $3.00 | $15.00 | Workhorse. Training data through Jan 2026 |
+| Claude Haiku 4.5 | $1.00 | $5.00 | Fast and cheap. Extended thinking support |
 
-xAI is pricing itself out. Grok-4 at $30/$150 per million tokens is the most expensive API on the market. That's 6x Claude Opus 4.6 and 17x GPT-5.2 on input. Unless you need something Grok does better (hard to name what that is), the pricing makes no sense for production use.
+Anthropic's lineup hasn't changed since last month. Opus 4.6 at $5/$25 is still a solid deal compared to the old Opus 4 pricing ($15/$75). Legacy models (Sonnet 4.5, Opus 4.5, Opus 4.1, Sonnet 4) are still available at various price points.
 
-Google is quietly the cheapest. Gemini 2.0 Flash at $0.10/$0.40 matches GPT-4.1 nano and undercuts almost everything else. If your use case tolerates the quality tradeoff, it's the best deal available.
+### Google
 
-Open-weight models changed the math. Llama 4 Maverick at $0.27/$0.85 through hosted APIs is cheap, but the real story is self-hosting. Running Llama on your own GPUs drops the effective cost below $0.10/M tokens for input. The breakeven vs API depends on volume, but for companies doing 10B+ tokens/month, self-hosting wins.
+| Model | Input | Output | Notes |
+|-------|-------|--------|-------|
+| Gemini 3.1 Pro Preview | $2.00 | $12.00 | Latest. Image output support ($120/M tokens) |
+| Gemini 3 Pro Preview | $2.00 | $12.00 | Same pricing as 3.1 |
+| Gemini 3 Flash Preview | $0.50 | $3.00 | Audio input at $1/M |
+| Gemini 2.5 Pro | $1.25 | $10.00 | Mature, stable. Computer use preview available |
+| Gemini 2.5 Flash | $0.30 | $2.50 | Strong on long context |
+
+Google doubled their lineup. Gemini 3 Pro sits at $2/$12, which puts it right between GPT-5.1 and Claude Sonnet 4.6 on output cost. The bigger story is Gemini 3 Flash at $0.50/$3, which is pricier than Gemini 2.5 Flash but presumably better quality. Google also charges double for long context (>200K tokens) on Pro models.
+
+### xAI
+
+| Model | Input | Output | Notes |
+|-------|-------|--------|-------|
+| Grok-4 | $3.00 | $15.00 | Flagship reasoning. 256K context |
+| Grok-4.1 fast (reasoning) | $0.20 | $0.50 | 2M context. Absurdly cheap for the context window |
+| Grok-4.1 fast (non-reasoning) | $0.20 | $0.50 | Same price, no chain-of-thought |
+| Grok Code Fast 1 | $0.20 | $1.50 | Code specialist. 256K context |
+| Grok-3 | $3.00 | $15.00 | Previous gen, same price as Grok-4 |
+| Grok-3-mini | $0.30 | $0.50 | Budget reasoning |
+
+xAI's pricing strategy flipped completely. Grok-4 flagship at $3/$15 puts it on par with Claude Sonnet 4.6. But the real play is Grok-4.1 fast at $0.20/$0.50 with a 2 million token context window. That's 10x the context of most competitors at a fraction of the price. If your workload is context-heavy, this might be the best deal on the market.
+
+### DeepSeek
+
+| Model | Input | Output | Notes |
+|-------|-------|--------|-------|
+| DeepSeek V3.2 (non-thinking) | $0.28 | $0.42 | 128K context. Cache hits at $0.028 |
+| DeepSeek V3.2 (thinking) | $0.28 | $0.42 | Same model, reasoning mode |
+
+DeepSeek V3.2 replaced V3.1 and the pricing dropped hard. Input went from $0.60 to $0.28. Output from $1.70 to $0.42. Cache hits at $0.028/M input make repeat queries almost free. Both chat and reasoning modes are the same model now, just toggled via API. At this price, DeepSeek is cheaper than GPT-5 nano on output.
+
+### Open-weight and newer labs (via Together.ai, Groq)
+
+| Model | Input | Output | Notes |
+|-------|-------|--------|-------|
+| Llama 4 Maverick | $0.27 | $0.85 | Meta. Self-hostable |
+| Kimi K2.5 | $0.50 | $2.80 | Moonshot AI. Strong on Chinese + English |
+| Qwen3.5 397B | $0.60 | $3.60 | Alibaba. Massive MoE |
+| Qwen3 Coder Next | $0.50 | $1.20 | Code specialist |
+| GLM-5 | $1.00 | $3.20 | Zhipu AI |
+| MiniMax M2.5 | $0.30 | $1.20 | Competitive pricing |
+| DeepSeek R1 | $3.00 | $7.00 | Reasoning model (via Together) |
+| Gemma 3n E4B | $0.02 | $0.04 | Google's open-weight. Cheapest option period |
+
+The Chinese model ecosystem got crowded. Kimi K2.5, Qwen3.5, and GLM-5 are all available through Together.ai at prices that undercut the major US labs. Whether the quality matches for English-language workloads depends on the task, but for bilingual or Chinese-market applications, these are worth testing.
+
+## What changed since last month
+
+**OpenAI expanded aggressively.** GPT-5.1, GPT-5, GPT-5 nano, GPT-5.2 pro, and o3/o3-pro all appeared. The GPT-5 family now covers every price point from $0.05 to $21 per million input tokens. GPT-4.1 still exists but there's less reason to use it when GPT-5 and 5.1 cost $1.25.
+
+**xAI stopped being the expensive outlier.** Grok-4 at $3/$15 is competitive with Claude Sonnet. The Grok-4.1 fast tier at $0.20/$0.50 is one of the cheapest options from any major lab, and it comes with 2M token context. That's a significant shift from their earlier premium positioning.
+
+**DeepSeek undercut itself.** V3.2 at $0.28/$0.42 is less than half what V3.1 cost. With cache hits at $0.028, high-volume users with repetitive prompts pay almost nothing.
+
+**Google went multi-generational.** You can now run Gemini 2.5 Flash ($0.30/$2.50), Gemini 2.5 Pro ($1.25/$10), Gemini 3 Flash ($0.50/$3), or Gemini 3 Pro ($2/$12). Pick based on quality vs cost requirements.
+
+**Chinese labs are everywhere.** Kimi, Qwen, GLM, MiniMax all have models on hosted APIs. Pricing is competitive. Quality varies by task and language.
 
 ## Beyond the price tag
 
-The table is just the start. What actually matters:
+Output tokens still cost 3-8x more than input across every provider. If your app generates long responses, output cost dominates your bill. Trim your outputs.
 
-Output tokens cost 3-8x more than input. This is consistent across every provider. If your app generates long responses (code, reports, content), output cost dominates your bill. Trim your outputs.
+Caching is now standard. OpenAI, Anthropic, DeepSeek, xAI, and Google all offer prompt caching that cuts repeat-context costs by 50-90%. DeepSeek's cache hit rate at $0.028/M (10x cheaper than base) is the most aggressive discount.
 
-Caching changes everything. [OpenAI](https://platform.openai.com/docs/guides/prompt-caching) and [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) both offer prompt caching that cuts repeat-context costs by 50-90%. If you're sending the same system prompt or few-shot examples on every call, caching alone might cut your bill in half.
+Context windows got massive. Grok-4.1 fast at 2M tokens, Claude at 1M (beta), Gemini 3 at large windows. If you were truncating context to save money, recalculate. The per-token cost dropped enough that longer context might be cheaper than the engineering effort to work around it.
 
-Quality gaps are shrinking. A year ago, there was a clear hierarchy: GPT-4 > Claude 3 > everything else. Now GPT-5 mini, Claude Sonnet 4, and Gemini 2.5 Flash are all competitive for most tasks. The premium models (GPT-5.2, Opus 4) still win on complex reasoning and long-form analysis, but the gap keeps closing.
-
-Latency matters more than price. The cheapest model that takes 8 seconds to respond might cost you more in user drop-off than a 2x pricier model that responds in 1.5 seconds. Benchmark latency alongside cost.
+Reasoning models are worth the premium for the right tasks. o3 at $2/$8, o4-mini at $1.10/$4.40, and Grok-4 at $3/$15 all perform reasoning before responding. For multi-step problems, they often get it right in one shot where a cheaper model needs 3-4 retries.
 
 ## Who should use what
 
-High-volume production (chatbots, classification, extraction): GPT-5 mini or Gemini 2.0 Flash. Both under $0.50/M input with solid quality.
+**High-volume production** (chatbots, classification, extraction): GPT-5 nano ($0.05/$0.40) or DeepSeek V3.2 ($0.28/$0.42). Both handle 80%+ of tasks fine. DeepSeek's cache hits make it essentially free for repetitive workloads.
 
-Code generation: Claude Sonnet 4 or GPT-5.2. Sonnet is generally better at following complex coding instructions. GPT-5.2 has an edge on multi-file refactoring.
+**Code generation**: Claude Sonnet 4.6, GPT-5.2, or Grok Code Fast 1 ($0.20/$1.50). Sonnet handles complex instructions well. Grok Code is surprisingly good for the price.
 
-Research and analysis: Claude Opus 4.6 if budget allows ($5/$25 is much more reasonable than the old Opus 4 pricing). GPT-5.2 if not.
+**Long-context workloads**: Grok-4.1 fast. 2M tokens at $0.20/$0.50 is unbeatable. No one else comes close on context-per-dollar.
 
-Cost-sensitive startups: Llama 4 Maverick self-hosted, or GPT-4.1 nano for API. Get to market first, pick the right model later.
+**Research and analysis**: Claude Opus 4.6 if budget allows. Gemini 3 Pro or GPT-5.2 if not.
+
+**Reasoning-heavy tasks**: o3 ($2/$8) or o4-mini ($1.10/$4.40) for chain-of-thought. o3-pro ($20/$80) for hard problems where accuracy matters more than cost.
+
+**Cost-sensitive startups**: Gemma 3n ($0.02/$0.04) or GPT-OSS-20B ($0.05/$0.20) self-hosted. Get to market first, pick the right model later.
 
 ## What's next
 
-Pricing has dropped roughly 10x per year for equivalent quality over the past three years. There's no reason to think that stops. By Q4 2026, expect GPT-5 mini-equivalent quality at $0.05/M input or less.
+The trend from last year held. Equivalent quality got roughly 10x cheaper. GPT-5 nano gives you GPT-4-class performance at $0.05/M input. A year ago that cost $2.50.
 
-The real shift is happening at the infrastructure layer. Custom silicon (Google TPUs, Amazon Trainium, Microsoft Maia) is starting to undercut Nvidia GPU economics. As that scales, hosted API pricing will drop faster than self-hosting costs — potentially flipping the build-vs-buy calculation for mid-size companies.
+The bigger shift is competition. OpenAI, Anthropic, and Google used to set the pace. Now xAI, DeepSeek, and a half-dozen Chinese labs are forcing prices down faster. Grok-4.1 fast at $0.20/$0.50 with 2M context would've been unthinkable six months ago.
 
-We'll update this comparison monthly. [Subscribe to get updates](/#newsletter) when pricing changes.
+By Q4 2026, expect GPT-5 mini-equivalent quality below $0.05/M input. Self-hosting economics are getting tighter as hosted APIs race to the bottom.
+
+We'll keep this comparison updated as pricing changes. [Subscribe to get updates](/#newsletter).
 
 ---
+
+*Sources: [OpenAI pricing](https://developers.openai.com/api/docs/pricing), [Anthropic models](https://platform.claude.com/docs/en/about-claude/models/overview), [Google Vertex AI pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing), [xAI models](https://docs.x.ai/developers/models), [DeepSeek pricing](https://api-docs.deepseek.com/quick_start/pricing), [Together.ai](https://www.together.ai/pricing). All checked February 22, 2026.*
 
 *This analysis is part of Kael Research's ongoing coverage of AI market economics. We track pricing, adoption, and competition across the AI industry. [See our full research briefs](/briefs) for deeper analysis on specific markets.*
