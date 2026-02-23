@@ -1,0 +1,46 @@
+---
+title: "This week in AI markets — February 17-23"
+description: "Qwen drops a 397B MoE model, Seedance 2.0 shocks video creators, and Sam Altman admits AI adoption faces more resistance than expected."
+date: "2026-02-23"
+author: "Kael Tiwari"
+tags: ["weekly roundup", "news"]
+published: true
+---
+
+**TL;DR:** Qwen shipped a massive 397B mixture-of-experts model that the open source community immediately devoured. TikTok's Seedance 2.0 arrived with hyperrealistic video generation that has Hollywood paying attention. Sam Altman went on a media tour admitting AI adoption is harder than he thought, while Anthropic's internal data revealed that software engineering dominates 50% of all AI agent usage. Meanwhile, US farmers are turning down multimillion-dollar offers from data center developers, and the consulting industry is quietly having its best year since COVID.
+
+## [Qwen 3.5-397B-A17B drops as the largest open MoE model yet](https://huggingface.co/Qwen/Qwen3.5-397B-A17B)
+
+Alibaba's Qwen team released Qwen3.5-397B-A17B, a 397-billion parameter mixture-of-experts model with 17B active parameters per forward pass. It racked up 217,900 downloads and 892 likes on HuggingFace in its first days. Unsloth already shipped GGUF quantizations pulling 79,400 downloads. The local LLM community on Reddit immediately split into camps arguing whether the 9B or 35B distills matter more — a sign that open source model releases now generate the kind of fan energy usually reserved for GPU launches.
+
+The Qwen team also flagged something important: they found "serious problems with the data quality of the GPQA and HLE test sets." If the benchmarks themselves are broken, every leaderboard ranking from the past six months deserves an asterisk.
+
+## [Seedance 2.0 arrives "seemingly out of nowhere" and spooks Hollywood](https://reddit.com/r/artificial/comments/1ra20gt/tiktok_creators_seedance_20_ai_is_hyperrealistic/)
+
+TikTok's parent ByteDance released Seedance 2.0, and the results are genuinely unsettling. Posts showing single-prompt hyperrealistic video generations pulled thousands of upvotes across multiple subreddits. One demo hit 2,594 upvotes on r/AIVideo alone. Music videos, short films, and action sequences generated from text prompts now look close enough to real footage that the "is this AI?" question has become genuinely hard to answer. Hollywood should be less worried about AI replacing writers and more worried about AI replacing the entire post-production pipeline.
+
+## [Sam Altman says AI adoption faces more resistance than expected](http://www.techmeme.com/260222/p17#a260222p17)
+
+In a series of interviews reported by the [New York Times](https://www.nytimes.com/2026/02/21/technology/ai-boom-backlash.html), Sam Altman acknowledged that AI's adoption trajectory isn't what he predicted. Jensen Huang separately warned that the "doomer narrative" may be winning the public conversation. Altman also made a comparison that went viral (4,717 upvotes on r/singularity): training a human takes "20 years of life and all of the food you eat during that time," so AI energy costs are "unfair" to single out. The comparison is clever but misses the point — humans don't need 40,000 acres of farmland converted to data centers.
+
+## [Anthropic data: software engineering is 50% of all AI agent tool calls](http://www.techmeme.com/260222/p6#a260222p6)
+
+Garry Tan highlighted Anthropic's internal data showing software engineering accounts for roughly half of all AI agent tool calls on their platform. The remaining verticals are what Tan called "greenfields most founders are overlooking." This is the strongest signal yet that the agent market is wildly concentrated. If you're building agent tooling for anything other than code, you have less competition than you think. The real question: does engineering dominate because agents are best at code, or because engineers are the ones building agents?
+
+## [US farmers reject multimillion-dollar data center land offers](http://www.techmeme.com/260222/p16#a260222p16)
+
+The [Guardian reported](https://www.theguardian.com) that US farmers are increasingly turning down multimillion-dollar offers from data center developers. Researchers estimate roughly 40,000 acres are needed globally for new AI projects. The land grab is real and it's meeting resistance from people who'd rather grow food than host GPUs. This story will only get bigger as power and cooling requirements scale with model size.
+
+## [AI fake faces now "too good to be true"](https://reddit.com/r/artificial/comments/1rb0619/fake_faces_generated_by_ai_are_now_too_good_to_be/)
+
+Researchers warned that AI-generated faces have crossed a threshold where they appear more trustworthy than real photographs. The post pulled 570 upvotes and 152 comments on r/artificial. We've moved past "can you tell it's fake?" into territory where fakes actually look better than reality. The implications for identity verification, social engineering, and political disinformation are obvious and none of the current detection tools are keeping pace.
+
+## [US consulting market to grow 7% in 2026, fastest since COVID](http://www.techmeme.com/260222/p5#a260222p5)
+
+Source Global data shows the US consulting market is set to grow 7% in 2026, the fastest pace in the post-COVID era. The driver: companies seeking advice on how to profit from AI. This is the classic enterprise pattern. The technology moves fast, internal teams can't keep up, and consultants fill the gap. Accenture tying promotions to AI adoption metrics tells you where this is heading — AI literacy isn't optional anymore, it's a career requirement.
+
+---
+
+For detailed pricing data, see our [LLM pricing comparison](/blog/llm-pricing-comparison-feb-2026). For the full open source vs proprietary breakdown, see our [cost analysis](/blog/open-source-vs-proprietary-llms).
+
+[Subscribe to our newsletter](/#newsletter) to get this roundup in your inbox every Monday.
