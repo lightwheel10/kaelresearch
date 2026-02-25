@@ -1,0 +1,114 @@
+---
+title: "GPU Economics: What Inference Actually Costs in 2026"
+description: "Real GPU rental prices from CoreWeave, Lambda, and AWS compared against per-token API pricing. We break down the math on when self-hosting beats API calls — and when it doesn't."
+date: "2026-02-25"
+author: "Kael Tiwari"
+tags: ["gpu", "inference", "pricing", "analysis"]
+published: true
+---
+
+The question every AI team eventually asks: should we rent GPUs and run models ourselves, or just pay per token through an API?
+
+The answer changed a lot in the last six months. GPU rental prices dropped. API prices dropped faster. New GPU generations shipped. And mixture-of-experts models made the whole calculation messier than it used to be.
+
+Here's the actual math, with real numbers from real providers.
+
+---
+
+## GPU rental prices right now
+
+These are on-demand, publicly listed prices as of February 2026. No negotiated enterprise deals, no reserved instances.
+
+| GPU | Provider | Config | $/hour | VRAM (GB) |
+|-----|----------|--------|--------|-----------|
+| NVIDIA B200 | [CoreWeave](https://coreweave.com/pricing) | 8x GPU | $68.80 | 180 |
+| NVIDIA GB200 NVL72 | [CoreWeave](https://coreweave.com/pricing) | 4-GPU slice | $42.00 | 186 |
+| NVIDIA HGX H200 | [CoreWeave](https://coreweave.com/pricing) | 8x GPU | $50.44 | 141 |
+| NVIDIA HGX H100 | [CoreWeave](https://coreweave.com/pricing) | 8x GPU | $49.24 | 80 |
+| NVIDIA GH200 | [CoreWeave](https://coreweave.com/pricing) | 1x GPU | $6.50 | 96 |
+| NVIDIA A100 80GB | [CoreWeave](https://coreweave.com/pricing) | 8x GPU | $21.60 | 80 |
+| NVIDIA L40S | [CoreWeave](https://coreweave.com/pricing) | 8x GPU | $18.00 | 48 |
+| NVIDIA RTX PRO 6000 | [CoreWeave](https://coreweave.com/pricing) | 8x GPU | $20.00 | 96 |
+
+A few things stand out. The B200 costs 40% more than the H100 per hour, but delivers roughly 2.5x the inference throughput for large models according to [NVIDIA's own benchmarks](https://www.nvidia.com/en-us/data-center/b200/). The H200 is barely more expensive than the H100 despite having 76% more VRAM. And the A100 — which was the default choice 18 months ago — is now less than half the price of current gen.
+
+CoreWeave dominates GPU cloud pricing. They're seeking an [$8.5B loan backed by a Meta contract](https://www.techmeme.com/260224/p44#a260224p44) worth up to $14.2B, which tells you the scale of demand here.
+
+## What does it cost to serve a model yourself?
+
+Let's do the math on running Llama 3.1 405B — a model big enough to compete with GPT-5 mini on most benchmarks, and the most common choice for self-hosted production deployments.
+
+Hardware requirement: 405B parameters at FP8 precision need roughly 405GB of VRAM. That's a minimum of 6x H100 80GB GPUs, or more practically an 8-GPU H100 node.
+
+Hourly cost on CoreWeave: $49.24/hr for 8x H100.
+
+Throughput: with vLLM and continuous batching, expect roughly 2,000-3,000 output tokens per second on an 8x H100 setup running Llama 405B at FP8. Call it 2,500 tok/s as a conservative estimate based on [vLLM benchmarks](https://blog.vllm.ai/2024/09/05/perf-update.html).
+
+Cost per million output tokens:
+
+- 2,500 tokens/second = 9,000,000 tokens/hour
+- $49.24 / 9M tokens = $5.47 per million output tokens
+
+Compare that to API pricing for models in this class:
+
+| Model | Provider | Input $/M | Output $/M | Source |
+|-------|----------|-----------|------------|--------|
+| Llama 3.1 405B | [Together AI](https://www.together.ai/pricing) | $3.50 | $3.50 | Serverless |
+| DeepSeek-R1-0528 | [Together AI](https://www.together.ai/pricing) | $3.00 | $7.00 | Serverless |
+| GPT-5 mini | [OpenAI](https://openai.com/api/pricing/) | $0.25 | $2.00 | API |
+| GPT-5.2 | [OpenAI](https://openai.com/api/pricing/) | $1.75 | $14.00 | API |
+| Gemini 3 Pro | [Google Cloud](https://cloud.google.com/vertex-ai/generative-ai/pricing) | $2.00 | $12.00 | Vertex AI |
+| Gemini 3 Flash | [Google Cloud](https://cloud.google.com/vertex-ai/generative-ai/pricing) | $0.50 | $3.00 | Vertex AI |
+| Qwen3.5-397B-A17B | [Together AI](https://www.together.ai/pricing) | $0.60 | $3.60 | Serverless |
+
+Self-hosting Llama 405B at $5.47/M output tokens is more expensive than calling Together AI's API for the same model at $3.50/M. That's the efficiency of shared infrastructure at scale. Together AI batches requests from thousands of customers across the same GPUs. You're paying for idle time; they're not.
+
+## When self-hosting wins
+
+The math flips in three scenarios.
+
+First, when you're running at near-100% capacity. If your inference demand is constant and maxes out the hardware — say, a consumer product doing millions of requests per day — your effective per-token cost drops because you're eliminating idle time. At 90%+ load, self-hosted Llama 405B drops to roughly $4.00/M output. Still not cheaper than Together AI's serverless rate, but cheaper than OpenAI's GPT-5.2 at $14.00/M.
+
+Second, data isolation. Some industries (healthcare, defense, finance) can't send prompts to third-party APIs. The premium you pay for self-hosting is really a compliance cost. CoreWeave and Lambda offer single-tenant nodes for this.
+
+Third, smaller models. A 7B or 8B model on a single L40S ($2.25/hr for one GPU) can push 10,000+ tokens/second. That works out to about $0.06/M output tokens — roughly matching the cheapest API options like Llama 3.2 3B at [$0.06/M on Together AI](https://www.together.ai/pricing). But if you're running a fine-tuned version of that model, the API option doesn't exist.
+
+## When APIs win
+
+For most teams, most of the time. Here's why.
+
+Mixture-of-experts models destroyed the self-hosting value proposition. Qwen3.5-397B has 397B total parameters but only activates 17B per token. Together AI charges [$0.60/M input and $3.60/M output](https://www.together.ai/pricing) for it. Running it yourself requires enough VRAM to hold all 397B parameters even though you're only using 17B at inference. You're paying for dead weight.
+
+The same applies to DeepSeek V3.1 ($0.60/$1.70 on Together AI), Llama 4 Maverick ($0.27/$0.85), and most new open models shipping with MoE architectures. API providers handle the memory overhead across a shared fleet. You'd handle it alone.
+
+Batch pricing cuts costs in half. OpenAI's Batch API gives you 50% off both input and output tokens in exchange for 24-hour turnaround. For non-realtime workloads — data processing, content generation, analysis pipelines — that brings GPT-5 mini down to $0.125/$1.00. No GPU rental comes close for a model of that quality.
+
+You don't need to hire anyone. Running inference infrastructure requires MLOps engineers. Kubernetes. Monitoring. Model updates. Quantization debugging. One senior ML infra engineer costs $200K+/year. That's equivalent to roughly 4,000 H100-hours at CoreWeave, or about 36 trillion tokens through GPT-5 mini's API.
+
+## The Blackwell generation changes the math (slightly)
+
+NVIDIA's B200 delivers roughly [2.5x the inference throughput of an H100](https://www.nvidia.com/en-us/data-center/b200/) for FP8 workloads. At $68.80/hr for 8x B200 on CoreWeave versus $49.24 for 8x H100, you're paying 40% more for 2.5x the throughput. Per-token cost drops by about 44%.
+
+That brings self-hosted Llama 405B on B200s down to roughly $3.10/M output tokens — finally competitive with Together AI's API rate. But B200 availability is still constrained. CoreWeave's GB200 NVL72 (the rack-scale option at $42/hr for a 4-GPU slice) adds even more memory bandwidth, but at 186GB VRAM per slice it's sized for models under 200B parameters.
+
+For teams that can get B200 allocations and run at high capacity, self-hosting starts to make financial sense again. For everyone else, the API gap keeps widening.
+
+## The real cost nobody talks about
+
+Electricity. A single 8x H100 node draws about 10.2 kW under load. At US commercial electricity rates ($0.12/kWh average from the [EIA](https://www.eia.gov/electricity/monthly/epm_table_5_6_a.html)), that's $1.22/hr just for power — roughly 2.5% of the CoreWeave rental price. Not a big deal for cloud renters.
+
+But if you're Meta building out [data centers that consume gigawatts](https://www.reddit.com/r/artificial/comments/1rdm17p/meta_strikes_up_to_100b_amd_chip_deal_as_it/), or CoreWeave financing $8.5B in infrastructure, power becomes the constraint that sets the floor on how cheap inference can get. Big Tech is projected to invest [$650B in AI infrastructure in 2026](https://www.reddit.com/r/artificial/comments/1rcmgzy/big_tech_to_invest_about_650_billion_in_ai_in/), and a meaningful chunk of that is electricity and cooling.
+
+## Bottom line
+
+For teams processing fewer than 10B tokens per month, APIs are cheaper, simpler, and better maintained. GPT-5 mini at $0.25/$2.00 or Qwen3.5-397B at $0.60/$3.60 will outperform anything you self-host at the same cost.
+
+For teams above 10B tokens/month with consistent demand, self-hosting on B200s starts to pencil out — but only if you have the engineering team to run it and can tolerate the 3-6 month wait for hardware allocation.
+
+The interesting middle ground is dedicated endpoints from providers like Together AI and Fireworks, where you rent reserved GPU capacity but the provider handles the stack. You get lower per-token costs than serverless without the ops overhead. That's where most serious production deployments end up.
+
+If you want to see how the API prices compare across all major providers, we maintain an updated table in our [LLM pricing comparison](/blog/llm-pricing-comparison-feb-2026). And for context on which models are worth running in the first place, see our [open source vs proprietary LLM analysis](/blog/open-source-vs-proprietary-llms).
+
+---
+
+*We publish data-driven analysis on AI infrastructure, pricing, and adoption every week. [Subscribe to get it in your inbox](/#newsletter).*
